@@ -27,16 +27,17 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
 
-      - uses: actions/setup-node@v4
+      # Pinned to match the bun that generated bun.lock. Bumping bun here is
+      # all it takes; run `bun install` locally afterwards to refresh the lock.
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 24
-          cache: npm
+          bun-version: 1.4.2
 
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Build
-        run: npm run build
+        run: bun run build
         env:
           SITE_URL: ${{ steps.pages.outputs.origin }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}

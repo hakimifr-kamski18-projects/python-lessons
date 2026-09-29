@@ -9,23 +9,27 @@ type the URL.
 
 ## Running it
 
+Uses [bun](https://bun.sh), pinned to the version in the deploy workflow.
+
 ```sh
-npm install
-npm run dev        # http://localhost:4321
+bun install
+bun run dev        # http://localhost:4321
 ```
 
 ```sh
-npm run build      # writes the static site to dist/
-npm run preview    # serves dist/ so you can check the real output
+bun run build      # writes the static site to dist/
+bun run preview    # serves dist/ so you can check the real output
 ```
 
-Node 24 or newer. If `node` is not found, the install instructions used here put it in
-`~/.local/lib/node/bin`, which `.bashrc` adds to `PATH`.
+Bun runs Astro itself, so Node is not needed. If `bun` is not found, it is installed at
+`~/.bun/bin`, which `.bashrc` adds to `PATH`. The raw release archive only contains the
+`bun` binary, so `bunx` has to be symlinked to it by hand.
 
 Deployment is automatic. `.github/workflows/deploy.yml` builds and publishes to GitHub
-Pages on every push to `main`. `configure-pages` works out the site URL and base path,
-so there is nothing to fill in for the repository name. Enable it once under
-**Settings → Pages → Source → GitHub Actions**.
+Pages on every push to `main`, using `bun install --frozen-lockfile` so CI fails loudly
+if `bun.lock` and `package.json` ever disagree. `configure-pages` works out the site URL
+and base path, so there is nothing to fill in for the repository name. Enable it once
+under **Settings → Pages → Source → GitHub Actions**.
 
 ## Two audiences
 
