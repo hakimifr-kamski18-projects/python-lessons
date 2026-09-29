@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # This repository's default branch is master, not main. If you ever rename
+    # it, change this line too, or pushes will silently stop deploying.
+    branches: [master]
   # Lets you run a deploy by hand from the Actions tab.
   workflow_dispatch:
 
