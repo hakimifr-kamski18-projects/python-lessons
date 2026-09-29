@@ -33,7 +33,7 @@ and print a sentence that includes it.
 Open `about_me.py` from last session and have them narrate it line by line, out loud.
 Then ask them what the `#` does, and what happens if you remove it.
 
-Then open the shell (`python3`) and ask them to work out `17 * 3` in it. That is the
+Then open the Python console and ask them to work out `17 * 3` in it. That is the
 bridge into today, since a variable is how you keep an answer around instead of losing
 it.
 

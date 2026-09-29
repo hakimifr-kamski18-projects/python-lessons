@@ -1,5 +1,5 @@
 # Unit 01 — the basic types
-# Run this file with: python3 types.py
+# Run this with the Run button in your editor.
 
 # Four kinds of value, for now.
 

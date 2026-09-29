@@ -1,5 +1,5 @@
 # Unit 08 — the validation loop
-# Run this file with: python3 validation.py
+# Run this with the Run button in your editor.
 #
 # This is THE pattern for getting a usable value out of a user,
 # and you will use it constantly from now on.

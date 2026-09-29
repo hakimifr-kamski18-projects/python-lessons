@@ -1,5 +1,5 @@
 # Unit 02 — strings as sequences
-# Run this file with: python3 strings.py
+# Run this with the Run button in your editor.
 # Predict each line before you run it.
 
 word = "Python"

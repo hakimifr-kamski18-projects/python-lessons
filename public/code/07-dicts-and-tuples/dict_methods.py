@@ -1,5 +1,5 @@
 # Unit 07 — changing a dictionary
-# Run this file with: python3 dict_methods.py
+# Run this with the Run button in your editor.
 # Print the dictionary after each step so you can watch it change.
 
 student = {"name": "Ada"}

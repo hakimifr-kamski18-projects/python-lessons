@@ -1,5 +1,5 @@
 # Unit 06 — scope
-# Run this file with: python3 scope.py
+# Run this with the Run button in your editor.
 
 def double(number):
     result = number * 2

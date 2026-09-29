@@ -1,5 +1,5 @@
 # Unit 05 — list methods
-# Run this file with: python3 list_methods.py
+# Run this with the Run button in your editor.
 
 # ---------------------------------------------------------------
 # ADDING

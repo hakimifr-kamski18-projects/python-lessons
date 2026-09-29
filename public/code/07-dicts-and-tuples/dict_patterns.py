@@ -1,5 +1,5 @@
 # Unit 07 — dictionary patterns
-# Run this file with: python3 dict_patterns.py
+# Run this with the Run button in your editor.
 
 # ---------------------------------------------------------------
 # THE COUNTING PATTERN

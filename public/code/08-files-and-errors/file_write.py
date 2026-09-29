@@ -1,9 +1,8 @@
 # Unit 08 — writing files
-# Run this file from inside the code folder:
-#     cd code
-#     python3 file_write.py
+# Run this with the Run button in your editor.
 #
-# Then look at output.txt. Run it again, and look again.
+# Then look at output.txt, which appears in this same folder. Run it again,
+# and look again.
 
 # ---------------------------------------------------------------
 # "w" means WRITE, and it WIPES the file.

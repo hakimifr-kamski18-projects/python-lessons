@@ -1,5 +1,5 @@
 # Unit 03 — the if statement
-# Run this file with: python3 if_demo.py
+# Run this with the Run button in your editor.
 
 age = 20
 

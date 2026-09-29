@@ -1,10 +1,9 @@
 # Unit 08 — reading files
-# Run this file from inside the code folder:
-# cd code
-# python3 file_read.py
+# Run this with the Run button in your editor.
 #
-# If you run it from somewhere else you will get a FileNotFoundError,
-# which is the most common problem with files and is never a code problem.
+# sample.txt sits in this same folder, next to this script. If your editor
+# runs from a different folder, you get a FileNotFoundError instead, which is
+# the most common problem with files and is never a code problem.
 
 # ---------------------------------------------------------------
 # THE FORM TO USE. The "with" block closes the file for you,

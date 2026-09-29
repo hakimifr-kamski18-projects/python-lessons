@@ -1,5 +1,5 @@
 # Unit 04 — break and continue
-# Run this file with: python3 break_continue.py
+# Run this with the Run button in your editor.
 # Predict both loops before running.
 
 print("break when number is 5:")

@@ -1,5 +1,5 @@
 # Unit 06 — returning values
-# Run this file with: python3 return_values.py
+# Run this with the Run button in your editor.
 #
 # THIS IS THE MOST IMPORTANT FILE IN THE UNIT.
 # print() shows a human. return gives a value to the program.

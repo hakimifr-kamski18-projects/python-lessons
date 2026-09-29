@@ -1,5 +1,5 @@
 # Unit 01 — f-strings
-# Run this file with:  python3 fstrings.py
+# Run this with the Run button in your editor.
 
 name = "Ada"
 age = 36

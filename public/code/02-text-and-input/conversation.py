@@ -1,5 +1,5 @@
 # Unit 02 — a small conversation
-# Run this file with:  python3 conversation.py
+# Run this with the Run button in your editor.
 
 # Notice the .strip() on the name. Without it, a stray trailing space
 # follows the name around and causes confusing bugs later.

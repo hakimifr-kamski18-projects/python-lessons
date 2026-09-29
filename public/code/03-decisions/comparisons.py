@@ -1,5 +1,5 @@
 # Unit 03 — comparisons
-# Run this file with:  python3 comparisons.py
+# Run this with the Run button in your editor.
 # Predict each line before running it.
 
 print("5 > 3  :", 5 > 3)      # True

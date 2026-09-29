@@ -1,5 +1,5 @@
 # Unit 07 — tuples
-# Run this file with: python3 tuples.py
+# Run this with the Run button in your editor.
 
 # A tuple.
 

@@ -1,5 +1,5 @@
 # Unit 04 — for loops and range
-# Run this file with: python3 for_loop.py
+# Run this with the Run button in your editor.
 # Predict each output before running.
 
 for i in range(5):

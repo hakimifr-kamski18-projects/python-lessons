@@ -11,7 +11,7 @@ Predict before you run. Read your conditions out loud as sentences.
 
 ### 3.1 Predict the boolean
 
-Write down `True` or `False` for each, then check in the shell.
+Write down `True` or `False` for each, then check them in the Python console.
 
 ```python
 10 > 5

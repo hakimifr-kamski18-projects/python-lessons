@@ -79,13 +79,13 @@ That third piece is the one beginners forget, and forgetting it gives an infinit
 ### The infinite loop, on purpose
 
 Have them delete the `count = count + 1` line and run it. The output scrolls forever.
-Let it run for a few seconds, then tell them to press Ctrl+C in the terminal to stop it.
+Let it run for a few seconds, then tell them to stop it. There is a Stop button next to
+Run, usually showing a square. Ctrl and C in the terminal panel does the same thing.
 
 Two things to get from this.
 
-- Ctrl+C is how you stop a runaway program, and it is a normal part of
-  programming rather than a failure state. Everyone writes infinite loops, all the
-  time, forever.
+- Stopping a runaway program is a normal part of programming rather than a failure
+  state. Everyone writes infinite loops, all the time, forever.
 - Forgetting to change the thing the condition depends on is the single most common
   loop bug.
 
@@ -445,8 +445,8 @@ like the convenience it is. Going straight to `for` leaves students unable to wr
 loop whose end condition is not a number of passes.
 
 **The infinite loop demo is not optional.** Let it run, let it fill the screen, and
-teach Ctrl+C. Fear of the infinite loop stops people from experimenting, and
-experimenting is how they learn.
+show them the Stop button. Fear of the infinite loop stops people from experimenting,
+and experimenting is how they learn.
 
 **The accumulator pattern earns its own session.** If this unit takes three sessions
 instead of two because they spent a long time on accumulators, that is the correct

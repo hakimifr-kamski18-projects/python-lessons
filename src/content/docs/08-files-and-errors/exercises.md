@@ -91,6 +91,11 @@ lines, how many words, and how many characters it has.
 
 Test it against [`sample.txt`](/code/08-files-and-errors/sample.txt) and check the answers by hand.
 
+Save `sample.txt` in the same folder as your script, so your program can find it. If you
+run it and get a `FileNotFoundError` saying it cannot find the file, that means your
+editor is running from a different folder rather than that the file is missing. Tell me
+rather than guessing.
+
 Careful with the line count. If a file ends with a newline, the last line is complete,
 and reading it with a loop counts it correctly. Reading different ways can give
 different answers, so say which way you used and why.

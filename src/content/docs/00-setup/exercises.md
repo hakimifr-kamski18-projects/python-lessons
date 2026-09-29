@@ -3,37 +3,42 @@ title: Unit 00 exercises
 sidebar:
   label: Exercises
 ---
-These are mostly about your environment, not about Python. Do them in order.
+These are about getting a file to run and reading your first errors, rather than about
+Python itself. Do them in order.
 
 ---
 
-## 1. Prove Python is installed
+## 1. Get a program to run
 
-Open a terminal and run the version command for your system.
+You should already have an editor open with Python working in it. If the Run button
+does nothing, or you cannot find it, stop and tell me rather than guessing.
 
-Windows:
+Make a new file called `hello.py` and type this, by hand, no copying.
 
-```
-python --version
-```
-
-macOS or Linux:
-
-```
-python3 --version
+```python
+print("Hello, world!")
 ```
 
-Write down the version number you see. If you get an error, or the Microsoft Store
-opens, the install did not finish properly. Tell me before going on.
+Now click the **Run** button. Do not type any commands anywhere. The editor runs the
+file for you, and figures out which folder it is in.
+
+Answer these out loud.
+
+1. Where did the output appear? Point at it.
+2. Click Run again. What happens the second time?
+3. Change the message to your own name and run it again.
+
+If you see your message printed, the whole of today has already worked.
 
 ---
 
-## 2. Use the shell as a calculator
+## 2. Use the Python console as a calculator
 
-Type `python3` (or `python` on Windows) with no file name and press Enter. You should
-see `>>>`.
+Your editor has a second place to type Python, separate from a file. It is called the
+console, and it shows `>>>` where you type. It is a live conversation. Type something,
+press Enter, see the answer immediately.
 
-Work out the answers to these in the shell, and write down each answer.
+Find the console in your editor and work out these answers there. Write each one down.
 
 ```
 12 + 30
@@ -48,7 +53,8 @@ Then answer these two questions in your own words.
 - What did `10 / 4` give you, and did it surprise you?
 - What do you think `**` does?
 
-Leave the shell with `exit()`.
+There is nothing to save and nothing to run. The console forgets everything when you
+close it, which is exactly why finished work goes in a file.
 
 ---
 
@@ -62,14 +68,13 @@ print("I am learning Python")
 print("My favourite food is ...")
 ```
 
-Fill in your own answers. Run it with `python3 about_me.py` and check the three lines
-appear.
+Fill in your own answers. Click Run, and check that the three lines appear.
 
 ---
 
 ## 4. Break it on purpose
 
-Now, one at a time, make each of these changes, and before running it write down what
+Now, one at a time, make each of these changes, and before clicking Run write down what
 you think will happen.
 
 | Change | Your prediction | What actually happened |
@@ -86,7 +91,7 @@ down what it said.
 
 ## 5. Read an error without panicking
 
-Open [`broken.py`](/code/00-setup/broken.py) and run it. It will fail.
+Open [`broken.py`](/code/00-setup/broken.py) and click Run. It will fail.
 
 Answer these out loud, not on paper.
 
@@ -135,6 +140,6 @@ how to do it. Hint, think about what character you might use to wrap the text in
 
 Be able to do these without help.
 
-- Open a terminal, navigate to your `python-work` folder, and run a `.py` file.
-- Open a blank file and write a program with three `print()` lines.
+- Open a blank file, write a program, and run it with the Run button.
+- Say out loud what the console is for, and why it is not where finished work goes.
 - Read an error message from the bottom up, out loud.

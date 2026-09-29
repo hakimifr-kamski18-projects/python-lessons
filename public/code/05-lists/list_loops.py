@@ -1,5 +1,5 @@
 # Unit 05 — loops and lists together
-# Run this file with: python3 list_loops.py
+# Run this with the Run button in your editor.
 
 names = ["Ada", "Grace", "Alan"]
 

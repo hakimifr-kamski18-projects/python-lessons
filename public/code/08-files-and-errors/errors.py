@@ -1,5 +1,5 @@
 # Unit 08 — handling errors
-# Run this file with:  python3 errors.py
+# Run this with the Run button in your editor.
 
 # ---------------------------------------------------------------
 # You have been READING errors for eight units.

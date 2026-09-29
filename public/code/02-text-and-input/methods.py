@@ -1,5 +1,5 @@
 # Unit 02 — string methods
-# Run this file with:  python3 methods.py
+# Run this with the Run button in your editor.
 
 name = "ada lovelace"
 

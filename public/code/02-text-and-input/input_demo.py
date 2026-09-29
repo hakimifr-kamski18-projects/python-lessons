@@ -1,5 +1,5 @@
 # Unit 02 — input() and the type problem
-# Run this file with:  python3 input_demo.py
+# Run this with the Run button in your editor.
 # You will need to type answers when it asks.
 
 # input() shows a prompt, waits for the user to type something and press Enter,

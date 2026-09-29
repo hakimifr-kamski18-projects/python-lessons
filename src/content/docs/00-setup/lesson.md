@@ -18,36 +18,44 @@ open them as plain text. Every snippet the student needs is already inline in th
 exercises, so the files are for the session itself, when you are both at the
 keyboard.
 
-**Goal for the session.** They install Python and an editor, run a file they wrote
-themselves, see output, and read their first error message calmly.
+**Goal for the session.** They run a file they wrote themselves, see output, and read
+their first error message calmly.
 
-**Time.** 45 to 90 minutes, and most of it is installation. Do not try to teach concepts
-in this session. The win is a working environment and no fear.
+**Time.** 45 to 60 minutes. Most of it is the error reading at the end, and that is the
+part that matters.
 
-**Prerequisites.** None. This is the first session.
-
+**Prerequisites.** A working editor with Python in it. This is set up outside the course,
+by you, before the session. Nothing in this unit explains how to install anything.
 
 ---
 
-## Before you start, check the laptop situation
+## Before you start
 
-Ask them what they are working on. It changes everything about the next thirty minutes.
+Assume the editor and Python already work. That is your job rather than the course's, and
+by the time the student sits down it should be done.
 
-**Windows.** They will install from python.org. The one thing that matters is ticking
-the box that says "Add python.exe to PATH" on the first installer screen. If that box is
-missed, the `python` command will not be found and the fix is either reinstalling or
-doing it by hand, so watch them tick it.
+Check three things before you begin, and fix them quietly rather than making a lesson out
+of them.
 
-**macOS.** The system ships an old Python for its own use. They should install a current
-one from python.org or with Homebrew. The command is `python3` in either case. `python`
-on its own may not exist, or may open something they do not want.
+1. **The Run button works.** Open any `.py` file and click it. If nothing happens, or the
+   button is not there, stop and fix that first. Everything in the next nine units
+   depends on this one button, and a student who cannot run their own code has no course.
+2. **The console is somewhere they can find it.** You will point at it once in section 4.
+   In VS Code it is the command palette, "Python: Start REPL", or Shift and Enter on a
+   selected line. Show them where it is, do not describe it.
+3. **Run uses the file's own folder.** Unit 08 reads data files that sit next to the
+   scripts, and it is the one unit where a wrong working directory gives a
+   `FileNotFoundError`. In VS Code, `python.terminal.executeInFileDir` is the setting.
 
-**Linux.** Usually already installed. Check with `python3 --version` in a terminal. They
-are likely the least lost of the three, since they have a terminal.
+A couple of things worth knowing if a machine gives trouble, since they come up.
 
-**Chromebook, tablet, phone only.** No local install. Use an online editor such as
-replit.com or the Python editor at python.org/shell. Perfectly workable, but tell them
-the first session is easier on a real computer if they can borrow one.
+- **Windows.** The install has a checkbox for adding Python to `PATH`. If it is missed,
+  the editor cannot find Python at all, and the fix is a reinstall with the box ticked.
+- **`python` versus `python3`.** On Windows the command is `python`, on macOS and Linux
+  it is usually `python3`. You will not need either in this course, but you will see both
+  in error messages and in anything the student finds online.
+- **No local install possible.** A Chromebook or a tablet can use an online editor, but
+  the Run button is the whole foundation here, so a borrowed laptop is much better.
 
 ---
 
@@ -67,123 +75,7 @@ find which instruction says something other than what you meant.
 
 That single framing will carry them through every error in the next nine units.
 
-## 2. Installing Python
-
-Do this together, on their machine, with you watching rather than doing.
-
-**Windows**
-
-1. Go to python.org/downloads and click the big yellow download button.
-2. Run the installer.
-3. Tick "Add python.exe to PATH" at the bottom of the first screen. Do not skip
-   this.
-4. Click "Install Now".
-5. When it finishes, open the Start menu, type `cmd`, and open Command Prompt.
-6. Type this and press Enter.
-
-```
-python --version
-```
-
-They should see something like `Python 3.13.1`. If instead they see an error, or the
-Microsoft Store opens, the PATH box was missed. Reinstall and tick it.
-
-**macOS**
-
-1. Go to python.org/downloads and get the macOS installer, or use Homebrew with
-   `brew install python`.
-2. Run the installer through to the end.
-3. Open Terminal (press Cmd and space, type `terminal`).
-4. Type this and press Enter.
-
-```
-python3 --version
-```
-
-**Linux**
-
-Open a terminal and check.
-
-```
-python3 --version
-```
-
-If it is missing, it comes from the package manager, for example `sudo apt install
-python3` on Debian family systems.
-
-### The command name, once
-
-Explain this briefly and do not belabour it. On Windows the command is `python`. On
-macOS and Linux it is usually `python3`, because `python` used to mean the old version.
-Anywhere below that says `python3`, use `python` on Windows.
-
-## 3. The two ways to run Python
-
-This distinction is worth ten minutes because it confuses people for weeks otherwise.
-
-### The interactive shell
-
-Type `python3` in the terminal, with no file name, and press Enter. The prompt changes
-to `>>>`. This is a live conversation. Type an expression (anything that produces a
-value), press Enter, see the answer immediately.
-
-```
->>> 2 + 3
-5
->>> "hello" + " world"
-'hello world'
->>> 7 * 6
-42
-```
-
-Ask them to use it as a calculator for two minutes. Really, as a calculator. Let them do
-some arithmetic they actually need.
-
-Two things to point out.
-
-- There is no `>>>` in a file, ever. If they copy a line that starts with `>>>`
-  into a file, it will be a `SyntaxError`. This happens constantly, so say it now.
-- To leave, type `exit()` or press Ctrl+D. On Windows, press Ctrl+Z then Enter.
-
-### Files
-
-A file ending in `.py` is a program. You run it with the `python3` command followed by
-the file name, and Python follows the instructions from the top and finishes.
-
-```
-python3 hello.py
-```
-
-Ask them which one they think is used for real programs. It is the file. The shell is
-for quick experiments, and experienced programmers use it constantly, but every program
-worth keeping is a file.
-
-## 4. Installing an editor
-
-**If they are nervous, use Thonny.** It is designed for exactly this situation. One
-download, Python bundled inside, a Run button, and a simple view. Less capable later,
-but it gets a beginner writing code in five minutes instead of thirty. Switching editor
-after unit 03 is painless.
-
-**Otherwise, use VS Code.** Get it from code.visualstudio.com, then install the official
-Python extension from the Extensions panel on the left. The steps.
-
-1. Open VS Code.
-2. Click the Extensions icon in the left sidebar, the one made of four squares.
-3. Search for `python`.
-4. Install the one published by Microsoft.
-5. Open the Terminal in VS Code with Ctrl and backtick, and check
-   `python3 --version` works there too.
-
-Two settings worth changing now. Turn on "Format On Save" and set the tab size to four
-spaces. Both live in the settings search box.
-
-Warn them about one thing. VS Code will offer to autocomplete and auto-import things
-they have never heard of. Tell them to ignore all suggestions for now and type
-everything by hand. Autocomplete is wonderful and it will hide exactly the syntax they
-need to learn.
-
-## 5. The first program
+## 2. The first program
 
 Have them make a folder called `python-work` somewhere sensible, like their home
 directory or Documents. Everything from the course goes in there. Then create a new file
@@ -193,14 +85,22 @@ called `hello.py` inside it and type this, by hand, no pasting.
 print("Hello, world!")
 ```
 
-Then, in the terminal, making sure they are in that folder, run it.
+Now they click **Run**.
 
-```
-python3 hello.py
-```
+That is the whole of running a program, and it is worth saying out loud that this is the
+part people worry about. There is no command to type, and no folder to keep track of.
+The editor knows which file they are looking at and runs that one.
 
-If they see `Hello, world!` then the whole session has succeeded. Nothing else today
+If they see `Hello, world!` then the session has already succeeded. Nothing else today
 matters as much as this.
+
+Two things to point out while it is on screen.
+
+- The output appears somewhere specific, usually a panel at the bottom. Ask them to point
+  at it. That panel is where every error message in this course will also appear.
+- Running again runs the whole file again, from the top, with nothing remembered from
+  last time. This is the single most important fact about how programs work, and they
+  will rely on it constantly.
 
 ### Things to try immediately
 
@@ -215,9 +115,37 @@ Then the punctuation experiments, one at a time, predicting first.
 - What happens if you remove both brackets entirely, as in `print "hello"`?
 - What happens if you write `Print` with a capital P?
 
-Each one is an error, and each error is the lesson. See step 7.
+Each one is an error, and each error is the lesson. See section 6.
 
-## 6. Comments
+## 3. The console, and why files are different
+
+Show them the console now, and let them play with it for two minutes. Really, as a
+calculator. Let them do some arithmetic they actually need.
+
+It shows `>>>` where they type, and it answers immediately.
+
+```
+>>> 2 + 3
+5
+>>> "hello" + " world"
+'hello world'
+>>> 7 * 6
+42
+```
+
+The distinction to leave them with, in one sentence. The console is for trying something
+small and getting an answer now, and a file is for anything worth keeping. The console
+forgets everything when it closes, which is exactly why finished work goes in a file.
+
+Two things to point out.
+
+- There is no `>>>` in a file, ever. If they copy a line that starts with `>>>` into a
+  file, it will be a `SyntaxError`. This happens constantly, so say it now.
+- In the console, the answer appears without being asked for. In a file, nothing appears
+  unless you `print` it. This is the first thing that will confuse them in unit 01, so
+  plant it now.
+
+## 4. Comments
 
 A comment is a note for humans. Python ignores it completely.
 
@@ -255,12 +183,13 @@ real reason.
 price = 1999
 ```
 
-## 7. Reading an error, the first time
+## 5. Reading an error, the first time
 
 Do not skip this step. It is the actual lesson of unit 00.
 
 Open [`broken.py`](/code/00-setup/broken.py), which contains a mistake on purpose. Have them run it. It will
-fail. Then walk through the ritual from `instructor/debugging-with-beginners.md`.
+fail. Then walk through the ritual from
+`src/content/docs/instructor/debugging-with-beginners.md`.
 
 1. Read the last line out loud. It names the error type and says what is wrong.
 2. Read the line above it. It gives the file name and the line number.
@@ -280,18 +209,18 @@ where the program starts and gets some of the way through. The error type tells 
 which situation you are in, which is a large part of why reading the type first is worth
 doing.
 
-Then run the four punctuation experiments from step 5 with this ritual. They should read
-each error out loud before fixing it. By the fourth one it will already feel routine,
-and that is the whole point.
+Then run the four punctuation experiments from section 2 with this ritual. They should
+read each error out loud before fixing it. By the fourth one it will already feel
+routine, and that is the whole point.
 
-## 8. Closing
+## 6. Closing
 
 Ask them to do two things before they finish.
 
 1. From a blank file, write a program that prints three lines. No looking at the
    old file.
-2. Say out loud, in their own words, the difference between the `>>>` shell and a
-   `.py` file.
+2. Say out loud, in their own words, the difference between the console and a `.py`
+   file.
 
 Then ask what still feels fuzzy and write it down.
 
@@ -299,28 +228,32 @@ Then ask what still feels fuzzy and write it down.
 
 ## Teaching notes for this unit
 
-**If installation fights you, stop and fix it properly.** Do not move on with a
-half-working environment because you are behind schedule. A student who cannot run their
-own code has no course. If it takes the entire session, that is a successful session.
-The concepts can wait a week.
+**Everything here rests on the Run button.** If it is broken, fix it before teaching
+anything, even if that takes the whole session. Say so out loud rather than making the
+student feel behind.
+
+**Do not let them learn the habit of fighting the environment.** The reason this unit
+uses the Run button rather than a command is that a beginner typing `python3 file.py`
+gets a folder error sooner or later, and the error looks nothing like the mistake they
+made. The editor removes that entire category of problem.
 
 **Resist teaching `print` properly today.** They will meet the full version in unit 01
 with f-strings and multiple arguments (values you pass in when calling). Today
-`print("something")` is enough, and adding more now just crowds out the installation.
+`print("something")` is enough, and adding more now just crowds out the running and the
+error reading.
 
 **The four punctuation errors are the core content.** If you only have twenty minutes,
-do the install, run `hello.py`, and do the error reading. That is the whole unit.
+run `hello.py`, do the four experiments, and read `broken.py`. That is the whole unit.
 
-**Watch for the `>>>` copy.** It is very common. They type into the REPL, it works, then
-they copy the whole thing including the prompts into a file and it explodes with a
+**Watch for the `>>>` copy.** It is very common. They type into the console, it works,
+then they copy the whole thing including the prompts into a file and it explodes with a
 `SyntaxError`. Now you know why.
 
-**Let them keep the terminal open.** Beginners close it constantly and then cannot find
-their folder again. Show them how to check where they are with `pwd` (Linux and macOS)
-or `cd` with no arguments (Windows), and how to change directory with `cd foldername`.
-Ten seconds, saves a lot of future confusion.
+**Console versus file, said once and repeated.** Nothing appears in a file unless you
+`print` it, and a program starts from the top every time. Those two facts explain most of
+the confusion in unit 01.
 
 **Option 3 (triple-quoted strings) is a preview, not a lesson.** Do not spend time on it now.
 
-**Preview of next unit.** They now have a way to run code. Next session they make it
-store things and do arithmetic.
+**Preview of next unit.** They can run a file. Next session they make it store things and
+do arithmetic, and they meet the difference between showing an answer and keeping it.

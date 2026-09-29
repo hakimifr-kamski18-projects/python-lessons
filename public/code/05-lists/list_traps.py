@@ -1,5 +1,5 @@
 # Unit 05 — code broken on purpose
-# Run this file with: python3 list_traps.py
+# Run this with the Run button in your editor.
 #
 # Each section below is broken ON PURPOSE. Uncomment one section at a time,
 # run it, read the error out loud bottom up, predict the fix, then fix it.

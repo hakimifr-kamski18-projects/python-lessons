@@ -1,5 +1,5 @@
 # Unit 01 — variables
-# Run this file with:  python3 variables.py
+# Run this with the Run button in your editor.
 
 # A variable is a name for a value.
 # The "=" means "put the value on the right into the name on the left".

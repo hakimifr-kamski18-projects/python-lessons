@@ -1,5 +1,5 @@
 # Unit 04 — while loops
-# Run this file with:  python3 while_loop.py
+# Run this with the Run button in your editor.
 # TRACE this on paper before running. Write down "count" at each step.
 
 count = 1
@@ -24,13 +24,13 @@ print()
 # ---------------------------------------------------------------
 # An infinite loop, on purpose.
 # Uncomment these three lines, run it, watch it scroll, then
-# press Ctrl+C in the terminal to stop it.
+# click the Stop button next to Run to stop it.
 
 # count = 1
 # while count <= 5:
 #     print(count)
 
-# Ctrl+C is how you stop a runaway program. Everyone writes infinite
+# Stopping a runaway program is normal. Everyone writes infinite
 # loops, all the time, forever. It is a normal thing, not a failure.
 
 print()

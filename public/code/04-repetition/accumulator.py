@@ -1,5 +1,5 @@
 # Unit 04 — the accumulator pattern
-# Run this file with: python3 accumulator.py
+# Run this with the Run button in your editor.
 #
 # This is the most important idea in the unit, and one of the most
 # important in the whole course.

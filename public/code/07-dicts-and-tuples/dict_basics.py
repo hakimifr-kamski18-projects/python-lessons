@@ -1,5 +1,5 @@
 # Unit 07 — dictionary basics
-# Run this file with: python3 dict_basics.py
+# Run this with the Run button in your editor.
 
 student = {
     "name": "Ada",

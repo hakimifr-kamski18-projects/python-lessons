@@ -1,6 +1,6 @@
 # Unit 09 — the main guard
-# Run this file directly: python3 main_guard.py
-# Then import it from another file, or from the shell:
+# Run this with the Run button in your editor.
+# Then import it from another file, or from the console:
 # >>> import main_guard
 #
 # The message only appears when the file is RUN, not when it is IMPORTED.

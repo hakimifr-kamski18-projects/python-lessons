@@ -1,5 +1,5 @@
 # Unit 05 — list basics
-# Run this file with: python3 list_basics.py
+# Run this with the Run button in your editor.
 # Predict each line before running it.
 
 numbers = [1, 2, 3, 4, 5]

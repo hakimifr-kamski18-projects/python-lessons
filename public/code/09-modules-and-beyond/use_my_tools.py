@@ -1,5 +1,5 @@
 # Unit 09 — using your own module
-# Run this file with: python3 use_my_tools.py
+# Run this with the Run button in your editor.
 #
 # Watch what appears before your program even starts asking questions.
 # That is my_tools.py running its own bottom section, because importing a module runs its top level code.

@@ -1,9 +1,7 @@
 # Unit 08 — saving structured data with json
-# Run this file from inside the code folder:
-# cd code
-# python3 save_data.py
+# Run this with the Run button in your editor.
 #
-# Then open scores.json in a text editor and look at it.
+# Then open scores.json, which appears in this same folder, and look at it.
 
 import json
 

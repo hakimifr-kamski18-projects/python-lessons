@@ -3,13 +3,21 @@ title: Unit 00 solutions
 sidebar:
   label: Solutions
 ---
-## 1. Version check
+## 1. Get a program to run
 
-Anything from `Python 3.8` upwards is fine for this course. Modern systems give 3.10 or
-newer. If you see `Python 2.7`, that is the old version and nothing in this course will
-work, so install a current one.
+There is nothing to get right here. The point of the exercise is that the whole loop
+works: you type a file, you click Run, you see output.
 
-## 2. Shell arithmetic
+Where the output appears depends on your editor. Most put it in a panel at the bottom of
+the window, sometimes called Output, sometimes Terminal. Clicking Run a second time does
+it all again and prints your message again, which is worth noticing, because the program
+starts fresh every single time you run it.
+
+If Run did nothing, or you could not find it, that is an editor problem rather than a
+Python one. Say so rather than working around it. Everything for the next nine units
+depends on this one button.
+
+## 2. Python console arithmetic
 
 ```
 12 + 30 -> 42
@@ -33,6 +41,9 @@ operation you do not need to know about.
 If you guessed that `*` repeated a string, that is also correct and worth remembering,
 since `"ab" * 3` gives `"ababab"`. You will meet it again.
 
+The console is for exactly this, trying something small and seeing the answer straight
+away. The moment you want to keep it, it goes in a file instead.
+
 ## 3. about_me.py
 
 Anything that runs and prints three lines is correct. There is no right answer, the
@@ -44,11 +55,14 @@ print("I am learning Python")
 print("My favourite food is noodles")
 ```
 
-The one thing to check is that you typed the file in an editor and saved it with a
-`.py` extension, in the folder you are running the command from. A very common early
-failure is running `python3 about_me.py` from the wrong directory, which gives `can't
-open file 'about_me.py': [Errno 2] No such file or directory`. That message means the
-file is not where the terminal is looking, not that the file does not exist.
+The one thing to check is that you saved the file with a `.py` extension. An editor will
+happily let you type a whole program into a file called `about_me` with no ending at all,
+and then Run will do nothing useful with it.
+
+You do not have to think about which folder the file is in. That is the Run button's job,
+and it is one of the main reasons we use it. If you ever see a message about not being
+able to open or find a file, that means the editor is looking in a different folder from
+the one your file is in. Tell me rather than trying to work around it.
 
 ## 4. Breaking it on purpose
 

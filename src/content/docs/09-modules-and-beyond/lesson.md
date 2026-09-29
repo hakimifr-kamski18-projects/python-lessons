@@ -256,6 +256,11 @@ they open, so it is worth recognising.
 The standard library is what comes with Python. Everything else is on PyPI and installed
 with `pip`.
 
+This is the only place in the course where they type a command instead of clicking a
+button, because installing a package is not something the Run button can do. Every
+editor has a terminal panel built in for exactly this, usually under View, then
+Terminal. Show them where it is rather than describing it.
+
 ```
 pip install requests
 ```

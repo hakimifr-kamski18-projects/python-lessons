@@ -1,5 +1,5 @@
 # Unit 03 — grade calculator
-# Run this file with:  python3 grade.py
+# Run this with the Run button in your editor.
 
 name = input("Name: ").strip().title()
 score = int(input("Score out of 100: "))

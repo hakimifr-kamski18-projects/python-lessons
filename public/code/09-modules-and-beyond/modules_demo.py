@@ -1,5 +1,5 @@
 # Unit 09 — a tour of the standard library
-# Run this file with: python3 modules_demo.py
+# Run this with the Run button in your editor.
 
 # ---------------------------------------------------------------
 # random

@@ -1,5 +1,5 @@
 # Unit 06 — the first function
-# Run this file with: python3 first_function.py
+# Run this with the Run button in your editor.
 
 def greet():
     print("Hello!")

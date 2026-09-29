@@ -1,5 +1,5 @@
 # Unit 03 — combining conditions
-# Run this file with:  python3 logic.py
+# Run this with the Run button in your editor.
 
 # and : true when BOTH sides are true
 # or  : true when AT LEAST ONE side is true

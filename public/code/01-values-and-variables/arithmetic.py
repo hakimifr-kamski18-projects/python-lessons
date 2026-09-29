@@ -1,5 +1,5 @@
 # Unit 01 — arithmetic
-# Run this file with:  python3 arithmetic.py
+# Run this with the Run button in your editor.
 # Before running each block, predict the answer.
 
 print("Addition:        ", 10 + 3)
