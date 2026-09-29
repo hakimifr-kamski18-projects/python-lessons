@@ -2,6 +2,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { readdirSync, readFileSync } from 'node:fs';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 /**
  * The unit folders are read from the content directory rather than listed
@@ -57,6 +60,65 @@ const units = readdirSync(CONTENT, { withFileTypes: true })
 const site = process.env.SITE_URL || undefined;
 const base = process.env.BASE_PATH || undefined;
 
+/**
+ * Put the base path in front of every internal link in the built HTML.
+ *
+ * Astro applies `base` to the assets it generates and Starlight does the same
+ * for its navigation, but a link written by hand as `/cheat-sheets/glossary/`
+ * is left exactly as written. On a project site served from
+ * `/repository-name/` that means it 404s, which is what happened here.
+ *
+ * Doing it to the finished HTML rather than to the markdown has two advantages.
+ * It catches everything, including links in frontmatter such as the hero
+ * buttons on the home page and links inside .astro pages, and it does not
+ * depend on the markdown processor's plugin API.
+ *
+ * Links left alone: external ones, protocol-relative ones, in-page anchors, and
+ * anything already carrying the base path.
+ */
+function applyBaseToLinks() {
+  const prefix = !base || base === '/' ? '' : `/${base.replace(/^\/+|\/+$/g, '')}`;
+
+  return {
+    name: 'apply-base-to-links',
+    hooks: {
+      'astro:build:done': async ({ dir }) => {
+        if (!prefix) return;
+
+        // Only root-relative URLs are touched, and only once: Astro has
+        // already prefixed its own assets, so anything that already starts
+        // with the prefix has to be left alone.
+        const rewrite = (html) =>
+          html.replace(/(href|src)="(\/[^"]*)"/g, (whole, attr, url) => {
+            if (url.startsWith('//')) return whole; // protocol-relative
+            if (url === prefix || url.startsWith(`${prefix}/`)) return whole;
+            return `${attr}="${prefix}${url}"`;
+          });
+
+        let pages = 0;
+        const walk = async (folder) => {
+          for (const entry of await readdir(folder, { withFileTypes: true })) {
+            const full = join(folder, entry.name);
+            if (entry.isDirectory()) {
+              await walk(full);
+            } else if (entry.name.endsWith('.html')) {
+              const before = await readFile(full, 'utf8');
+              const after = rewrite(before);
+              if (after !== before) {
+                await writeFile(full, after);
+                pages += 1;
+              }
+            }
+          }
+        };
+
+        await walk(fileURLToPath(dir));
+        console.log(`[apply-base-to-links] prefixed internal links in ${pages} pages with ${prefix}/`);
+      },
+    },
+  };
+}
+
 export default defineConfig({
   site,
   base,
@@ -66,6 +128,7 @@ export default defineConfig({
   devToolbar: { enabled: false },
 
   integrations: [
+    applyBaseToLinks(),
     starlight({
       title: 'Python from Zero',
       description:
