@@ -3,6 +3,11 @@ title: Unit 07 — Dictionaries and tuples
 sidebar:
   hidden: true
 pagefind: false
+head:
+  - tag: meta
+    attrs:
+      name: robots
+      content: noindex
 prev: false
 next: false
 ---

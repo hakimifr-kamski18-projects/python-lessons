@@ -3,6 +3,11 @@ title: Unit 03 — Making decisions
 sidebar:
   hidden: true
 pagefind: false
+head:
+  - tag: meta
+    attrs:
+      name: robots
+      content: noindex
 prev: false
 next: false
 ---

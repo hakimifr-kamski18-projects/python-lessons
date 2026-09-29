@@ -37,9 +37,14 @@ in the third person.
 The `lesson.md` files and everything in `instructor/` are yours. They contain pacing
 advice, the mistakes to watch for, and notes on how to react to a wrong answer. They
 are published at URLs nobody will stumble onto, and they are excluded from the search
-index and from the previous/next links.
+index, from the previous/next links, and from search engines.
+
+**Bookmark `/teacher/`.** It is one page listing every teacher page, built from the
+content collection so it cannot go stale. Nothing links to it, so it is only reachable
+by typing the address. The pages it lists are also directly reachable:
 
 ```
+/teacher/                            the index of everything below
 /00-setup/lesson/                    the lesson for unit 00
 /01-values-and-variables/lesson/     and so on for each unit
 /instructor/teaching-guide/          how to teach this

@@ -1,0 +1,68 @@
+---
+/**
+ * One entry point for the teacher pages.
+ *
+ * They are kept out of the sidebar and the search index, so this page exists
+ * to make them findable once you know the address. The list is built from the
+ * content collection, so it cannot go stale when a unit is added.
+ */
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection } from 'astro:content';
+
+const docs = await getCollection('docs');
+
+const urlOf = (entry) => `/${entry.id.replace(/\.(md|mdx)$/, '').replace(/\/index$/, '')}/`;
+
+const hidden = docs.filter((entry) => entry.data?.sidebar?.hidden === true);
+
+const lessons = hidden
+  .filter((entry) => /^\d\d-/.test(entry.id) && entry.id.endsWith('lesson'))
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+const guides = hidden
+  .filter((entry) => entry.id.startsWith('instructor/'))
+  .sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Teacher pages',
+    description: 'The lesson notes and the teaching guides, kept out of the student view.',
+  }}
+>
+  <p>
+    These pages are for whoever is teaching. They are not in the sidebar and they are
+    not in the search results, so the only way in is to type the address. Nothing links
+    here either, so a student browsing the site will not find it.
+  </p>
+
+  <h2>Lesson notes, one per unit</h2>
+  <ul>
+    {
+      lessons.map((entry) => (
+        <li>
+          <a href={urlOf(entry)}>{entry.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Teaching guides</h2>
+  <ul>
+    {
+      guides.map((entry) => (
+        <li>
+          <a href={urlOf(entry)}>{entry.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Before you start</h2>
+  <p>
+    Read <a href="/instructor/teaching-guide/">the teaching guide</a> once, then skim it
+    again before each session until the rhythm is automatic. Keep{' '}
+    <a href="/instructor/common-mistakes/">common beginner mistakes</a> open while you
+    teach, so you recognise the classics on sight instead of debugging them together.
+  </p>
+</StarlightPage>

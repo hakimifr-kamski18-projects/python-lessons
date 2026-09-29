@@ -3,6 +3,11 @@ title: Unit 00 — Getting Python to say something
 sidebar:
   hidden: true
 pagefind: false
+head:
+  - tag: meta
+    attrs:
+      name: robots
+      content: noindex
 prev: false
 next: false
 ---
