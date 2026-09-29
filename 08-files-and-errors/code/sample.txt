@@ -1,0 +1,5 @@
+This is the first line of the sample file.
+The second line is here.
+And a third line to play with.
+
+Notice the blank line above, before this one.

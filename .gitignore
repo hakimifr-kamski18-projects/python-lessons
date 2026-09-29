@@ -1,0 +1,21 @@
+# Node and Astro
+node_modules/
+dist/
+.astro/
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Files the example programs create when you run them.
+# The checked-in inputs, sample.txt and scores.txt, are excluded from these
+# patterns on purpose.
+output.txt
+log.txt
+numbers.txt
+scores.json
+students.json
+todos.json
+grades.json
+even_numbers.txt
