@@ -28,6 +28,8 @@ const guides = hidden
   frontmatter={{
     title: 'Teacher pages',
     description: 'The lesson notes and the teaching guides, kept out of the student view.',
+    pagefind: false,
+    head: [{ tag: 'meta', attrs: { name: 'robots', content: 'noindex' } }],
   }}
 >
   <p>
@@ -61,7 +63,9 @@ const guides = hidden
   <h2>Before you start</h2>
   <p>
     Read <a href="/instructor/teaching-guide/">the teaching guide</a> once, then skim it
-    again before each session until the rhythm is automatic. Keep{' '}
+    again before each session until the rhythm is automatic. Spend real time on{' '}
+    <a href="/instructor/debugging-with-beginners/">debugging with beginners</a> as well,
+    because reading errors calmly is the habit the whole course depends on. Keep{' '}
     <a href="/instructor/common-mistakes/">common beginner mistakes</a> open while you
     teach, so you recognise the classics on sight instead of debugging them together.
   </p>

@@ -72,22 +72,22 @@ structure themselves.
 Absolute beginners lose real time to things you have forgotten were hard.
 
 - Finding the colon key, the underscore, and the parentheses.
-- The difference between a straight quote `"` and a curly quote `"` that arrives
-  when they type in a chat app first.
+- The difference between a straight quote `"` and the curly quotes `“` and `”` that
+  arrive when they type in a chat app first.
 - Tab versus space, and why "consistent indentation" means something.
 - Copying a file path versus typing it.
 
 Budget a few minutes in the first two sessions for pure typing trouble. It is not a
 waste.
 
-## Indentation, taught early and gently
+## Indentation, taught gently
 
 Python uses indentation to mean structure, which is unusual among languages and
 surprising to beginners. Do not sell it as a quirk. Sell it as Python saying out loud
 what other languages only imply with braces.
 
-Teach it early, in unit 01, with a two line example, even though nothing needs it until
-`if`. Then when `if` arrives in unit 03, it is already familiar.
+Teach it in unit 03, when `if` arrives, with a two line example. Unit 03 is the first
+place where indentation matters, so that is where the lesson file teaches it.
 
 How to teach it in one move. Show this.
 
@@ -111,8 +111,11 @@ the error teach it, then you name it.
 Make this a ritual in every single session from unit 00 onwards.
 
 Every time code fails, before doing anything else, ask them to read the last line of the
-red text out loud. Then the second to last line, which says where. Then the `^` marker
-if there is one, which points at the exact column.
+error message out loud. That line says what went wrong. Then the line of code above
+it, and above that the `File ... line N` line, which says where. If there are several
+`File` lines, they read the one nearest the bottom first. For a SyntaxError, the code
+line and the `^` marker, which points at the exact column, come right above the last
+line.
 
 You are building a habit. A student who automatically looks at the bottom of the
 traceback will debug independently. A student who looks at the top, gets overwhelmed,
@@ -123,7 +126,7 @@ Full method in `debugging-with-beginners.md`.
 ## Stay quiet during core exercises
 
 This is the hardest instruction in this document. When they are working on the core
-exercises, sit on your hands. If they go quiet and type slowly, that is thinking, not
+exercises, do not help. If they go quiet and type slowly, that is thinking, not
 failing. Intervene when they ask, when they have been stuck in an identical way for
 several minutes, or when they are about to get frustrated past the useful point.
 
@@ -166,7 +169,7 @@ skill.
 
 ## Spaced repetition, done cheaply
 
-Start every session with five minutes on something from a previous unit. Three good
+Start every session with five to ten minutes on something from a previous unit. Three good
 formats.
 
 - **Explain it.** Open an old exercise and have them narrate it line by line.
@@ -206,9 +209,9 @@ Less common, but it happens.
 - They are inventing their own extensions to exercises unprompted.
 - They ask "but what if I wanted to..." questions.
 
-If you see this, skip the remaining warm-ups, hand over the stretch exercises, and jump
-a unit ahead. There is nothing sacred about the order. Units 06 and 07 can swap, and
-unit 05's sorting material can move to the end if lists click fast.
+If you see this, skip the remaining warm-ups, hand over the stretch exercises, and move on to
+the next unit sooner. Keep the order of the units, though. Each unit needs the one
+before it, and unit 07 needs the functions from unit 06.
 
 ## A word on not teaching things
 
@@ -221,7 +224,7 @@ Common examples, and the short version to give.
 - "Why not use `is` for comparing numbers?" — "Use `==`. `is` asks a different and
   weirder question. I will show you later."
 - "What is a class?" — "A way to invent your own kind of thing, like a string but
-  custom. It is unit ten, and it will make much more sense once functions feel
+  custom. It comes after this course, and it will make much more sense once functions feel
   easy."
 - "Can I do this in one line?" — "Probably. Shorter code is not automatically
   better. Write it clearly first, always."
@@ -246,7 +249,7 @@ language, so you say "argument", then "value", then "thing you pass in". Do not.
 student working in a second language is building a map from one English word to one
 idea, and synonyms break that map. Use "argument" every single time.
 
-This applies to the course's own wording too. The lessons say "glue together" and never
+This applies to the course's own wording too. The course says "glue together" and never
 "concatenate", "go through the items" and never "iterate", "on purpose" and never
 "deliberately". Python's own error messages will use the harder word, so mention both
 once when the error appears.
@@ -257,8 +260,8 @@ the student permission to write in it.
 
 **Avoid idioms and phrasal verbs where a plain verb works.** "This will bite you" is
 harder than "this will cause problems for you". "Sit on your hands" is harder than "do
-not help". The course files have been cleaned of the worst of these, and you should keep
-an ear out for the ones you say yourself.
+not help". The course files have been cleaned of the worst of these, and you should listen
+for the ones you say yourself.
 
 Some need a short note about which are worth replacing. This is not about removing
 flavour from your speech, and a few ordinary phrasal verbs are fine because the student

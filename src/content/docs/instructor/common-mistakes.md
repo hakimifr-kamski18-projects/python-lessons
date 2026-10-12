@@ -25,13 +25,13 @@ because Python refuses to run at all and points at a line.
 | `if x > 5` then `print(x)` with no colon | Forgot the `:` | "What did the previous `if` line end with?" |
 | `if x > 5:` but the body is not indented | Indentation is the syntax here | "Which line is supposed to be inside the if?" |
 | `IndentationError: unexpected indent` | Extra space at the start of a line | "Is that line meant to be inside something?" |
-| `TabError` | Tabs and spaces mixed in one file | "Let us look at the whitespace. Set your editor to three or four spaces and re-indent that block." |
+| `TabError` | Tabs and spaces mixed in one file | "Let us look at the whitespace. Set your editor to four spaces and re-indent that block." |
 | `print "hello"` | Syntax from Python 2 or from another language | "`print` is a function here, so it needs brackets." |
 | `x = 5` written as `x == 5` | Confusing assignment with comparison | "You asked whether it equals, not to make it equal." |
-| A curly quote `"hello"` | Typed in a chat app or word processor first | "That quote is not the straight one. Retype it in the editor." |
+| A curly quote, as in `print(“hello”)` | Typed in a chat app or word processor first | "That quote is not the straight one. Retype it in the editor." |
 
 Curly quotes deserve a special mention. A student who writes their code in Telegram,
-WhatsApp, or Google Docs and then pastes it will hit `SyntaxError: invalid character '"'
+WhatsApp, or Google Docs and then pastes it will hit `SyntaxError: invalid character '“'
 (U+201C)` and be completely baffled, because the character looks fine on screen. If
 their code contains a suspicious `SyntaxError` with a `U+` code in it, this is almost
 certainly why. Tell them to type code in the editor, always, and this stops happening.
@@ -149,7 +149,7 @@ for n in numbers:
 
 This skips items, for reasons that are genuinely subtle. Do not teach the mechanism.
 Teach the rule, loop over a copy (`for n in numbers[:]`) or build a new list. This is a
-"later" topic, so just plant the flag.
+"later" topic, so just mention the rule and move on.
 
 ### Variable names that shadow builtins
 

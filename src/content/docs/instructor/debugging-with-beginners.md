@@ -21,9 +21,11 @@ rather than yours.
 
 1. **Read the last line out loud.** That is the error type and the message. For
    example, `NameError: name 'total' is not defined`.
-2. **Read the second to last line out loud.** That is where it happened. File name
-   and line number.
-3. **Go to that line.** Read it out loud too.
+2. **Read the line of code above it, and then the `File ... line N` line above
+   that, out loud.** That is where it happened, as a file name and a line number.
+   If there are several `File` lines, read the one nearest the bottom first. For a
+   SyntaxError, the code line and the `^` marker come right above the last line.
+3. **Go to that line in the file.** Read it out loud too.
 4. **Look at the top of the traceback only if the last lines were not enough.**
    Ignore it otherwise. Beginners who read the top first get lost in frames they
    did not write.
@@ -74,7 +76,7 @@ The distinction between `TypeError` and `ValueError` confuses people. Useful fra
 
 ## Print debugging, the honest version
 
-`print()` is the right tool for most of the first nine units. Teach it properly rather
+`print()` is the right tool for most of all ten units. Teach it properly rather
 than apologetically.
 
 Three patterns to install.
@@ -126,9 +128,11 @@ Do this once, together, in unit 05 or 06. Students are often reluctant, because 
 like going backwards. Point out that finding the problem in three lines is faster than
 staring at forty.
 
-## Rubbery duck debugging, but with you as the duck
+## Rubber duck debugging, but with you as the duck
 
-When they ask you a question, make them explain the code first. Say "walk me through
+Some programmers explain their code out loud to a rubber duck (a toy), and find the
+mistake while they talk. You are the duck. When they ask you a question, make them
+explain the code first. Say "walk me through
 what this does, line by line" and stay quiet.
 
 A surprising amount of the time they answer their own question halfway through, which is
@@ -184,9 +188,9 @@ Good ones, roughly in order of difficulty.
 
 There is a set of ready-made broken files for exactly this.
 
-- `05-lists/code/list_traps.py` — five list mistakes, commented out one section at a
+- `/code/05-lists/list_traps.py` (in `public/code/05-lists/`), five list mistakes, commented out one section at a
   time so the file still runs.
-- `06-functions/code/broken_functions.py` — six function mistakes, including the one
+- `/code/06-functions/broken_functions.py` (in `public/code/06-functions/`), six function mistakes, including the one
   that produces no error at all.
 
 Each is written to be worked through rather than read. Have them uncomment one section,
