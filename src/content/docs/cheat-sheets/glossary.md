@@ -1,10 +1,11 @@
 ---
 title: Glossary
 ---
-Every difficult word used in the lessons, explained in the shortest way I could
-manage. If a word is not here and it is still confusing, write it down and ask.
+The difficult words used in this course, explained in the shortest way that works. If a
+word is not here and it is still confusing, look it up or search for it online. Add
+the word `python` to your search.
 
-The lessons use one word for each idea, the same word every time. If you see
+This course uses one word for each idea, the same word every time. If you see
 "argument" and "parameter" in the same sentence, that is on purpose, and this page
 tells you the small difference.
 
@@ -31,6 +32,36 @@ called Boole.
 **None** — the value that means "nothing here". What you get back from a function
 that forgot to `return`.
 
+**literal** — a value written directly in the code, like `25` or `"hello"`. A name
+such as `age` is not a literal.
+
+**truthy and falsy** — how a value counts inside an `if`. Falsy values count as
+`False`. They are `0`, `""` (empty text), `[]` (an empty list) and `None`. Almost
+everything else is truthy.
+
+**f-string** — text with an `f` in front, where `{}` holds a value. `f"Hi {name}"`.
+
+**title case** — every Word Starts With A Capital Letter. `"ada lovelace".title()`
+gives `"Ada Lovelace"`.
+
+**newline** — the invisible character that ends a line. Written `\n` inside text. Each
+line you read from a file ends with one.
+
+**escape character** — a backslash `\` followed by a letter, which stands for a
+special character. `\n` is a newline and `\t` is a tab.
+
+**trailing** — at the end. A trailing space is a space at the end of the text, which
+you cannot see.
+
+**repr** — a function that shows a value the way it is written in code, with quotes
+and hidden spaces visible. `print(repr("hi "))` shows `'hi '`.
+
+**case sensitive** — treating `A` and `a` as different. Python names and text
+comparisons are case sensitive.
+
+**normalise** — change text into one standard form, so that two things that mean the
+same become equal. For example `.strip().lower()` on an answer.
+
 ---
 
 ## The ones about storing things
@@ -42,6 +73,9 @@ that forgot to `return`.
 **tuple** — like a list, but it cannot be changed. `(3, 4)`. Said like "tupple", to
 rhyme with "couple".
 
+**unpack** — take a group apart into separate variables. `x, y = point` unpacks the
+tuple `point`. `for a, b in pairs:` unpacks each pair in turn.
+
 **key** — the name you use to look something up in a dictionary.
 
 **index** — a position in a list or string. Positions start at zero, so the first
@@ -52,13 +86,23 @@ item is at index 0.
 **sequence** — anything with items in an order that you can walk through. Strings,
 lists and tuples are sequences.
 
+**swap** — trade the values of two variables. In Python, `a, b = b, a`.
+
 **nested** — put inside another one. A list inside a list is nested.
 
 **in place** — changed directly, without making a new copy. `sort()` changes a list
 in place. `sorted()` does not.
 
-**alias** — two names pointing at the same thing. `b = a` makes `b` an alias of the
-list `a`, so changing one changes both.
+**alias** — a second name for the same list (or dictionary). `b = a` makes `b` an alias
+of `a`, so changing one changes both. It is not a copy.
+
+**pair** — two values that belong together, such as `("Ada", 88)`.
+
+**parallel lists** — two lists where the item at position 0 in one belongs with the
+item at position 0 in the other.
+
+**hashable** — a value that cannot be changed, so it is allowed as a dictionary key.
+Text, numbers and tuples are hashable. Lists are not.
 
 ---
 
@@ -81,6 +125,18 @@ you are adding something other than 1, say "add to" instead.
 
 **accumulator** — a variable you add to on every pass of a loop. It accumulates,
 meaning it collects more and more. `total` in a sum is an accumulator.
+
+**pattern** — a way of writing code that you use again and again. The counting pattern
+and the accumulator are two.
+
+**trace** — follow a loop by hand on paper, with one column for each variable and one
+row for each pass.
+
+**off-by-one** — a mistake where a loop or a position is one too many or one too few.
+`range(5)` stops at 4, not 5.
+
+**edge case** — an unusual input at the edge of what is allowed, like an empty list or
+zero. Test it on purpose.
 
 ---
 
@@ -105,11 +161,23 @@ condition.
 **evaluate** — work out the value of. "Python evaluates the right side first" means
 it works out the right side first.
 
+**branch** — one of the paths in an `if`. The `if`, each `elif` and the `else` are
+branches. Only one of them runs.
+
+**keyword** — a word that Python has reserved for itself, such as `if`, `for`, `def`
+and `return`. You cannot use it as a variable name.
+
+**side effect** — something a function does besides giving back a value, such as
+printing or changing a list.
+
 ---
 
 ## The ones about functions
 
 **function** — a named block of code you can run whenever you like. Made with `def`.
+
+**method** — a function that belongs to a value, written after a dot. In
+`name.upper()`, `upper` is a method of the string `name`.
 
 **call** — run a function. `greet()` calls `greet`.
 
@@ -138,9 +206,6 @@ function is only in scope inside that function.
 
 **global** — exists for the whole program, not just inside one function.
 
-**unpack** — take a group apart into separate variables. `x, y = point` unpacks the
-tuple `point`.
-
 **docstring** — a short note at the top of a function saying what it does. Written
 as a string, not a comment.
 
@@ -155,10 +220,15 @@ running.
 
 **catch** — handle an error with `except`, so the program does not stop.
 
-**raise** — when Python signals that an error has happened. "It raises a
-`ValueError`" means that error happened.
+**raise** — start an error. Python raises an error when something goes wrong, so "it
+raises a `ValueError`" means that error happened. You can also do it yourself with
+`raise ValueError("message")`.
 
-**traceback** — the block of red error text. Read it from the bottom up.
+**traceback** — the text Python prints when a program stops with an error. It starts
+with the words `Traceback (most recent call last)`. Read it from the bottom up.
+
+**caret** — the `^` mark. In a SyntaxError it points at the spot where Python got
+confused.
 
 **syntax** — the rules about what valid Python looks like. A syntax error means the
 file is not valid Python, so none of it runs.
@@ -178,6 +248,20 @@ files.
 **import** — pull a module into your program so you can use it.
 
 **comment** — a note for humans, starting with `#`. Python ignores it completely.
+
+**prompt** — the text shown to ask the user for something. In `input("Name? ")`, the
+prompt is `Name? `.
+
+**editor** — the program where you type and run your code.
+
+**console** — the window or panel where a program shows its output and where you can
+type. Also called the terminal or the shell.
+
+**class** — a way to bundle data and functions into your own kind of value. Not taught
+in this course.
+
+**type hint** — a note in the code about which type a value should have, like
+`def f(n: int)`. Python does not enforce it. Not taught in this course.
 
 **refactor** — change the code without changing what it does. You do it to make the
 code clearer.
@@ -205,25 +289,25 @@ library is the one that comes with Python.
 
 ---
 
-## Words the lessons deliberately do not use
+## Words this course does not use, on purpose
 
-These are common in tutorials and in real code, and they are replaced with something
-simpler here. If you meet one, come back to this list.
+These are common in tutorials and in real code, and this course replaces them with
+something simpler. If you meet one, come back to this list.
 
-**iterate** — the lessons say "go through the items" instead. It means the same
+**iterate** — This course says "go through the items" instead. It means the same
 thing.
 
-**concatenate** — the lessons say "glue together" or "join". Python's own error
+**concatenate** — This course says "glue together" or "join". Python's own error
 messages use "concatenate", so you will see it in a `TypeError`.
 
-**parse** — the lessons say "read" or "work out". It means taking text apart and
+**parse** — This course says "read" or "work out". It means taking text apart and
 understanding its structure.
 
 **instantiate** — creating an object from a class. Not needed in this course.
 
 **deprecated** — old and no longer recommended. You will see it in documentation.
 
-**terminate** — stop. The lessons say stop.
+**terminate** — stop. This course says stop.
 
 **utilise** — use.
 
@@ -233,20 +317,20 @@ understanding its structure.
 
 **redundant** — not needed, because something else already does it.
 
-**verbose** — too long. The lessons say "more code than it needs".
+**verbose** — too long. This course says "more code than it needs".
 
-**concise** — short. The lessons say "short".
+**concise** — short. This course says "short".
 
-**explicit** — stated clearly, written out. The lessons say "spelled out".
+**explicit** — stated clearly, written out. This course says "spelled out".
 
-**implicit** — not stated, but understood. The lessons say "not written down".
+**implicit** — not stated, but understood. This course says "not written down".
 
-**arbitrary** — any value would do, it does not matter which. The lessons say
+**arbitrary** — any value would do, it does not matter which. This course says
 "any" or "does not matter".
 
-**ambiguous** — could mean more than one thing. The lessons say "unclear".
+**ambiguous** — could mean more than one thing. This course says "unclear".
 
-**caveat** — a warning. The lessons say "warning" or "but there is a catch".
+**caveat** — a warning. This course says "warning" or "but there is a catch".
 
 **boilerplate** is above, and it is the one exception, because there is no shorter
 way to say it.

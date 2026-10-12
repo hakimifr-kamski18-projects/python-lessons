@@ -3,8 +3,51 @@ title: Unit 01 exercises
 sidebar:
   label: Exercises
 ---
-Work through these in order. Warm-ups are meant to be quick and to be done together.
-Core ones are yours to work out. Predict before you run, every time.
+Work through these in order. Warm-ups are quick. Core exercises are for you to work out. Predict before you run,
+every time.
+
+---
+
+## Before you start
+
+A few small things are used in many of the exercises below.
+
+**Showing a type.** Every value has a type (the kind of value it is). To see it, print
+the result of `type()`.
+
+```python
+print(type(42))
+```
+
+This shows `<class 'int'>`. The word after `class` is the type.
+
+**f-strings.** An f-string is a piece of text with the letter `f` right before the
+opening quote. Anything inside braces `{ }` is worked out and put into the text.
+
+```python
+name = "Ada"
+a = 3
+b = 4
+print(f"Hello {name}")
+print(f"{a} + {b} = {a + b}")
+```
+
+This prints `Hello Ada` and then `3 + 4 = 7`. Braces can hold a variable or a
+calculation. Without the `f`, or without the braces, Python prints the characters as
+they are.
+
+**Rounding when you print.** Put `:.2f` after the value, inside the braces, to show
+exactly 2 digits after the decimal point. `:.1f` shows 1 digit.
+
+```python
+price = 3.14159
+print(f"{price:.2f}")
+```
+
+This prints `3.14`.
+
+**Numbers and text.** You cannot glue a number to text with `+`. Use `str()` to turn
+the number into text first, as in `"Age: " + str(25)`. An f-string does this for you.
 
 ---
 
@@ -37,7 +80,8 @@ print(x)
 
 ### 1.3 What is the type?
 
-Write down `int`, `float` or `str` for each one, then check with `type()`.
+Write down `int`, `float`, `str` or `bool` for each one, then check by printing the
+result of `type()`, for example `print(type(42))`.
 
 - `42`
 - `42.0`
@@ -52,9 +96,8 @@ Write down `int`, `float` or `str` for each one, then check with `type()`.
 
 ### 1.4 Age in the year 2100
 
-Make a variable `birth_year` set to your birth year, and a variable `current_year` set
-to 2026. Work out how old you will be in 2100 and print a sentence about it using an
-f-string.
+Make a variable `birth_year` set to your birth year. Work out how old you will be in
+2100 and print a sentence about it using an f-string.
 
 Example output shape, yours will differ.
 
@@ -78,11 +121,12 @@ Then change the celsius value and run it again without touching anything else.
 ### 1.6 Split a bill
 
 Three friends share a bill of 187.50 and want to leave a 12 percent tip. Work out the
-tip, the total including the tip, and what each person pays. Print all three with two
-decimal places.
+tip, the total including the tip, and what each person pays. Print the bill, the tip, the
+total and the share of each person, all with two decimal places. Print the last one as
+`Each person pays 70.00`, with your own number.
 
-Watch out for operator precedence, which means which operation happens first, in `total
-* 12 / 100`. Work it out on paper first, then check.
+Watch out for operator precedence (which operation happens first) in `bill * 12 / 100`.
+Work it out on paper first, then check.
 
 ### 1.7 Seconds into hours and minutes
 
@@ -107,9 +151,8 @@ b = "second"
 
 Make it so that `a` holds `"second"` and `b` holds `"first"`, then print both.
 
-There are two ways to do this. One of them needs a third variable and is worth working
-out because the reasoning is useful. The other is a special Python trick. Try to find
-the one with a third variable first.
+There are two ways to do this. Try the way with a third variable first, because the
+reasoning is useful. After that, look up how `a, b = b, a` does the same in one line.
 
 ### 1.9 Broken code
 
@@ -131,7 +174,7 @@ print(f"Total: {total)
 
 A pizza place sells small pizzas of radius 10 and large pizzas of radius 15. Both cost
 12 dollars. Work out the area of each with `3.14159 * radius ** 2` and print both areas
-and which one is better value per square centimetre.
+and which one gives more area per dollar.
 
 ### 1.11 Days, hours, minutes, seconds
 
@@ -160,16 +203,17 @@ into this
 print(f"Each person pays each:.2f")
 ```
 
-Run it. There is no error. Explain out loud what happened and why this kind of bug is
-more dangerous than the ones that produce an error message.
+Run it. There is no error. Write one or two sentences saying what happened, and why
+this kind of bug is worse than one that gives an error message. If your line in 1.6
+looked different, change your own version of it in the same way.
 
 ---
 
-## Before next session
+## Check yourself
 
-Be able to do these without notes.
+You are ready for unit 02 if you can do these without notes.
 
 - Make a variable, change it, and print the new value.
 - Use `//` and `%` to split a number into parts.
 - Print a sentence containing a variable and a calculation using an f-string.
-- Say what `type()` returns for `5`, `5.0` and `"5"`, and why that matters.
+- Say to yourself what `type()` returns for `5`, `5.0` and `"5"`, and why that matters.

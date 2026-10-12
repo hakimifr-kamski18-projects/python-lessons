@@ -22,8 +22,8 @@ numbers = [10, 20, 30, 40, 50]
 | `sum(numbers)` | `150` |
 
 `numbers[1:3]` gives positions 1 and 2, so 20 and 30. End position excluded, same as
-string slicing. If you got `[20, 30, 40]`, that rule has not stuck yet and it is worth
-going back to unit 02 for five minutes.
+string slicing. If you got `[20, 30, 40]`, remember that the end position is not
+included.
 
 ### 5.2 Predict the mutation
 
@@ -47,16 +47,16 @@ b.append(4)
 print(a) # [1, 2, 3] <- unchanged
 ```
 
-The middle one is the lesson. `b = a` does not make a copy. It gives the same list a
+The middle one is the important one. `b = a` does not make a copy. It gives the same list a
 second name. Changing it through one name is visible through the other, because there is
 only one list.
 
 In the third, `a[:]` makes a really new list with the same contents, so `b` and `a` are
 independent afterwards.
 
-Say this sentence. "Assigning a list does not copy it."
+Remember this rule: assigning a list does not copy it.
 
-Be briefly annoyed that this is different from numbers, because it is:
+This is different from numbers:
 
 ```python
 a = 5
@@ -65,10 +65,8 @@ b = 6
 print(a) # 5, unchanged
 ```
 
-Numbers behave the way you expect. Lists do not. The reason is that numbers are
-immutable, so `b = a` for numbers cannot cause this, and `b = 6` is really "reassign
-`b`" rather than "change the 5". The rule is what matters
-right now.
+Lists can be changed in place and numbers cannot. So `b = 6` just gives `b` a new
+value, and `a` stays 5.
 
 ### 5.3 Spot the bug
 
@@ -79,13 +77,11 @@ names = names.append("Grace")
 print(len(names))
 ```
 
-The immediate failure is on the third line, a `TypeError`, because `names` became `None`
-after the first `append()`. `append()` returns `None` and does its work by changing the
-list, so assigning the result back destroys the list.
-
-The problem that is hard to see is the first line. It is not wrong exactly, but the `=
-[]` is pointless if you are about to overwrite the variable. Your intent is clearly to
-start with an empty list, so the first line should be the whole setup.
+The program fails on the third line with `AttributeError: 'NoneType' object has no
+attribute 'append'`. After the first `append()`, `names` became `None` (the value that
+means "nothing here"). `append()` gives back `None` and does its work by changing the
+list, so assigning the result back throws the list away. Then the next `append()` is
+asked of `None`, which cannot do it.
 
 The fix.
 
@@ -96,7 +92,7 @@ names.append("Grace")
 print(len(names)) # 2
 ```
 
-Make the connection. This is the exact opposite of unit 02, where `name = name.upper()`
+This is the exact opposite of unit 02, where `name = name.upper()`
 was the correct thing to write. Both are correct in their own place, and the way to tell
 is to check whether the method gives something back or changes the thing. If you are
 unsure, `print()` the result and see.
@@ -113,7 +109,7 @@ names.remove("Alan") # ValueError, something about x not being in list
 not expect a character for character match. What matters is the error type and the
 meaning.)
 
-Two different error types, and the distinction is the point.
+These are two different error types, and the difference is the point.
 
 `IndexError` means the position does not exist. `ValueError` means the value is not in
 the list, even though the call itself was perfectly valid.
@@ -121,8 +117,8 @@ the list, even though the call itself was perfectly valid.
 This mirrors `int("hello")` from unit 02, which is also a `ValueError`, because the kind
 of thing was right and the content was wrong.
 
-The second and third lines both raise before `print()` gets a chance to run. That is worth
-noticing, because `print(names.remove("Alan"))` looks like it should print something.
+The second and third lines both raise before `print()` gets a chance to run. Notice this,
+because `print(names.remove("Alan"))` looks like it should print something.
 
 ### 5.5 Sort or reverse
 
@@ -137,7 +133,7 @@ It is not sorted. `reverse()` flips the order and does nothing else.
 - `reverse()` reverses the current order.
 - `sort(reverse=True)` sorts, then reverses, giving descending order.
 
-The way to make this concrete. Take a shuffled list and run both
+To see the difference, take a shuffled list, run both
 operations and compare the outputs. On `[5, 2, 9, 1, 7]`, `reverse()` gives `[7, 1, 9, 2,
 5]` and `sort(reverse=True)` gives `[9, 7, 5, 2, 1]`. Very different.
 
@@ -170,14 +166,15 @@ for item in sorted(shopping):
     print(f" - {item}")
 ```
 
-Two details worth checking.
+Two details to check.
 
 The `if item:` guard skips empty input, so pressing Enter by accident does not add a
-blank item. That is the truthiness point from unit 03 in real use.
+blank item. An empty string counts as `False` in an `if` (people say it is "falsy"), so
+the guard only lets real text through.
 
 And `sorted(shopping)` rather than `shopping.sort()`, because sorting the original would
-change the order the user entered them in, and the exercise prints both orders. This is
-a good opportunity to ask yourself which one you want and why. If you only needed the sorted
+change the order the user entered them in, and the exercise prints both orders. Ask
+yourself which one you want and why. If you only needed the sorted
 version, `shopping.sort()` would be fine and would save a copy.
 
 ### 5.7 Grades
@@ -201,9 +198,9 @@ else:
 The `if scores:` guard is the important part. Without it, a count of 0 gives a
 `ZeroDivisionError` on the average line, exactly like exercise 4.8.
 
-Note that `if scores:` works because an empty list is falsy, which is unit 03's
-truthiness rule applied to a list. That is the reason the guard is written this way
-rather than `if len(scores) > 0`.
+`if scores:` works because an empty list counts as `False` in an `if` (it is "falsy"),
+just like an empty string. Both ways of writing the guard work, and this one is shorter
+than `if len(scores) > 0`.
 
 ### 5.8 Remove the duplicates
 
@@ -219,8 +216,8 @@ for item in items:
 print(unique) # ['apple', 'banana', 'cherry']
 ```
 
-The `not in` check against the growing list is the whole technique. It is also worth
-noting that this is slow for large lists, since every item has to be checked against
+The `not in` check against the growing list is the whole technique. Note that this is
+slow for large lists, since every item has to be checked against
 everything already collected. There is a much faster way using a dictionary, which is
 unit 07 material.
 
@@ -249,17 +246,17 @@ len(items) - 1 start at the last valid position, 4
 -1 step backwards
 ```
 
-Both of the negative numbers are doing different jobs, which is confusing. The middle
-one is the stop value and the last one is the step. Trace it and print the
-range with `list()` before writing the loop.
+The two negative numbers do different jobs. The middle
+one is the stop value and the last one is the step. Print the
+range with `list()` before writing the loop to see what it gives.
 
-The common wrong answer is `range(len(items), 0, -1)`, which starts one too far to the
-right and gives an `IndexError` immediately, then stops one too early and never reaches
-position 0. Getting that wrong and debugging it is more valuable than getting it right
-first time.
+A common wrong answer is `range(len(items), 0, -1)`. It starts one position too far to
+the right, so the first `items[i]` is an `IndexError`. It also stops one too early, so
+it would never reach position 0. If you made this mistake, debugging it taught you more
+than getting it right the first time.
 
-Once it works, look at `items[::-1]` from unit 02 and note that the slicing version is
-what people actually write.
+Once it works, look at `items[::-1]`. Leaving the start and stop empty and using a step
+of `-1` gives a reversed copy, and this slicing version is what people usually write.
 
 ### 5.10 Biggest, the hard way
 
@@ -275,14 +272,14 @@ for number in numbers:
 print(biggest) # 9
 ```
 
-The answer to the question is that the starting value matters. Initialising to `0` works
+The starting value matters. Starting at `0` works
 for lists with positive numbers and fails for lists of all negative numbers, because 0
 is bigger than all of them and never gets replaced.
 
-Initialising to `numbers[0]` fixes it, because the first element is a real value from
+Starting at `numbers[0]` fixes it, because the first element is a real value from
 the list and the comparisons after it will do the right thing.
 
-There is one edge case. If the list is empty, `numbers[0]` is an `IndexError`. So the
+There is one special case. If the list is empty, `numbers[0]` is an `IndexError`. So the
 fully correct version is this.
 
 ```python
@@ -297,7 +294,7 @@ else:
 ```
 
 Test with `[-3, -7, -2]` on both versions. Seeing the `0` version print `0`
-for that list is the moment the lesson lands.
+for that list shows why the start value matters.
 
 ### 5.11 Word lengths
 
@@ -320,7 +317,7 @@ print(f"Longest word: {longest}")
 ```
 
 This is the same "biggest so far" pattern as 5.10, comparing lengths instead of values.
-Noticing that connection is valuable. It is one pattern, not two.
+It is one pattern, not two.
 
 Note the `words[0]` initialisation for the same reason as 5.10. It makes ties work out
 in favour of whichever tied word comes first, which is fine.
@@ -338,14 +335,13 @@ for number in numbers:
 print(result) # [49, 16, 9]
 ```
 
-Filter and transform in one loop. Note that the square of a negative number is positive,
-so the output is all positive even though the input was all negative. Some students
-expect negative output, which is worth catching.
+Filter and transform in one loop. The square of a negative number is positive,
+so the output is all positive even though the input was all negative. If you expected
+negative numbers, remember that a square is never negative.
 
-Also note `number ** 2` gives the right answer even for negatives, because `-7 ** 2` is
-49 in Python. That is because `**` binds tighter than the unary minus. Were it the other
-way round it would be `-(7 ** 2)` which is also 49, so this particular case is safe
-either way.
+If you ever write a negative number directly, use brackets: `(-7) ** 2` is `49`, but
+`-7 ** 2` is `-49`, because `**` has higher precedence than the minus sign. Here
+`number ** 2` is safe because `number` is a variable that holds the whole value.
 
 ### 5.13 Insert and delete
 
@@ -364,16 +360,16 @@ print(len(names))
 ```
 
 If you called `remove()` with a name that is not in the list, you got a `ValueError`.
-That is a good thing to have hit.
+Hitting that error taught you how `remove()` behaves.
 
-One question worth asking yourself. What does `names.remove("Ada")` do if there are two Adas in
-the list? The answer is that it removes only the first one. That is really a common
+Ask yourself what `names.remove("Ada")` does if there are two Adas in
+the list. It removes only the first one. This is a common
 source of bugs, and it is easy to check.
 
 ### 5.14 Sort by length
 
 ```python
-words = ["banana", "fig", "apple", "kiwi", "cherry"]
+words = ["apple", "banana", "cherry", "fig", "kiwi"]
 
 print(sorted(words)) # alphabetical
 print(sorted(words, key=len)) # shortest first
@@ -384,12 +380,12 @@ print(sorted(words, key=len, reverse=True)) # longest first
 item itself". Python calls `len()` on each word, sorts by those numbers, and gives you
 back the words.
 
-The explanation in your own words. It is a way of telling
-`sorted()` what to compare.
+In your own words, it is a way of telling `sorted()` what to compare.
 
-Ties are broken by keeping the original order, which is stable. So `fig` and `kiwi` both
-of length 3 stay in their original relative order. Python's sort is stable, which is a
-nice guarantee and worth knowing.
+The output of the second line is `['fig', 'kiwi', 'apple', 'banana', 'cherry']`. When
+two items tie, Python keeps their original order. Here `banana` and `cherry` both have
+length 6, and `banana` stays first. This is called a stable sort (a sort that keeps
+the original order of equal items).
 
 ---
 
@@ -417,23 +413,23 @@ for pair in pairs:
     print(f"{pair[1]:<10} {pair[0]:>5.1f}")
 ```
 
-The trick is to store the score first in each pair, so that the default sort puts them
+The trick is to store the score first in each pair, so that the normal sort puts them
 in score order. Python sorts lists of lists by comparing the first item of each, then
 the second if the first ties.
 
 That is why the pair is `[score, name]` and not `[name, score]`. If you build it the
-other way round, it sorts alphabetically by name, which is a very common first attempt
-and a good thing to debug.
+other way round, it sorts alphabetically by name. That is a common first attempt.
 
 On the formatting, `{pair[1]:<10}` left-aligns the name in a width of 10, and
 `{pair[0]:>5.1f}` right-aligns the score in a width of 5 with one decimal. The `<` and
 `>` are the alignment markers. Without them, numbers align right and text aligns left by
-default, which often looks fine anyway.
+default, which often looks fine anyway. The exact spacing does not matter for the
+exercise.
 
-The awkwardness you should feel here is the point. Two parallel lists are a bad design,
-and keeping them in sync by hand is error prone. Notice how easy it would be to append a
-name without appending the matching score and end up with garbage. Unit 07 gives a much
-better answer.
+The awkwardness here is the point. Two parallel lists are a poor design,
+and keeping them in step by hand easily goes wrong. It would be easy to append a
+name without appending the matching score, and then the data is wrong. Unit 07 gives a
+much better answer.
 
 ### 5.16 Second biggest
 
@@ -454,37 +450,15 @@ for number in numbers:
 print(second) # 3
 ```
 
+Here `second` starts as `None`, which means "nothing here yet" (see the glossary). The
+check `second is None` is how the code asks "have I found a second value yet?"
+
 The logic is that when you find a new biggest, the old biggest becomes the second
 biggest. The `elif number < biggest` is what excludes duplicates, which is why `[5, 5,
 3]` gives 3 rather than 5.
 
-There is a simpler approach that handles duplicates naturally.
-
-```python
-unique = []
-for number in numbers:
-    if number not in unique:
-        unique.append(number)
-
-unique.sort()
-print(unique[-2])
-```
-
-This deduplicates, sorts, and takes the second from the last. It is easier to follow and
-slower for big lists, and either is a fine answer.
-
-Note the `second is None` check. `None` is not taught until unit 08, so if you have not
-met it, you can use a flag instead.
-
-```python
-found_second = False
-...
-    if not found_second or number > second:
-```
-
-Or initialise `second` to the smallest possible value with `float("-inf")`, which also
-works and looks mysterious. The thinking
-about duplicates is the exercise.
+This never sorts and never uses `max()`, so it follows the rules of the exercise.
+Trace `[5, 5, 3]` by hand and write down `biggest` and `second` after each step.
 
 ### 5.17 Merge two sorted lists
 
@@ -517,19 +491,18 @@ print(merged)
 
 Output is `[1, 2, 3, 4, 7, 8, 10, 11]`.
 
-The reasoning. Because both lists are already sorted, the smallest remaining item in
+Because both lists are already sorted, the smallest remaining item in
 each list is always at its current index. So comparing `a[i]` with `b[j]` tells you
 which one is the next smallest overall.
 
 The two loops at the end are the part people forget. When one list runs out, the other
 still has items, and they are already in order, so they can just be appended.
 
-This really is the merge step of merge sort, which is one of the standard sorting
-algorithms, and it is the foundation of how large datasets get sorted. The exercise is a
-real algorithm, not a toy.
+This is the merge step of merge sort, one of the standard sorting
+algorithms. It is also used to sort very large amounts of data.
 
 Trace it with the small lists by hand, writing out `i` and `j` at each step.
-Four or five steps in, the pattern becomes clear.
+After four or five steps, the pattern becomes clear.
 
 ### 5.18 Run length encoding
 
@@ -557,10 +530,9 @@ if text:
 print(encoded) # a3b2c1
 ```
 
-The awkward part is the final flush after the loop. The last run never gets written
-inside the loop, because there is no next character to trigger the `else`. That "and
-then handle the last one" shape is extremely common in string and list processing, and
-it is worth feeling it directly rather than being told.
+The awkward part is writing out the last run after the loop. The last run never gets
+written inside the loop, because there is no next character to trigger the `else`. That
+"and then handle the last one" shape is very common in string and list processing.
 
 The `if text:` guard handles the empty string, which would otherwise crash on `text[0]`.
 
@@ -584,8 +556,7 @@ the character just after, which holds the count.
 
 Note that this only works if counts are single digits. `a12` would break it, since the
 `1` and the `2` would be read as separate characters. Handling multi-digit counts needs
-a bit more care, and it is a legitimate stretch on top of the stretch if you are
-enjoying yourself.
+a bit more care, and you can try it as an extra challenge.
 
-The other thing worth pointing out is `character * count`, which is string repetition
+Also note `character * count`, which is string repetition
 from unit 01, and it is exactly the tool for this.

@@ -8,6 +8,51 @@ always check the file is where you think it is before blaming the code.
 
 ---
 
+## Before you start
+
+Here is what the exercises use, in small pieces.
+
+`open` gives you a file to work with. `with` closes the file for you when the indented
+block ends. The second part of `open` is the mode: `"r"` reads (the default), `"w"`
+writes and empties the file first, and `"a"` adds to the end.
+
+```python
+with open("sample.txt") as file:
+    for line in file:
+        print(line.strip())
+```
+
+Each line from a file ends with a newline (the invisible character that starts a new
+line). `strip()` removes spaces and newlines from both ends. Give it characters and it
+removes those instead: `"line.".strip(".,!?")` gives `"line"`. `file.read()` gives the
+whole file as one text, `file.readline()` gives just one line, and `text.splitlines()`
+cuts a text into a list of lines.
+
+`enumerate` counts as it goes. `enumerate(items, start=1)` gives pairs of a number and an
+item, so you can number a list from 1.
+
+```python
+for number, item in enumerate(["tea", "milk"], start=1):
+    print(f"{number}. {item}")
+```
+
+`try` and `except` handle an error. You can add `else`, which runs only when nothing went
+wrong in the `try` block.
+
+```python
+try:
+    number = int(text)
+except ValueError:
+    print("not a number")
+else:
+    print("that worked")
+```
+
+To catch two kinds of error with one `except`, put them in brackets:
+`except (FileNotFoundError, ValueError):`.
+
+---
+
 ## Warm-ups
 
 ### 8.1 Predict the output
@@ -86,19 +131,14 @@ print("C")
 
 ### 8.6 Count things in a file
 
-Make a file with several lines of text in it. Then write a program that reports how many
-lines, how many words, and how many characters it has.
-
-Test it against [`sample.txt`](/code/08-files-and-errors/sample.txt) and check the answers by hand.
+Write a program that reports how many lines, how many words, and how many characters
+[`sample.txt`](/code/08-files-and-errors/sample.txt) has. Check the answers by hand.
 
 Save `sample.txt` in the same folder as your script, so your program can find it. If you
-run it and get a `FileNotFoundError` saying it cannot find the file, that means your
-editor is running from a different folder rather than that the file is missing. Tell me
-rather than guessing.
+get a `FileNotFoundError`, the file is in a different folder than your script. Move it.
 
-Careful with the line count. If a file ends with a newline, the last line is complete,
-and reading it with a loop counts it correctly. Reading different ways can give
-different answers, so say which way you used and why.
+Be careful with the line count. Different ways of reading a file can give different
+line counts. Write a comment in your code saying which way you counted lines and why.
 
 ### 8.7 Write a file
 
@@ -126,15 +166,16 @@ import datetime
 now = datetime.datetime.now()
 ```
 
-Then `str(now)` gives you a readable timestamp. This is a preview of unit 09.
+Then `str(now)` gives you a readable date and time. This is a preview of unit 09.
 
 Run it a few times and then open the file and look at what accumulated.
 
 ### 8.9 Safe number input
 
 Write a function `get_number(prompt)` that keeps asking until the user gives a whole
-number. This is the validation loop (a loop that asks again until the answer is valid)
-from the lesson, so do it from memory.
+number. This is a validation loop (a loop that asks again until the answer is valid).
+Loop forever, try `int(text)` and `return` it, and when you get a `ValueError`, print a
+message and go round again.
 
 Then use it to ask for two numbers and print their sum.
 
@@ -150,7 +191,9 @@ Then answer this. Which version do you prefer, and why?
 ### 8.11 Save and load a dictionary
 
 Ask the user for five names and scores, store them in a dictionary (a collection you
-look things up in by name), and save it with `json.dump`.
+look things up in by name), and save it with `json.dump`. If the user types the same
+name twice, the second score replaces the first, so you may end up with fewer than five
+entries. That is fine.
 
 Then write a second program that loads the file and prints the names and scores sorted
 by score, highest first.
@@ -170,6 +213,10 @@ Remember that everything from a file is text, so you need `int`.
 Read a file and count how many times each word appears, using the dictionary counting
 pattern from unit 07. Print the ten most common words.
 
+Ignore capital letters, so `The` and `the` count as the same word, and remove `.,!?`
+from both ends of each word (`word.strip(".,!?")` does this). Words with the same count
+can come out in any order.
+
 Test it on [`sample.txt`](/code/08-files-and-errors/sample.txt).
 
 ### 8.14 Filter a file
@@ -187,8 +234,13 @@ run it.
 
 ### 8.15 To-do list that remembers
 
-Write the to-do list from the lesson yourself, without looking. It should save on every
-change and load on start.
+Write a to-do list program that remembers its items between runs.
+
+- Show the items numbered from 1, or `(nothing to do)` if there are none.
+- Show a menu with Add, Remove and Quit, and repeat until the user quits.
+- Write a function `load_todos()` that reads `todos.json` and gives back the list. If
+  the file does not exist, it gives back an empty list.
+- Write a function `save_todos(todos)` and call it after every change.
 
 Then add marking items as done. The simplest way is to store each item as a dictionary
 rather than a string.
@@ -197,15 +249,19 @@ rather than a string.
 [{"text": "buy milk", "done": False}]
 ```
 
+When you change the shape of the data like this, delete your old `todos.json` first.
+The old file holds plain strings, and the new code cannot read them.
+
 ### 8.16 Grade book on disk
 
 Ask for student names and scores, store them in a dictionary, and save to JSON.
 
 Then add a second run mode. If the file already exists when the program starts, load it
-and let the user add more students rather than starting empty.
+and let the user add more students rather than starting empty. A name typed twice
+replaces the earlier score.
 
-This is the first program here that behaves differently depending on whether it has been
-run before, which is what makes it feel like real software.
+Like 8.15, this program loads what was saved earlier, which is what makes it feel like
+real software.
 
 ### 8.17 A small CSV reader
 
@@ -225,7 +281,8 @@ and prints each record as a dictionary.
 ```
 
 The trick is to read the first line separately to get the column names, then use those
-names for every line after it.
+names for every line after it. `file.readline()` reads just one line, and a loop over
+`file` after that carries on from the second line.
 
 Then think about this. Should `score` be converted to a number? What happens if one row
 has a missing column?
@@ -240,15 +297,15 @@ Handle all of these without crashing.
 - Not a number
 - An operator that does not exist
 - Division by zero
-- Malformed input like `7 *` or just `hello`
+- Badly written input like `7 *` or just `hello`
 
-Wrap the whole calculation in a `try` and catch (handle an error so the program does not
-stop) the specific errors you expect. Then answer this. What is the danger of wrapping
-too much in one `try`?
+Use `try` and `except` around the part that can fail, and catch (handle an error so the
+program does not stop) the specific errors you expect. Then answer this. What is the
+danger of wrapping too much in one `try`?
 
 ### 8.19 File statistics
 
-Write a program that takes a filename and reports the number of lines, words,
+Write a program that asks the user for a filename and reports the number of lines, words,
 characters, the longest word, and the most common word.
 
 Handle the file not existing, and handle the file being empty, both without crashing. An
@@ -257,9 +314,9 @@ most-common-word logic.
 
 ---
 
-## Before next session
+## Check yourself
 
-Be able to do these without notes.
+Try to do these without notes.
 
 - Open and read a file, line by line, with `with`.
 - Write to a file, and explain the difference between `"w"` and `"a"`.

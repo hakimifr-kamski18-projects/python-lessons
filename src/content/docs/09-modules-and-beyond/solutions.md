@@ -14,9 +14,9 @@ is `18`. Remove the `seed` line and the two runs give different answers.
 make the numbers any less random, it makes them repeatable. Give the same seed and you
 get the same sequence every time.
 
-Why anyone would want that. Reproducibility. If a bug only shows up occasionally, and it
-depends on random numbers, you cannot debug it unless you can make the same random
-sequence happen again. Seeding lets you replay the exact run that failed.
+People want this for reproducibility (getting the same result again). If a bug only
+shows up occasionally, and it depends on random numbers, you cannot debug it unless you
+can make the same random sequence happen again. Seeding lets you replay the exact run that failed.
 
 It is also how you write tests for code that uses randomness. Set the seed, run the
 test, and expect a specific answer.
@@ -63,8 +63,8 @@ whether that is from the standard library, from a file you wrote, or from someth
 installed. In a large file, you really cannot tell.
 
 **It can silently overwrite your own names.** If you defined a variable or function
-called `floor`, and then do `from math import *`, your `floor` is replaced by the maths
-one, with no warning and no error. Your code then behaves wrongly in a way that is very
+called `floor`, and then do `from math import *`, your `floor` is replaced by the one
+from `math`, with no warning and no error. Your code then behaves wrongly in a way that is very
 hard to find, because the line that caused it is nowhere near the symptom.
 
 For `math` specifically the damage is mild, since the names are distinctive. For larger
@@ -109,15 +109,14 @@ for face in sorted(counts):
 ```
 
 The counts should come out roughly 166 each, without being exactly equal. That uneven
-spread is the point. If they came out exactly equal, something would be wrong with the
+spread is expected. If they came out exactly equal, something would be wrong with the
 random number generator.
 
-Worth running it a few times and watching the numbers move around. It is a good
-way to build a feel for what random actually looks like, which is lumpier than people
-expect.
+Run it a few times and watch the numbers move around. Real random numbers are lumpier
+than most people expect.
 
-Note `random.randint(1, 6)` includes both 1 and 6, unlike `range()`. Worth checking that you
-have noticed, since the two behave differently.
+Note that `random.randint(1, 6)` includes both 1 and 6, unlike `range()`, which stops
+before the end.
 
 ### 9.5 Random password generator
 
@@ -136,10 +135,9 @@ for i in range(length):
 print(password)
 ```
 
-The answer to why this should not be used for a real password is that the `random`
-module does not give numbers that are impossible to guess. Its numbers are predictable
-if you know the seed, and an attacker who can work out the sequence can guess your
-password.
+You should not use this for a real password because `random` is built for games and
+simulations. A person who sees enough of its output can work out what comes next, and
+an attacker who can do that can guess your password.
 
 There is a separate module for this, `secrets`, which is designed to be unguessable. The
 change is small.
@@ -149,9 +147,8 @@ import secrets
 password += secrets.choice(allowed)
 ```
 
-Knowing that there is a right and a wrong way to generate random numbers, and
-that the wrong way looks identical, is really valuable. It is a good example of how a
-program that works and a program that is correct can be different things.
+There is a right and a wrong way to generate random numbers, and the wrong way looks
+identical. A program that works and a program that is correct can be different things.
 
 ### 9.6 Coin flip statistics
 
@@ -171,12 +168,12 @@ print(f"Heads: {heads} ({heads / 10:.1f}%)")
 print(f"Tails: {tails} ({tails / 10:.1f}%)")
 ```
 
-The percentage is `heads / 1000 * 100`, which simplifies to `heads / 10`. Worth writing
-it the long way first so the arithmetic is clear.
+The percentage is `heads / 1000 * 100`, which simplifies to `heads / 10`. Write it the
+long way first so the arithmetic is clear.
 
 Running it several times, the percentages wander around 50 by a few points. At 100000
-flips, they get much closer. That is the law of large numbers, and it is really
-satisfying to see it happen in your own program.
+flips, they get much closer. That is the law of large numbers (more trials give results
+closer to the true chance), and you can see it happen in your own program.
 
 If you are interested, you can run the experiment 100 times and plot the spread of
 results, which is a nice thing to do with a list and a loop.
@@ -211,12 +208,12 @@ else:
 `random.choice` picks one item and can pick the same one again if you call it twice.
 `random.sample` picks several **different** items, and it will not repeat.
 
-That distinction matters and is worth remembering. Calling `choice()` three times in a loop to
-pick a team of three can pick the same person twice, which is a bug. `sample()` is the
-right tool and it is worth knowing why.
+Remember this difference. Calling `choice()` three times in a loop to pick a team of
+three can pick the same person twice, which is a bug. `sample()` is the right tool for
+this.
 
 The `len(names) >= 3` check exists because `random.sample` raises a `ValueError` if you
-ask for more items than there are. That is a good thing to hit.
+ask for more items than there are.
 
 ### 9.8 Dates
 
@@ -243,15 +240,16 @@ dates happened to be at, which is usually not interesting.
 
 `difference.days // 365` is an approximation and it will be wrong for people whose
 birthday has not happened yet this year. Doing it exactly means comparing months and
-days, which is fiddly. That approximation is worth noticing rather than pretending it is exact,
-and it is up to you whether to fix it.
+days, which is fiddly. So this answer is not exact, and it is up to you whether to fix
+it.
 
-`strftime("%A")` gives the day of the week, which is a fun thing to print and a good way
-to show that the formatting codes are worth looking up rather than memorising.
+`strftime("%A")` turns a date into text, here the name of the day of the week. Each
+`%` code stands for one part of the date. Look the codes up when you need them instead
+of memorising them.
 
-If the input does not match the format, `strptime` raises a `ValueError`, which is a
-nice callback to unit 08 and a good place to use the validation loop (a loop that asks
-again until the answer is valid).
+If the input does not match the format, `strptime` raises a `ValueError`. This is the
+same error handling as unit 08, so a validation loop (a loop that asks again until the
+answer is valid) works well here.
 
 ### 9.9 Your own module
 
@@ -295,8 +293,7 @@ running when the second file imports it. Prove it by removing the guard,
 running the second file, and watching the test prompt appear before your own program
 even starts.
 
-That is the moment the guard stops being boilerplate (fixed code you copy without
-changing much) and becomes a fix for a real problem you have seen.
+Now you have seen the problem that the guard fixes.
 
 ### 9.10 A geometry helper module
 
@@ -346,11 +343,12 @@ else:
 ```
 
 Note that `shapes.py` does not print anything at all, and does not ask for input. It is
-a file of pure functions, and that is what makes it reusable. A module that asks
-questions when you import it is a module you can only use in one way.
+a file of functions that only calculate and return values, and that is what makes it
+reusable. A module that asks questions when you import it is a module you can only use
+in one way.
 
-That separation, between code that does things and code that produces values, is a
-really good design principle, and it is worth naming.
+Keep code that talks to the user separate from code that produces values. This is a good
+design rule.
 
 ---
 
@@ -384,8 +382,8 @@ gives a random float between the two, unlike `randint()` which gives whole numbe
 1970. The actual number is meaningless, and the difference between two of them is what
 you want.
 
-The check for an implausibly fast reaction is worth having, because pressing Enter early
-is a real thing people do.
+The check for an implausibly fast reaction is useful, because people sometimes press
+Enter early.
 
 `time` also has `time.perf_counter`, which is better for measuring short durations
 because it does not jump around if the system clock changes.
@@ -416,13 +414,15 @@ play()
 ```
 
 The `return True` and `return False` let the caller find out what happened without
-printing inside the function, which is the unit 06 lesson applied here.
+printing inside the function. This is the unit 06 idea of returning values instead of
+printing them.
 
-The strategy question. You always guess the middle of the remaining range. With 1 to
+The strategy is to always guess the middle of the remaining range. With 1 to
 100, guess 50, then 25 or 75, and so on. Each guess halves what is left, and seven
 guesses is enough because 2 to the power 7 is 128, which is more than 100.
 
-The computer playing against itself looks like this.
+The computer playing against itself looks like this. It needs `import random` from the
+block above.
 
 ```python
 def computer_play():
@@ -446,10 +446,8 @@ def computer_play():
 ```
 
 The two variables `low` and `high` track the range that the answer could still be in,
-and each guess cuts it in half. That is binary search (cutting the range in half each
-time), and it is the same algorithm behind searching a sorted list, and behind the
-"guess the number between 1 and 1000" trick. Finding it yourself is the point of the
-exercise, so it is worth working it out on your own.
+and each guess cuts it in half. This is binary search, and it is the same method behind
+searching a sorted list, and behind the "guess the number between 1 and 1000" trick.
 
 ### 9.13 Rock paper scissors tournament
 
@@ -463,6 +461,25 @@ def beats(a, b):
            (a == "scissors" and b == "paper") or \
            (a == "paper" and b == "rock")
 
+# first part: two random players
+first_wins = 0
+second_wins = 0
+draws = 0
+
+for i in range(1000):
+    first = random.choice(moves)
+    second = random.choice(moves)
+
+    if first == second:
+        draws += 1
+    elif beats(first, second):
+        first_wins += 1
+    else:
+        second_wins += 1
+
+print(f"First: {first_wins}, Second: {second_wins}, Draws: {draws}")
+
+# second part: a random player against always rock
 wins = 0
 losses = 0
 draws = 0
@@ -481,23 +498,22 @@ for i in range(1000):
 print(f"Wins: {wins}, Losses: {losses}, Draws: {draws}")
 ```
 
-The answer to the question. Roughly a third of each.
+With two random players, each of the three results comes out at roughly a third. Against
+always-rock the answer is the same, roughly a third of each.
 
 The wrong reasoning is "two of the three moves beat rock, so the random player wins two
-thirds of the time". The flaw is that the third move, rock, does not lose. It draws. So
-the three outcomes are one third win, one third lose, one third draw, and the random
-player's advantage over always-rock is nothing at all.
+thirds of the time". The flaw is that only one move beats rock, which is paper. Scissors
+loses to rock, and rock against rock is a draw. So the three outcomes are one third win,
+one third lose, one third draw, and the random player does no better than always-rock.
 
-The important idea underneath. Always-rock is not actually a bad strategy against random
-play. It breaks even on wins and losses and draws a third of the time. Rock only loses
-to a fixed strategy that always plays paper, and only wins against one that always plays
-scissors.
+Always-rock is not a bad strategy against random play. Wins and losses are equal, and a
+third of the rounds are draws. Rock only loses to a fixed strategy that always plays
+paper, and only wins against one that always plays scissors.
 
-If you want to take it further, find the strategy that beats
-always-rock reliably (it is always-paper, which wins every round), and then note that
-always-paper loses every round to always-scissors. That is the loop that makes rock
-paper scissors interesting, and it is a nice demonstration that "beats the other
-strategy" is not a total order.
+If you want to take it further, find the strategy that beats always-rock reliably (it
+is always-paper, which wins every round). Then note that always-paper loses every round
+to always-scissors. This circle is what makes rock paper scissors interesting. No
+single strategy beats all the others.
 
 ### 9.14 Shuffle and sort
 
@@ -514,14 +530,13 @@ print("By length:", sorted(names, key=len))
 print("Longest first:", sorted(names, key=len, reverse=True))
 ```
 
-The answer to the question. `random.shuffle` changes the list in place (changed
-directly, without a copy) and returns `None`. `sorted()` returns a new list and leaves the
-original alone. Which is the same distinction you met in unit 05, and it is worth
-making sure you can still explain it. The command-sounding name changes the thing, the
-description-sounding name gives you back something new.
+`random.shuffle` changes the list in place (changed directly, without a copy) and
+returns `None`. `sorted()` returns a new list and leaves the original alone. This is the
+same difference as `sort()` and `sorted()` in unit 05.
 
-Note that `shuffle()` is the one list method where there is no `sorted()` equivalent, so you
-cannot avoid the in-place version.
+`shuffle` is a function from `random`, not a list method. There is no built-in that
+returns a shuffled copy, but `random.sample(names, len(names))` does the same job and
+leaves the original list alone.
 
 ### 9.15 Split your to-do list
 
@@ -597,12 +612,13 @@ while True:
         break
 ```
 
-The improvement over the single file version is that the filename becomes a parameter
-rather than a hardcoded string. Now the library can be used for more than one list, and
-it is testable without touching a real file.
+This solution splits the basic version of 8.15, where each item is plain text. The
+improvement over the single file version is that the filename becomes a parameter rather
+than a fixed string. Now the library can be used for more than one list, and you can
+test it without touching a real file.
 
-Note also that `todo.py` is almost entirely input and output, and all the logic lives in
-the library. That is the shape a program should take once it has any size to it.
+Note also that `todo.py` is almost entirely input and output, and the other work lives
+in the library. A program that has grown large should take this shape.
 
 ---
 

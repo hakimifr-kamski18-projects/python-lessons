@@ -9,6 +9,53 @@ right shape for this data?
 
 ---
 
+## Before you start
+
+Four ideas that the exercises use. Try each small example yourself.
+
+Looping over pairs. When a list holds pairs, you can give each half its own variable in
+the `for` line. Python splits (unpacks) each pair for you.
+
+```python
+pairs = [("Ada", 88), ("Grace", 95)]
+for name, score in pairs:
+    print(name, score)
+```
+
+A dictionary has the same loop through `.items()`, which gives you one pair per key.
+Looping over a dictionary directly gives only the keys. `sorted(some_dict)` gives the
+keys in order.
+
+Grouping. Sometimes each value is a list, for example all the words that start with the
+same letter. The first time you see a key, you must put an empty list under it. After
+that you can use `.append()`.
+
+```python
+groups = {}
+for word in ["apple", "avocado", "banana"]:
+    first = word[0]
+    if first not in groups:
+        groups[first] = []
+    groups[first].append(word)
+print(groups)   # {'a': ['apple', 'avocado'], 'b': ['banana']}
+```
+
+Sorting pairs. Python compares two lists item by item. It looks at the first items. It
+looks at the second items only when the first items are equal. So `[88, "Ada"]` comes
+before `[95, "Grace"]`, because 88 is less than 95.
+
+```python
+pairs = [[95, "Grace"], [88, "Ada"], [72, "Alan"]]
+pairs.sort()
+print(pairs)   # [[72, 'Alan'], [88, 'Ada'], [95, 'Grace']]
+```
+
+Choosing the shape. Use a list for many things of the same kind, where you add and remove
+items. Use a dictionary when you look things up by a name. Use a tuple for a small fixed
+group that belongs together, such as `(3, 4)` or a name with a score.
+
+---
+
 ## Warm-ups
 
 ### 7.1 Predict the output
@@ -111,8 +158,8 @@ The answer should be `{"Ada": 88, "Grace": 95, "Alan": 72}`.
 
 You will need the loop with an index from unit 05, `for i in range(len(names))`.
 
-Then think about what this answers about exercise 5.15. You were building two parallel
-lists and then fighting to keep them together. What should you have done instead?
+Then look back at exercise 5.15, where you kept two parallel lists in step. What should
+you have used instead?
 
 ### 7.9 Inventory
 
@@ -129,8 +176,8 @@ Then do these things, printing the inventory after each step.
 - Add a new item, `"dates"` with 7
 - Print the total number of items across all the fruit, not the number of kinds
 
-For that last one, you need a loop over `.values()` (a value is the thing you get back)
-and an accumulator from unit 04.
+For that last one, you need a loop over `.values()` (in a dictionary, the value is what
+you get back when you look up a key) and an accumulator from unit 04.
 
 ### 7.10 Letter frequency
 
@@ -168,8 +215,8 @@ The average needs a loop inside a loop, or a loop over `.values()`.
 
 Take a dictionary of names and scores and print it sorted by score, highest first.
 
-You did the technique in the lesson with the word counter. Build a list of pairs with
-the score first, sort it, then print.
+Build a list of `[score, name]` pairs, call `.sort(reverse=True)` on it, then print each
+pair. `reverse=True` is covered in unit 05.
 
 Then answer this. Why does putting the score first make the sort work?
 
@@ -179,8 +226,8 @@ Then answer this. Why does putting the score first make the sort work?
 
 ### 7.14 Group by first letter
 
-Given a list of words, build a dictionary that groups them by their first letter. You
-did this in the lesson, so do it without looking.
+Given a list of words, build a dictionary that groups them by their first letter. When
+a letter is not a key yet, start it with an empty list `[]`, then use `.append()`.
 
 ```python
 words = ["apple", "banana", "avocado", "cherry", "blueberry"]
@@ -196,7 +243,10 @@ Then print each group on its own line, sorted alphabetically.
 
 ### 7.15 The most common word
 
-Take a long piece of text. Find the word that appears most often.
+Take a long piece of text. Find the word that appears most often. Ignore uppercase, and
+ignore punctuation such as `. , ! ?` at the ends of words. Hint: `word.strip(".,!?;:")`
+removes those characters from both ends of `word`. Skip a word that becomes empty after
+that.
 
 Then answer these. What is the second most common? What happens if two words tie?
 
@@ -217,6 +267,7 @@ the result.
 
 Ask for two pieces of text. Count the words in both, combined into a single dictionary.
 So a word that appears 3 times in the first and 2 times in the second should show 5.
+Ignore uppercase, and ignore punctuation at the ends of words, as in 7.15.
 
 Then print only the words that appear in both texts.
 
@@ -241,23 +292,24 @@ A dictionary key does not have to be a string. It can be a tuple.
 ```python
 distances = {
     ("London", "Paris"): 344,
-    ("Paris", "Berlin"): 878,
+    ("Berlin", "Paris"): 878,
 }
 ```
 
 Build a small version of this, and write a function that takes two city names and
-returns the distance, in either order.
+returns the distance, in either order. Store each key with its two cities in
+alphabetical order, as above. If the pair is not in the dictionary, return `"unknown"`.
 
 So looking up both `("London", "Paris")` and `("Paris", "London")` should work.
 
-The trick is to normalise the pair (put it in a fixed form so two equal things really
-are equal) before looking it up, by putting them in a fixed order first.
+Put the two cities in a fixed order (for example alphabetical) before the lookup, so both
+orders give the same key. This is called normalising.
 
 ---
 
-## Before next session
+## Check yourself
 
-Be able to do these without notes.
+Try to do these without notes.
 
 - Make a dictionary, add to it, remove from it, and get values out by key.
 - Loop over the keys, the values, and the pairs.

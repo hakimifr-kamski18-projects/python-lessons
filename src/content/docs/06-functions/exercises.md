@@ -8,6 +8,59 @@ back, or does it just need to show something? Most of these need to return.
 
 ---
 
+## Before you start
+
+These are the ideas the exercises use. Read them once, then come back if you get stuck.
+
+`def` only defines a function. It does not run it. To run it you call it, with brackets.
+
+```python
+def greet():
+    print("Hello")
+
+greet()   # this line runs the function
+greet     # no brackets, so this is the function itself and nothing runs
+```
+
+`print()` shows a value on the screen. `return` hands a value back to the code that called
+the function, so you can store it or use it in a sum. If a function has no `return`, the
+call gives you `None` (a value that means "nothing here").
+
+```python
+def double(n):
+    return n * 2
+
+x = double(4)   # x is 8
+```
+
+The moment a `return` runs, the function stops. Any lines after it in that function are
+skipped, even if the `return` is inside a loop.
+
+A function can call another function, as long as that other function is defined before
+the call actually runs.
+
+```python
+def double(n):
+    return n * 2
+
+def double_plus_one(n):
+    return double(n) + 1
+
+print(double_plus_one(4))   # 9
+```
+
+A function can also return several values at once, by separating them with commas. You
+pick them up with the same number of names on the left.
+
+```python
+def two_things():
+    return 1, 2
+
+a, b = two_things()   # a is 1, b is 2
+```
+
+---
+
 ## Warm-ups
 
 ### 6.1 Predict the output
@@ -30,7 +83,7 @@ result = add(2, 3)
 print(result)
 ```
 
-Compare 6.1 and 6.2 and say the difference out loud in one sentence.
+Compare 6.1 and 6.2 and write the difference down in one sentence.
 
 ### 6.3 Predict the output
 
@@ -111,7 +164,8 @@ called whenever you like.
 ### 6.10 Greeting with a default
 
 Write `greet(name, greeting="Hello")` that returns a greeting string, not prints it.
-Call it once with one argument and once with two.
+A parameter with a default value must come after the ones without. Call it once with one
+argument and once with two.
 
 Then call it with `greeting` as a keyword argument (passing a value by naming the
 parameter) and see that it works.
@@ -135,17 +189,19 @@ user for a sentence and print the count using the function.
 
 Then write `count_letters(text, letter)` that counts any letter. Then rewrite
 `count_vowels` so that it uses `count_letters`. That is a function using a function.
+Inside a function you can call any function that is already defined.
 
 ### 6.13 Statistics
 
 Write `statistics(numbers)` that takes a list and returns three things, the smallest,
 the largest, and the average.
 
-Remember that a function can return several values at once by separating them with
-commas. Then unpack them on the other side.
+To return several values, write `return a, b, c`. To pick them up, write
+`x, y, z = statistics(numbers)`.
 
-Test it with an empty list and see what happens. Decide what you think it should do,
-then make it do that.
+Test it with an empty list and see what happens. You will probably get an error first,
+which is the point. Decide what you think the function should do for an empty list, then
+make it do that.
 
 ### 6.14 Squares list
 
@@ -171,7 +227,7 @@ now you can call it inside a loop.
 Write a program with four functions, one for each option, and a menu that asks the user
 which one they want. Run it in a `while True` loop until they choose to quit.
 
-Options, pick your own.
+You can pick your own options. These are an example.
 
 ```
 1. Celsius to Fahrenheit
@@ -187,18 +243,22 @@ doing work itself.
 
 ## Stretch
 
-### 6.17 Refactor the grade calculator
+### 6.17 Refactor a grade calculator
 
-Take your solution to exercise 3.11 or the grade calculator from unit 03 and pull out
-functions. A good target is a `letter_grade(score)` function and a `print_report(name,
-score)` function.
+To refactor (change the code without changing what it does) is to pull code out into
+functions. First write a small program that asks for a name and a score out of 100, and
+prints a letter grade. A is 90 and up, B is 80 and up, C is 70 and up, D is 60 and up,
+and anything lower is F.
+
+Then pull out functions. A good target is a `letter_grade(score)` function and a
+`print_report(name, score)` function. Pick one chunk of code that does one job, move it
+into a function, and replace it with a call.
 
 The final program should read like a description of what it does, with almost no logic
 in the main part.
 
 Do the same for the shopping list from exercise 5.6. That one is harder, and the
-functions may need to take a list as a parameter (the name in the definition that
-receives the value) and return a new list.
+functions may need to take a list as a parameter and return a new list.
 
 ### 6.18 Debugging by cutting down
 
@@ -236,7 +296,7 @@ def countdown(n):
 countdown(5)
 ```
 
-Trace this by hand and convince yourself that it stops. The key question is what stops
+Trace `countdown(3)` by hand (follow it line by line on paper) and convince yourself that it stops. The key question is what stops
 it, and why the function does not run forever.
 
 Then rewrite it as a loop. Both versions are correct, and the loop version is usually
@@ -265,9 +325,9 @@ being passed around as a value, exactly like `double` here.
 
 ---
 
-## Before next session
+## Check yourself
 
-Be able to do these without notes.
+Try to do these without looking at your notes.
 
 - Define a function with parameters and call it.
 - Explain the difference between printing and returning.

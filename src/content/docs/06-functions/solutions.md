@@ -15,8 +15,8 @@ no `return`, so the second print gives `None`.
 6.2 prints `5` once. Nothing is printed inside the function, because there is no `print()`
 in it, and `result` holds the number 5.
 
-The one sentence answer to the comparison. Printing shows a value to a human, returning
-hands a value to the code that called the function.
+Here is the answer to the comparison in one sentence. Printing shows a value to a
+human, and returning hands a value to the code that called the function.
 
 ### 6.3 Predict the output
 
@@ -48,9 +48,9 @@ def area(width, height):
     return width * height
 ```
 
-It is worth asking yourself what `result` was for in the original. The answer is nothing, and the
-variable could be dropped entirely. A `return` can return an expression directly, and a
-single-use variable in between is often just not needed.
+The variable `result` is not needed, because `return width * height` does the same thing
+in one line. A `return` can give back an expression directly, so a variable that is used
+only once is often not needed.
 
 ### 6.5 Find the bug, part two
 
@@ -98,7 +98,7 @@ name = make_name()
 print(name)
 ```
 
-Which is the fix, and it is the general answer. If you want something from inside a
+That is the fix, and it is the general answer. If you want something from inside a
 function, return it.
 
 ---
@@ -146,7 +146,7 @@ The important detail is `return number % 2 == 0` rather than an `if` statement. 
 comparison already produces `True` or `False`, so returning it directly is both shorter
 and clearer.
 
-If you wrote this, it works and it is worse.
+If you wrote this version, it works. It is just longer than it needs to be.
 
 ```python
 def is_even(number):
@@ -193,8 +193,7 @@ print(greet(greeting="Hi", name="Ada")) # Hi, Ada! order does not matter
 ```
 
 The last two lines are the point of keyword arguments (passing a value by naming the
-parameter). When you spell out the parameter names (the name in the definition that
-receives the value), the order stops mattering. That is useful when a function has
+parameter). When you spell out the parameter names, the order stops mattering. That is useful when a function has
 several optional parameters.
 
 ### 6.11 BMI
@@ -281,15 +280,17 @@ print(f"low {low}, high {high}, average {avg:.2f}")
 ```
 
 The empty list case is the interesting decision, and there is no single right answer.
-Returning three `None`s is one option. Other reasonable options.
+If you did not handle it, you probably got an `IndexError` from `numbers[0]` (or a
+`ValueError` from `min()`), or a `ZeroDivisionError` from the average. Returning three
+`None`s is one way to handle it. Here are other reasonable options.
 
 - Return the average as `0` for an empty list and the extremes as `None`.
 - Print a message and return nothing.
 - Let it crash with a clear error, because an empty list is a caller mistake.
 
 Think about which you chose and why. The point is that you made the decision on purpose
-rather than having it happen by accident. `None` is unit 08 material if you have not
-met it yet, and `if not numbers:` is the unit 03 truthiness rule.
+rather than having it happen by accident. The line `if not numbers:` means "if the list
+is empty".
 
 ### 6.14 Squares list
 
@@ -305,9 +306,10 @@ print(squares_up_to(4)) # [1, 4, 9, 16]
 
 The key point is that `result` has to be returned. Without the `return`, the list is
 built and then destroyed when the function ends, and the caller gets `None`. That is the
-same lesson as 6.4, in a different form.
+same point as 6.4, in a different form.
 
-`range(1, n + 1)` gives 1 to n inclusive, thanks to the off-by-one rule. If you wrote
+`range(1, n + 1)` gives 1 up to and including n, because `range` stops before the end
+value. If you wrote
 `range(1, n)` the answer is short by one, and the test with 4 catches it.
 
 ### 6.15 Is it a prime, as a function
@@ -400,7 +402,7 @@ line programs look like. It is worth having written one.
 
 ## Stretch
 
-### 6.17 Refactor the grade calculator
+### 6.17 Refactor a grade calculator
 
 ```python
 def letter_grade(score):
@@ -430,7 +432,7 @@ here, because its whole job is to produce output for a human. A function that pr
 not wrong, it just has a narrower purpose. The rule is not "never print in a function".
 It is "know which one you are doing and why".
 
-For the shopping list, a reasonable decomposition.
+For the shopping list, here is one reasonable way to split it up.
 
 ```python
 def read_items():
@@ -463,9 +465,10 @@ rather than printing a message itself. That is a good design habit. The function
 what happened, and the caller decides what to do about it.
 
 Note also that `remove_item` changes the list in place (changed directly, without a
-copy), which is the one place this decomposition breaks the "no side effects" rule. It
-is a real judgement call. An alternative is to have it return a new list, which is
-cleaner but slower and less natural here.
+copy). This is the one place where the program changes something outside the function. A
+good rule of thumb in this unit is that functions take values in and return values out.
+It is a real judgement call. An alternative is to have it return a new list, which is
+cleaner but less natural here.
 
 ### 6.18 Debugging by cutting down
 
@@ -483,7 +486,7 @@ def count_long_words(sentence):
 The intended answer for `"a bb ccc dddd"` is 1, since only `dddd` is longer than three
 characters.
 
-What actually happens.
+Here is what actually happens.
 
 ```
 word = "a" len 1, not > 3, count = 1
@@ -503,7 +506,7 @@ right now".
 Only `return` exits the whole function. That comparison is a good one to make here,
 since you now know all three.
 
-The fix.
+Here is the fix.
 
 ```python
 def count_long_words(sentence):
@@ -525,7 +528,8 @@ def countdown(n):
     countdown(n - 1)
 ```
 
-Trace for `countdown(3)`.
+Here is the trace for `countdown(3)`. A call with 5 has the same shape, with two more
+steps at the start.
 
 ```
 countdown(3): 3 <= 0 is false, print 3, call countdown(2)
@@ -541,7 +545,7 @@ What stops it is the base case, `n <= 0`. Every call reduces `n` by one, so it a
 reaches 0 eventually. Without the base case, the function would call itself forever
 until Python gives up with a `RecursionError`, which is a real error worth seeing once.
 
-The loop version, which is what most people would actually write.
+Here is the loop version, which is what most people would actually write.
 
 ```python
 def countdown(n):
@@ -570,7 +574,7 @@ So it returns 20.
 The inner call happens first, giving 10, and then `double` is applied to that result,
 giving 20.
 
-A version with your own function.
+Here is a version with your own function.
 
 ```python
 def add_one(n):
@@ -579,7 +583,7 @@ def add_one(n):
 print(apply_twice(add_one, 5)) # 7, because 5 -> 6 -> 7
 ```
 
-The connection to exercise 5.14 is the real lesson. `sorted(words, key=len)` passes the
+The connection to exercise 5.14 is the real point. `sorted(words, key=len)` passes the
 function `len` as a value, in exactly the same way. That is why `key` works without
 brackets. You are handing the function itself, not the result of calling it, and
 `sorted()` decides when to call it.

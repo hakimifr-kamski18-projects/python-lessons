@@ -10,12 +10,12 @@ works: you type a file, you click Run, you see output.
 
 Where the output appears depends on your editor. Most put it in a panel at the bottom of
 the window, sometimes called Output, sometimes Terminal. Clicking Run a second time does
-it all again and prints your message again, which is worth noticing, because the program
-starts fresh every single time you run it.
+it all again and prints your message again. The program starts fresh every single time
+you run it.
 
 If Run did nothing, or you could not find it, that is an editor problem rather than a
-Python one. Say so rather than working around it. Everything for the next nine units
-depends on this one button.
+Python one. Fix it before you go on, by reading the help pages of your editor or asking
+whoever set it up for you. Everything in the next nine units depends on this one button.
 
 ## 2. Python console arithmetic
 
@@ -31,15 +31,11 @@ Answers to the two questions.
 
 `10 / 4` gives `2.5`, not `2`. Division in Python 3 always gives a decimal result, even
 when it divides evenly. `10 / 2` gives `5.0`, with the point. This is a design choice
-made on purpose and it will come back in unit 01 when we meet the two different division
-operators.
+made on purpose and it will come back in unit 01, where you meet the two different
+division operators.
 
 `**` means "to the power of", so `2 ** 10` is two to the tenth, which is 1024. It is
-written with two asterisks because `^` already means something else in Python, a bitwise
-operation you do not need to know about.
-
-If you guessed that `*` repeated a string, that is also correct and worth remembering,
-since `"ab" * 3` gives `"ababab"`. You will meet it again.
+written with two asterisks because `^` already means something else in Python.
 
 The console is for exactly this, trying something small and seeing the answer straight
 away. The moment you want to keep it, it goes in a file instead.
@@ -60,16 +56,20 @@ happily let you type a whole program into a file called `about_me` with no endin
 and then Run will do nothing useful with it.
 
 You do not have to think about which folder the file is in. That is the Run button's job,
-and it is one of the main reasons we use it. If you ever see a message about not being
-able to open or find a file, that means the editor is looking in a different folder from
-the one your file is in. Tell me rather than trying to work around it.
+and it is one of the main reasons to use it. If you ever see a message about not being
+able to open or find a file, the editor is looking in a different folder from the one
+your file is in. Find out which folder your file is in, and open that folder in your
+editor, rather than trying to work around the message.
 
 ## 4. Breaking it on purpose
 
-Here is what each change produces. Read your own predictions first,
-since comparing a prediction with reality is the exercise.
+Here is what each change produces. Read your own predictions first, since comparing a
+prediction with reality is the exercise.
 
-**Delete the closing bracket on `print()`**
+Your Python version may draw the `^` mark (the caret) a little differently from the
+examples here. The last line of each error is the part to trust.
+
+**Delete the closing parenthesis on `print()`**
 
 ```
   File "about_me.py", line 2
@@ -78,26 +78,26 @@ since comparing a prediction with reality is the exercise.
 SyntaxError: '(' was never closed
 ```
 
-The caret points at the opening bracket, not at the end of the line. That is because
-Python is telling you which bracket it lost track of, which is the useful piece of
-information. This is worth noticing, since students expect the caret to point at where the
-problem "is".
+The caret points at the opening parenthesis `(`, not at the end of the line. Python is
+telling you which parenthesis it lost track of, which is the useful piece of
+information. You might expect the caret to point at the place where the problem "is",
+but here it points at where the unfinished part began.
 
 **Delete the closing quote**
 
 ```
-  File "about_me.py", line 3
-    print("My favourite food is noodles)
-                                        ^
-SyntaxError: unterminated string literal (detected at line 3)
+  File "about_me.py", line 2
+    print("I am learning Python)
+          ^
+SyntaxError: unterminated string literal (detected at line 2)
 ```
 
-The caret sits at the end of the line, at the point where Python gave up looking for the
-missing quote. Python treats everything after an opening quote as text,
-right up to the end of the line, so it reached the end and still had not found the
-closing one.
+The caret points at the opening quote, the one that was never closed. "Unterminated
+string literal" means a piece of text in quotes that never ends. Python treats
+everything after an opening quote as text, right up to the end of the line, so it
+reached the end and still had not found the closing quote.
 
-**Remove the brackets, `print "hello"`**
+**Remove the parentheses, `print "hello"`**
 
 ```
     print "hello"
@@ -106,36 +106,42 @@ SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
 ```
 
 This error is unusually helpful. It means Python understood you wanted to print, and is
-telling you the modern syntax. Note that older tutorials and code from before 2008 use
-the bracketless form. If you see it anywhere, the code is old.
+telling you the modern way to write it. Older tutorials and code from before 2008 use
+the form without parentheses. If you see it anywhere, the code is old.
 
 **Capitalise the P, `Print("hello")`**
 
 ```
+Traceback (most recent call last):
+  File "about_me.py", line 2, in <module>
     Print("hello")
     ^^^^^
-NameError: name 'Print' is not defined
+NameError: name 'Print' is not defined. Did you mean: 'print'?
 ```
 
 The important detail is that this is a `NameError`, not a `SyntaxError`. The code is
-valid Python, it is asking for a thing called `Print` that does not exist. Python is
-case sensitive, so `print` and `Print` are entirely different names as far as it is
-concerned.
+valid Python, it is asking for a thing called `Print` that does not exist. Python
+treats capital and small letters as different, so `print` and `Print` are entirely
+different names as far as it is concerned. Your Python version may leave out the
+"Did you mean" part.
 
-This is worth dwelling on. Case sensitivity will cause problems for you repeatedly.
-Get in the habit of reading names character by character when a `NameError`
-appears.
+This will cause problems for you again and again. Get in the habit of reading names
+character by character when a `NameError` appears.
 
 ## 5. broken.py
 
-The output is this, and nothing else.
+The output is this, and nothing else. The file name on the first line will show the
+folder where you saved your copy.
 
 ```
-  File "broken.py", line 15
+  File "broken.py", line 10
     print("Line two)
-                   ^
-SyntaxError: unterminated string literal (detected at line 15)
+          ^
+SyntaxError: unterminated string literal (detected at line 10)
 ```
+
+The caret position can differ between Python versions, so the last line is the part to
+trust.
 
 The missing thing is the closing double quote on the second print.
 
@@ -143,40 +149,41 @@ The important question is number four. "Line one" is never printed, because the 
 never started. When Python cannot understand the file, it refuses to run any of it. Not
 even the lines above the mistake.
 
-This is a really useful distinction and worth keeping in mind.
+This is a useful difference to keep in mind.
 
 - A `SyntaxError` means nothing ran at all. The mistake could be anywhere.
-- An error at runtime, such as `NameError` or `TypeError`, means the program
-  started and got partway through before hitting trouble.
+- An error that happens while the program runs, such as `NameError` or `TypeError`,
+  means the program started and got partway through before hitting trouble.
 
 That is why reading the error type first is worth doing. It tells you whether you are
-looking at a broken file or a working file that misbehaved at line 15.
+looking at a broken file or a working file that failed partway through.
 
-(Line numbers above assume the file is unchanged. If you edited it, the line number
+(The line number above assumes the file is unchanged. If you edited it, the line number
 will differ, and the correct answer is whatever your error actually said.)
 
 ## 6. The comment test
 
+With the `#`, this line is a comment and Python skips it.
+
 ```python
-print("My favourite food is noodles")
+# I like noodles because they are quick
 ```
 
-without the `#` is now a real line of code, and it fails with a `SyntaxError` or a
-`NameError`, depending on what words followed.
+Without the `#`, it is a real line of code.
 
-If your comment was something like `# because noodles are perfect`, then removing the
-`#` leaves this.
-
-```
-print("My favourite food is noodles")
-because noodles are perfect
+```python
+I like noodles because they are quick
 ```
 
-The first line runs fine, then Python hits `because noodles are perfect`, which is not
-valid Python, and refuses to run the file at all. Since it is a syntax error, nothing
-runs, so the first print does not appear either. A nice echo of question 5.
+Python cannot understand it, so you get `SyntaxError: invalid syntax`. Because it is a
+syntax error, nothing runs, so the print lines above it do not appear either. This is
+the same rule as `broken.py` in exercise 5.
 
-The lesson is that `#` is not decoration. It is the thing that tells Python to skip the
+If your comment was a single word, such as `# noodles`, you get a `NameError` instead.
+A single word is valid Python, it names something, but nothing called `noodles` exists.
+That error happens while the program runs, so the lines above it do print first.
+
+The point is that `#` is not decoration. It is the thing that tells Python to skip the
 rest of the line.
 
 ## 7. three_lines.py
@@ -203,10 +210,11 @@ print(" |____| ")
 ```
 
 The double backslash is the interesting part. `\\` in a string means one backslash,
-because a single backslash is special and starts an escape sequence, like the `\n` for a
-new line you may have already met. So `"\\"` prints a single `\`.
+because a single backslash is special. It starts an escape sequence (a backslash plus a
+letter or mark that stands for one special character). For example, `\n` means a new
+line. So `"\\"` prints a single `\`.
 
-For the quote question, there are three answers and all of them are useful to know.
+For the quote question, there are two answers and both are useful to know.
 
 ```python
 # Option 1: wrap in single quotes
@@ -214,17 +222,8 @@ print('She said "hello"')
 
 # Option 2: escape the inner quotes
 print("She said \"hello\"")
-
-# Option 3: use a triple-quoted string
-print("""She said "hello" """)
 ```
 
 Option 2 is the general technique and the one to learn, because it works everywhere and
-in any combination. Backslash means "the next character is literal, do not treat it as
-special". This works the same way as `\\` from the house drawing.
-
-Option 3 is a preview rather than a lesson. Triple quotes make a multi-line string, and
-you will meet it properly later.
-
-Once you get this, be amused by `print("She said \"\\\"hello\\\"\"")` for a
-moment and then move on.
+in any combination. A backslash means "the next character is just a character, do not
+treat it as special". This works the same way as `\\` in the house drawing.

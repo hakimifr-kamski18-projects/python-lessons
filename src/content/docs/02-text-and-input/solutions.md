@@ -15,8 +15,11 @@ value = str(input("...")) # str, still
 ```
 
 The last one is the trick. `input()` already gives back a string, so wrapping it in `str()`
-changes nothing at all. It is harmless and completely pointless. It is worth running
-it and checking with `type()` yourself rather than taking my word for it.
+changes nothing at all. It is harmless and completely pointless. Run it and check with
+`type()` to see this for yourself.
+
+Whatever the user types is text, even `25`, which is the characters 2 and 5. That is why
+`input()` always gives a string.
 
 ### 2.2 Predict the slicing
 
@@ -36,8 +39,8 @@ word = "elephant" # e l e p h a n t
 | `word[100:200]` | `''` | past the end of a slice is allowed, gives empty |
 
 If you got `'epha'` for `word[2:5]`, you are counting the end position as included.
-That is the single most common slicing mistake, and the fix is to say the rule out loud.
-Start is included, end is not.
+That is the most common slicing mistake. Say the rule to yourself: the start is included
+and the end is not.
 
 ### 2.3 Predict the methods
 
@@ -54,13 +57,13 @@ text = " Hello World "
 | `text.replace("World", "there")` | `' Hello there '` |
 | `text.strip().count("l")` | `3` |
 
-Note that the order in the third and fourth rows does not matter here, because `strip()`
-only touches the ends and `lower()` only changes letters in the middle. It is worth asking
-yourself whether there is any input where the order would matter. There is not, for these two,
-and thinking about why is a good exercise.
+The order in the third and fourth rows does not matter here, because `strip()` only
+removes spaces at the ends and `lower()` only changes letters. The order would matter for
+other pairs, for example `lower()` and then `title()` gives a different result from
+`title()` and then `lower()`.
 
-`count("l")` gives 3. There is one `l` in `Hello` and two in `World`. Careful students
-sometimes get 2, from only looking at `World`.
+`count("l")` gives 3. There is one `l` in `Hello` and two in `World`. If you got 2, you
+only looked at `World`.
 
 ### 2.4 Spot the bug
 
@@ -68,18 +71,16 @@ sometimes get 2, from only looking at `World`.
 answer = input("Continue? ")
 ```
 
-If the user types `yes` and then presses Enter, the answer is `'yes'` and the comparison
-works. So why does it fail?
-
-Because very often they do not type exactly `yes`. They might type `yes ` with a
-trailing space, or `Yes` with a capital, or ` y`. The comparison `==` requires an exact
-match, character for character, and a trailing space is a character.
+If the user types exactly `yes` and then presses Enter, the answer is `'yes'` and the
+comparison works. The problem is that often they do not type exactly `yes`. They might
+type `yes ` with a space at the end, or `Yes` with a capital, or ` y`. The comparison
+`==` requires an exact match, character for character, and a space is a character.
 
 The way to see it.
 
 ```python
 answer = input("Continue? ")
-print(repr(answer)) # 'yes ' <- the space is right there
+print(repr(answer)) # 'yes ' <- the space at the end is right there
 ```
 
 The fix.
@@ -90,9 +91,8 @@ answer = input("Continue? ").strip().lower()
 
 Then `yes`, `Yes`, `YES`, ` yes ` all work, which is what the user expects.
 
-A note on the exercise as written. The `if` on the next line is unit 03 material, so
-this is a peek ahead. If you have not met `if` yet, you can still do the detective
-work with `print(repr(answer))` and `print(answer == "yes")`.
+The `if` in the exercise is unit 03 material. If you have not met `if` yet, you can still
+find the problem with `print(repr(answer))` and `print(answer == "yes")`.
 
 ---
 
@@ -108,32 +108,30 @@ full_name = f"{first} {last}".upper()
 email = f"{first}.{last}@example.com".lower()
 
 print("=" * 28)
-print(f" {full_name}")
-print(f" {email}")
+print(f"  {full_name}")
+print(f"  {email}")
 print("=" * 28)
 ```
 
 Two useful asides here.
 
 `"=" * 28` is string repetition. Multiplying a string by a number repeats it, which is
-much nicer than typing twenty eight equals signs. You met this in unit 01 if you did
-the stretch exercises.
+much nicer than typing twenty eight equals signs.
 
 The email uses `f"{first}.{last}@example.com"` and then calls `.lower()` on the whole
 thing, which is simpler than lowercasing each piece separately. Either way works.
 
-Output for Adamari Lovelace.
+Output for Ada Lovelace.
 
 ```
 ============================
-  ADAMARI LOVELACE
+  ADA LOVELACE
   ada.lovelace@example.com
 ============================
 ```
 
-Note that the width will not match if the name is very long. That is fine. Getting the
-badge to line up for any length of name is a real problem and it is not worth solving
-today.
+The width will not match if the name is very long. That is fine here. Making the badge
+line up for any length of name is a harder problem that this exercise does not ask for.
 
 ### 2.6 Mad libs
 
@@ -145,10 +143,10 @@ adjective = input("Enter an adjective: ").strip()
 print(f"The {adjective} {noun} likes to {verb} in the rain.")
 ```
 
-Simple, and the only judgement call is where to `.strip()`. Every input gets one.
+Simple, and the only choice to make is where to `.strip()`. Every input gets one.
 
-Worth running it a few times with silly answers. Small programs that are fun to
-run get run more, and running things is how the syntax settles.
+Run it a few times with silly answers. Running a program again and again is how the
+syntax becomes familiar.
 
 ### 2.7 Rectangle
 
@@ -166,7 +164,8 @@ print(f"Perimeter: {perimeter:.1f}")
 For width 2.5 and height 4, that gives an area of `10.0` and a perimeter of `13.0`.
 
 The thing to check is `float` rather than `int`. If you used `int` and typed `2.5`,
-you get a `ValueError`, which is the lesson from the lesson file arriving on its own.
+you get a `ValueError`, because `int()` refuses decimals. This is the same rule from the
+cheat sheet, showing up on its own.
 
 The second thing to check is `2 * (width + height)` rather than `2 * width + height`,
 which is a classic precedence slip. Compute both and compare. For 2.5 and 4,
@@ -185,7 +184,7 @@ print(f"{name.title()}, in 2030 you will be {age_2030}.")
 print(f"In 2020 you turned {age_2020}.")
 ```
 
-Nothing tricky, and that is the point. It is a consolidation exercise for the `int`
+Nothing tricky, and that is the point. It is a practice exercise for the `int`
 conversion. If you wrote `int(input(...))` on one line, that is fine now.
 
 ### 2.9 Initials
@@ -202,10 +201,10 @@ last_initial = parts[1][0].upper()
 print(f"{first_initial}.{last_initial}.")
 ```
 
-The double indexing `parts[0][0]` is the interesting part. Read it inside out. Take the
-first item of the list, which is a string, then take the first character of that string.
-Say that out loud. It is your first taste of reaching inside something that
-is inside something else, and it comes back constantly later with dictionaries.
+The double indexing `parts[0][0]` is the interesting part. Read it from left to right.
+Take the first item of the list, which is a string, then take the first character of
+that string. Say it to yourself. This idea of reaching inside something that is inside
+something else comes back often later.
 
 For three names, add a middle line.
 
@@ -214,12 +213,9 @@ middle_initial = parts[1][0].upper()
 last_initial = parts[2][0].upper()
 ```
 
-Note that this breaks completely if there is only one name, with an `IndexError`. That
-is correct behaviour and a good thing to notice, because handling a variable number
-of names properly needs a loop (unit 04).
-
-A cleaner general version, once you have loops, will be three lines instead of however
-many names there are. It is worth seeing where this is heading.
+Each version only works for its own number of names. With one name, the three name
+version stops with an `IndexError`. Handling any number of names needs a loop, which you
+will meet in unit 04.
 
 ### 2.10 Word count
 
@@ -234,11 +230,11 @@ print(f"Title case: {sentence.title()}")
 For `the quick brown fox jumps over the lazy dog`, the answers are 43 characters and 9
 words.
 
-Check the word count by hand. There is a real lesson here. The character
+Check the count by hand. The character
 count is 43 because it counts the eight spaces as well as the letters. If you guessed
 35, you forgot the spaces.
 
-`len(sentence.split())` is neat but it hides a step. Write it in two lines if
+`len(sentence.split())` does two steps in one line. Write it in two lines if
 you find it hard to read.
 
 ```python
@@ -246,7 +242,7 @@ words = sentence.split()
 print(f"Words: {len(words)}")
 ```
 
-That is the better habit at this stage, and the nested version can come later.
+That is the better habit at this stage. The all-in-one-line version can come later.
 
 ### 2.11 Username generator
 
@@ -265,15 +261,14 @@ print(f"Your username is {username}")
 
 For `Anna Smith` and `42`, this gives `asmith42`.
 
-Note that `number` is left as a string on purpose here, because it is being glued onto
-other text and never used in arithmetic. That is the judgement call the exercise is
-testing. Asking "does this need to be a number?" and answering "no, it is being pasted
-into a name" is the right reasoning.
+`number` is left as a string on purpose here, because it is glued onto other text and
+never used in arithmetic. The exercise is testing this choice. Ask "does this need to be
+a number?" The answer is no, because it is pasted into a name.
 
-If you converted it to `int` and then hit a `TypeError` gluing it into the username,
-that is a very useful mistake, and the fix is either to convert it back with `str` or,
-better, to not convert it in the first place. Try `str(number)` and see that
-it works, then ask yourself which version you prefer and why.
+If you converted it to `int` and then got a `TypeError` when gluing it into the username,
+that is a useful mistake. You can fix it by converting it back with `str()`, or better,
+by not converting it in the first place. Try `str(number)` to see that it works, then
+decide which version you prefer and why.
 
 ---
 
@@ -286,15 +281,15 @@ sentence = input("Enter a sentence: ").strip()
 
 print(sentence.replace(" ", "_"))
 print(sentence.title())
-print(f"The letter e appears {sentence.count('e')} times")
+print(f"e appears: {sentence.count('e')}")
 ```
 
 For `the quick brown fox`, the three outputs are `the_quick_brown_fox`, `The Quick Brown
-Fox`, and 1.
+Fox`, and `e appears: 1`.
 
 The interesting bit is `count('e')`. It is case sensitive, so it does not count `E`.
-Try it with a sentence containing a capital and then decide whether to fix it
-with `.lower()` first.
+Try it with a sentence containing a capital `E`. To count both kinds, call `.lower()` on
+the sentence first, as in `sentence.lower().count('e')`.
 
 ### 2.13 Acronym
 
@@ -310,20 +305,8 @@ print(acronym.upper())
 
 For `North Atlantic Treaty Organization` this gives `NATO`.
 
-It is worth being clear about this. This is a terrible way to write this program, because it
-only works for exactly four words. It is here because it is the best you can do without
-a loop, and it makes a good advertisement for unit 04. When you meet loops, this whole
-exercise collapses into three lines.
-
-There is a neat trick that works for any number of words, using the tools you already
-have.
-
-```python
-print("".join(part[0] for part in parts).upper())
-```
-
-It uses a generator expression, which is a comprehension, which
-is not in this course on purpose.
+This only works for exactly four words. It is the best you can do without a loop. A loop
+(unit 04) will fix that.
 
 ### 2.14 Palindrome check
 
@@ -338,11 +321,11 @@ else:
     print("That is not a palindrome")
 ```
 
-(Again, `if` is unit 03, so if you have not got there, just print both words and
-compare them by eye.)
+(Again, `if` is unit 03. If you have not got there, just print both words and compare
+them by eye, or print `reversed_word == word`.)
 
-The clever part is `word[::-1]`, and you were not taught it. Start with the slices you
-already know, then extend.
+The key part is `word[::-1]`, which this course did not teach before. Start with the
+slices you already know, then extend.
 
 ```
 word[0:3] start at 0, stop before 3, step forward by 1
@@ -353,9 +336,7 @@ word[::-1] step backwards by 1, so the whole thing reversed
 An empty start means "the beginning", an empty end means "the end", and `-1` as the step
 means "go backwards". So `[::-1]` is "the whole string, backwards".
 
-This is really a "wow" moment for beginners, and it is worth enjoying it. It
-is also worth knowing that this exact trick appears in every Python codebase in the
-world.
+This is a common way to reverse a string in Python.
 
 The `.lower()` matters, so that `Racecar` also works. Try it without the `.lower()` and see.
 
@@ -370,15 +351,13 @@ else:
     print("Wrong, try again")
 ```
 
-The one sentence explanation. A bug like this is nastier than a crash because there is
-no error to point at the problem, and there is no error message telling you what went
-wrong.
+A bug like this is worse than a crash because the program keeps running and there is no
+error message telling you what went wrong.
 
-The broader question is worth asking yourself. How would you have found this bug if you
-had not been told where it was? These are good answers to know. Print
+Ask yourself how you would have found this bug if you had not been told where it was.
+Here are three ways. Print
 `repr(answer)` to see the hidden character. Print `len(answer)` and compare with
-`len("magic")`. Compare character by character. All three are real techniques and all
-three work.
+`len("magic")`. Compare character by character. All three work.
 
 Finally, `.strip()` on every single `input()` you ever write is a very cheap
 and very effective habit.

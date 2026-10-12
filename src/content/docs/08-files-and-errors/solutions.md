@@ -45,7 +45,7 @@ C
 
 `int("hello")` raises (signals that an error has happened) immediately, so `print("A")`
 never runs. The `except` catches it (handles the error so the program does not stop) and
-prints `B`. Then the `try` block is finished, and execution continues with whatever
+prints `B`. Then the `try` block is finished, and the program continues with whatever
 comes after, which is `C`.
 
 The `C` printing is the point. `try` and `except` do not stop the program, they handle
@@ -80,6 +80,9 @@ print(f"Words: {len(words)}")
 print(f"Characters: {len(text)}")
 ```
 
+`splitlines()` cuts a text into a list of lines, and `split()` cuts it into a list of
+words.
+
 For [`sample.txt`](/code/08-files-and-errors/sample.txt), the answers are 5 lines, 29 words and 146 characters.
 
 The line count is worth thinking about, because it depends on how you count.
@@ -90,14 +93,14 @@ The line count is worth thinking about, because it depends on how you count.
   an empty string at the end.
 
 So the same file gives different answers depending on the method. `splitlines` and
-looping both do the sensible thing. The naive `split("\n")` counts one extra because of
+looping both do the sensible thing. The simple `split("\n")` counts one extra because of
 the trailing newline.
 
-Check by hand. Counting the physical lines in the file is the only way to know
+Check by hand. Counting the lines in the file yourself is the only way to know
 which answer is right, and that is a good habit to build.
 
 The character count is also worth a look. 146 includes the newlines. Stripping the whole
-text first gives 145. Both are defensible, and the difference is exactly the final
+text first gives 145. Both are reasonable, and the difference is exactly the final
 newline.
 
 ### 8.7 Write a file
@@ -149,9 +152,6 @@ Turning it into a string with an f-string gives something readable like `2026-09
 14:32:10.123456`. The microseconds are ugly, and if you want to clean it up there is a
 formatting method for it, which is unit 09 material.
 
-This is the first time your program has recorded anything about
-when it ran, which is a small step toward being a real tool.
-
 ### 8.9 Safe number input
 
 ```python
@@ -171,8 +171,8 @@ print(f"Sum: {a + b}")
 The key detail is that `return` is inside the `try`. If the conversion succeeds the
 function returns, which ends the loop. If it fails, the loop goes round and asks again.
 
-Some students write the `return` outside the `try`, which either crashes or returns the
-wrong thing.
+If you put `return number` after the `try` block instead, a bad first input crashes the
+function, because `number` was never set.
 
 Test cases worth running. `hello` a few times then `5`, and also an empty line, and also
 `5.5` which is a `ValueError` because `int` will not take a decimal.
@@ -203,15 +203,12 @@ else:
     print(a / b)
 ```
 
-The answer to the question. Most people prefer the `if` version here, because the check
-is simple and the code reads more directly. The `try` version is better when the check
-is awkward or impossible, like reading a file.
+The answer to the question. Both are fine here. The `if` version reads more directly
+because the check is simple. The `try` version is the safer habit, because the check and
+the action cannot disagree later if the code changes. It is also the only choice when
+the check is awkward or impossible, like reading a file that may not exist.
 
-There is a third position worth mentioning. Some programmers argue for `try` even here,
-on the grounds that the check and the operation should not be separate, since they can
-disagree if the code changes later. That is a real argument and it is why Python style
-generally leans toward `try`. The point is that you can see
-both and explain a preference.
+Whichever you prefer, make sure you can explain why.
 
 ### 8.11 Save and load a dictionary
 
@@ -285,15 +282,8 @@ The `if numbers:` guard handles the empty file. Without it, `max([])` is a `Valu
 That is the same class of problem as the `average of nothing` case from unit 04, and it
 is a habit worth having.
 
-An alternative that avoids storing everything.
-
-```python
-biggest = None
-for line in file:
-    ...
-```
-
-But `None` comparisons are unit 09, so the list version is fine here.
+There is a way to avoid storing every number, by keeping only the biggest one so far.
+The list version above is simpler, so it is fine here.
 
 ### 8.13 Word count from a file
 
@@ -320,10 +310,13 @@ for count, word in pairs[:10]:
 For [`sample.txt`](/code/08-files-and-errors/sample.txt), the top two are `the` with 4 and `line` with 4, then `this` and
 `is` with 2 each.
 
-The `strip(".,!?")` matters. Without it, `line.` and `line` are different words, so the
-count for `line` would be split across two keys (the names you look things up by). That
-is a good thing to notice by looking at the output and asking why a word seems
-to be missing.
+The `.lower()` matters. Without it, `The` and `the` are different words, so `the` would
+score 3 instead of 4. The `strip(".,!?")` matters for the same reason. Without it, a
+word at the end of a sentence, like `with.`, is a different key (a name you look things
+up by) from `with`. If a word seems to be missing from your output, look for a second
+key with a capital letter or a punctuation mark.
+
+From the fifth word on, every count is 1, so those words can come out in any order.
 
 `pairs[:10]` is a slice, from unit 02, taking the first ten. That is the neat way to do
 "top ten".
@@ -346,10 +339,10 @@ with open("even_numbers.txt", "w") as file:
 print(f"Found {len(evens)} even numbers")
 ```
 
-The warning in the exercise is the real lesson. If you wrote `"w"` on the *input*
+The warning in the exercise is the important part. If you wrote `"w"` on the *input*
 filename by accident, the input file is wiped before a single line is read, and the data
-is gone. Opening for writing truncates (cuts off the end) the file at the moment of
-opening, not at the moment of writing.
+is gone. Opening for writing empties the file at the moment of opening, not at the
+moment of writing.
 
 Reading the whole file into a list first, then writing, is the safe habit. Doing both in
 one pass with the same file would be a disaster.
@@ -432,8 +425,9 @@ for i, todo in enumerate(todos, start=1):
     print(f"{i}. [{mark}] {todo['text']}")
 ```
 
-The `"x" if todo["done"] else " "` is a conditional expression (anything that produces a
-value), which is unit 09 material. The long form works just as well.
+The `"x" if todo["done"] else " "` is a conditional expression (a one-line if/else that
+gives back one of two values), which is unit 09 material. The long form works just as
+well.
 
 ```python
 if todo["done"]:
@@ -443,7 +437,9 @@ else:
 ```
 
 The important part of the extension is that the data shape changed and everything else
-had to change with it. That is a real lesson about how data structures drive programs.
+had to change with it. The shape of your data decides how the rest of the program looks.
+Delete the old `todos.json` after you change the shape, or loading will fail with a
+`TypeError`, because the old file holds plain strings.
 
 ### 8.16 Grade book on disk
 
@@ -486,9 +482,10 @@ for name in sorted(grades):
 Note the `except (FileNotFoundError, ValueError)` form, which catches two types with one
 block. That syntax is worth knowing, since it is common.
 
-The behaviour difference based on whether the file exists is what makes this feel like
-real software, and it is worth noticing. The first run starts fresh, every run
-after that continues from where it left off.
+Like 8.15, this program loads what was saved earlier. The first run starts fresh, and
+every run after that continues from where it left off.
+
+`indent=2` in `json.dump` only makes the saved file easy for a person to read.
 
 ### 8.17 A small CSV reader
 
@@ -514,9 +511,9 @@ for record in records:
     print(record)
 ```
 
-The key idea is that `readline` reads one line and leaves the file positioned at the
-next one, so the loop over `file` afterwards starts from the second line. That shows
-nicely that the file keeps track of where you are.
+The key idea is that `readline` reads one line and leaves the file at the next one, so
+the loop over `file` afterwards starts from the second line. The file keeps track of
+where you are.
 
 Answers to the questions.
 
@@ -527,9 +524,9 @@ the point of use.
 
 What if a row has a missing column? The index loop would raise an `IndexError`, since
 `values[i]` would not exist. The fix is to check the length first, or use `values[i] if
-i < len(values) else ""`, which is a conditional expression. This is exactly the kind of
-thing that makes real CSV reading fiddly, and it is why the `csv` module exists in the
-standard library. It is worth knowing that it exists.
+i < len(values) else ""`, which is a one-line if/else that gives back one of two values.
+This is the kind of thing that makes real CSV reading awkward, and it is why the `csv`
+module exists in the standard library. It is worth knowing that it exists.
 
 ### 8.18 A calculator that does not crash
 
@@ -579,18 +576,16 @@ The answer to the question about wrapping too much in one `try`. If the whole
 calculation were inside a single `try` with `except ValueError`, then a bug elsewhere in
 the calculation would be silently reported as "those were not numbers", which is
 misleading. Worse, if you used a bare `except:`, a typo in your own code would be
-swallowed and reported as a user error.
+hidden and reported as a user error.
 
 The general principle. Put as little as possible inside the `try`, and only the part
 that can actually raise the error you are catching. Here, only the conversions can raise
-a `ValueError`, so only they are inside that `try`.
-
-That is a really important habit and it is worth the extra time.
+a `ValueError`, so only they are inside that `try`. This is an important habit.
 
 One more detail. Returning strings like `"Cannot divide by zero"` from a function that
-otherwise returns numbers is a design smell (a sign of a problem in the design), since
-the caller cannot tell what it got. A cleaner design would raise, or return a pair of
-success and value.
+otherwise returns numbers is a sign of poor design, since the caller cannot tell what
+it got. A cleaner design would report the problem another way, which you will meet
+later, or return a pair of success and value.
 
 ### 8.19 File statistics
 
@@ -630,28 +625,31 @@ else:
             if top is None or count > top[1]:
                 top = [word, count]
 
-        print(f"Most common: {top[0]} ({top[1]} times)")
+        if top is None:
+            print("There are no words to count, only punctuation")
+        else:
+            print(f"Most common: {top[0]} ({top[1]} times)")
 ```
 
-The `else` on the `try` is doing real work here. It runs only when the file was opened
-successfully, which means the whole analysis is skipped cleanly when the file is
-missing, without needing to indent everything inside the `try`. This is exactly what
-`else` is for, and this is the best example of it in the course.
+The `else` on the `try` runs only when the file was opened successfully. That means the
+whole analysis is skipped when the file is missing, and you do not need to indent
+everything inside the `try`.
 
 The empty file case is handled by `if not words`. Without it, `words[0]` is an
-`IndexError`, and the loop would find nothing. That is the case people forget, and it is
-the reason the exercise asks about it.
+`IndexError`. That is the case people forget, and it is the reason the exercise asks
+about it.
 
-`top = None` followed by `top is not None` is `None` comparison, which is unit 09. The
-long way round with a `found` flag works if you prefer.
+A file holding only punctuation, like `...`, is a second hidden case. It has words, but
+every word becomes empty after `strip`, so `counts` stays empty and `top` stays `None`.
+The `if top is None` check stops `top[0]` from crashing.
 
-There is a much shorter version of the most-common-word logic using the pair sorting
-from unit 07.
+There is a shorter version of the most-common-word logic using the pair sorting from
+unit 07.
 
 ```python
 pairs = sorted([[count, word] for word, count in counts.items()], reverse=True)
 top = pairs[0]
 ```
 
-That uses a list comprehension, which is not taught on purpose. If you write it, good
-for you, but the loop version is what the course wants.
+That uses a list comprehension, which this course does not teach. If you write it, good
+for you, but the loop version is enough here.

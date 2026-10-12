@@ -38,9 +38,9 @@ i = 3: total = 6 + 3 * 2 = 12
 
 It prints `12`.
 
-The mistake to watch out for is getting 14, from doing `(total + i) * 2`. The precedence is
-multiplication first, so `i * 2` happens before the addition. If you got 14, add
-brackets and see which version you were imagining.
+The mistake to watch out for is getting 22, from doing `(total + i) * 2`. Multiplication
+happens before addition, so `i * 2` is worked out first. If you got 22, add brackets and
+see which version you were imagining.
 
 ### 4.3 Find the infinite loop
 
@@ -52,13 +52,10 @@ while count >= 1:
     count = count + 1
 ```
 
-Two problems, and both need fixing.
-
-**The counter goes the wrong way.** `count = count + 1` moves away from the condition
-rather than towards it. Since `count` keeps growing, `count >= 1` stays true forever.
-
-**There is no way out at all.** Even if the direction were fixed, there is nothing that
-ends the loop when it reaches 1.
+There is one bug. The counter goes the wrong way. `count = count + 1` moves away from
+the condition rather than towards it. Since `count` keeps growing, `count >= 1` stays
+true forever. Once the counter goes down, `count >= 1` becomes false when `count` reaches
+0, and the loop ends on its own.
 
 The fix.
 
@@ -77,8 +74,8 @@ for count in range(5, 0, -1):
     print(count)
 ```
 
-Worth asking yourself which you prefer and why. "The `for` version, because I cannot get
-the direction wrong" is an excellent answer and a good habit to build.
+Ask yourself which you prefer and why. "The `for` version, because I cannot get the
+direction wrong" is a good answer.
 
 ### 4.4 Predict break and continue
 
@@ -96,9 +93,8 @@ i = 6 -> BREAK, leave the loop entirely
 i = 7 -> never reached
 ```
 
-The `if i == 3` check comes first, so when `i` is 3 the `continue` fires and the `i ==
-6` check is never even looked at. That is a good illustration of why order matters
-inside a loop body too.
+When `i` is 3, the `continue` skips the rest of that pass, so the `if i == 6` check is
+not looked at.
 
 ### 4.5 How many times?
 
@@ -110,9 +106,8 @@ for i in range(5, 0, -1): # 5 times, 5, 4, 3, 2, 1
 ```
 
 If you said 10 for the second one, you are still thinking of the end value as
-inclusive. The count of a range is `stop - start` when the step is 1, after adjusting
-for the step. Just work out the values and count them rather than
-memorising a formula.
+inclusive. Work out the values and count them. With a step of 1, the count is the stop
+number minus the start number.
 
 ---
 
@@ -132,8 +127,8 @@ print("Lift off!")
 For an input of 5, this prints 5, 4, 3, 2, 1, then "Lift off!".
 
 `range(number, 0, -1)` starts at `number` and stops before 0, so it reaches 1 and not 0.
-That is exactly what is wanted here. If you wrote `range(number, -1, -1)` you get 0 as
-well, which is a fine answer too. Ask yourself which you intended.
+That is exactly what is wanted here. If you wrote `range(number, -1, -1)`, it prints 0
+as well, which does not match the exercise.
 
 A `while` version is equally acceptable and is a good way to check you can write both.
 
@@ -154,7 +149,7 @@ for i in range(1, 13):
     print(f"{number} x {i} = {number * i}")
 ```
 
-`range(1, 13)` gives 1 to 12, which is the off-by-one rule doing its job. `range(1, 12)`
+`range(1, 13)` gives 1 to 12, because `range` stops before the end number. `range(1, 12)`
 would stop at 11 and give eleven lines, which is the mistake to watch out for.
 
 ### 4.8 Sum and average
@@ -171,24 +166,17 @@ if how_many > 0:
     average = total / how_many
     print(f"Total: {total:.2f}")
     print(f"Average: {average:.2f}")
+else:
+    print("No numbers were entered")
 ```
 
-The guard `if how_many > 0` is the interesting part. Without it, entering 0 gives a
-`ZeroDivisionError` on the average line. That is a really good error to hit,
-because "what if the user enters zero" is exactly the kind of question you should be
-asking yourself by now.
+`i` starts at 0, so `i + 1` shows 1, 2, 3 to the user.
+
+The check `if how_many > 0` is the interesting part. Without it, entering 0 gives a
+`ZeroDivisionError` on the average line. "What if the user enters zero" is a question
+you should ask yourself every time.
 
 The other check is `float` rather than `int`, since you may want to enter decimals.
-
-A version that also tracks the biggest, for extra practice.
-
-```python
-total = 0
-biggest = None
-```
-
-Careful with `biggest = None` here. It works, because `None` compares as smaller than
-any number, but `None` is unit 08 material. Not needed for this exercise.
 
 ### 4.9 Count the vowels
 
@@ -206,12 +194,12 @@ print(f"There are {count} vowels")
 The `.lower()` on the input handles the case problem in one move, which is neater than
 checking both cases in the condition.
 
-If you wrote `if letter in "aeiouAEIOU"` that is also correct and avoids the `.lower()`.
-Either is fine. What matters is that you thought about the case problem at all.
+If you wrote `if letter in "aeiouAEIOU"`, that is also correct and avoids the `.lower()`.
+Either is fine.
 
-Note that `letter in "aeiou"` reuses the `in` operator
- from unit 03, which works on a string
-because a string is a sequence of characters. That connection is worth noticing.
+Note that `letter in "aeiou"` reuses the `in` operator from unit 03, which works on a
+string because a string is a sequence of characters. This is also why a `for` loop can
+walk through a string.
 
 ### 4.10 FizzBuzz
 
@@ -228,9 +216,8 @@ for number in range(1, 101):
 ```
 
 The `and` case has to come first. If `number % 3 == 0` came first, then 15 would print
-`Fizz` and the `FizzBuzz` branch would never be reached. Exactly the same ordering
-problem as the grade calculator in unit 03, and worth noticing that it is the same
-lesson in a different form.
+`Fizz` and the `FizzBuzz` branch would never be reached. This is the same ordering
+problem as the grade calculator in unit 03.
 
 The first few lines should be.
 
@@ -281,9 +268,8 @@ For five rows, the first row has four spaces and one star, and the last row has 
 spaces and five stars. The pattern is that the spaces count down while the stars count
 up.
 
-The reasoning to work out. Row 1 needs `rows - 1` spaces. Row `rows` needs 0. So the
-number of spaces is `rows - row`. Working that out from the first and last row, rather
-than being told, is the exercise.
+To work out the spaces: row 1 needs `rows - 1` spaces and the last row needs 0. So the
+number of spaces in each row is `rows - row`.
 
 ### 4.12 Multiplication table grid
 
@@ -299,10 +285,10 @@ for row in range(1, size + 1):
 Output.
 
 ```
-  1 2 3 4 5
-  2 4 6 8 10
-  3 6 9 12 15
-  4 8 12 16 20
+  1  2  3  4  5
+  2  4  6  8 10
+  3  6  9 12 15
+  4  8 12 16 20
   5 10 15 20 25
 ```
 
@@ -316,8 +302,9 @@ unit 01, using `:3` to mean "width three" rather than "three decimal places".
 The inner loop finishes before the outer loop moves on. That is the whole idea of
 nesting. Trace the first two rows by hand.
 
-The `print()` with nothing in it at the end of the outer loop is what starts a new line
-for each row. Without it, everything would come out as one long line.
+`end=""` tells `print` to put nothing after the value, so the next `print` continues on
+the same line. The `print()` with nothing in it at the end of the outer loop is what
+starts a new line for each row. Without it, everything would come out as one long line.
 
 ### 4.13 Guess the number
 
@@ -348,13 +335,12 @@ while True:
 
 The interesting part is the `continue`. A bad input skips the rest of the pass, so it
 does not count as an attempt and the loop just asks again. That is exactly what
-`continue` is for, and it is a much better use of it than the contrived `if number == 5:
-continue` examples.
+`continue` is for.
 
 `.isdigit()` gives back `True` for `"42"` and `False` for `"hello"`, `"-5"` and `"4.5"`.
-Note the last two. It is stricter than `int` in one direction, since `int("-5")` works
-but `.isdigit()` says no, and looser in others. Worth testing both. Handling
-negative numbers properly would need unit 08 material.
+Note the last two. `int("-5")` works but `int("4.5")` does not, so `.isdigit()` and `int`
+are not the same test. This program rejects negative numbers, because `.isdigit()` says
+no to `"-5"`. Handling negative numbers properly would need unit 08 material.
 
 ### 4.14 Sum of digits
 
@@ -383,7 +369,7 @@ while number > 0:
 print(total)
 ```
 
-The arithmetic way deserves a trace, because it is a really nice bit of reasoning.
+The arithmetic way deserves a trace.
 
 For 472.
 
@@ -401,8 +387,7 @@ number = 0 -> loop ends
 through the number from right to left.
 
 Note that this version does not work for negative numbers, since the `while number
-> 0` condition fails immediately. That is fine, but noticing it is worth
-a moment.
+> 0` condition fails immediately. That is fine for this exercise.
 
 ---
 
@@ -431,7 +416,7 @@ else:
 ```
 
 The `number < 2` check handles 0 and 1, which are not prime. That is a case people
-forget, so testing 1 is worthwhile.
+forget, so test 1.
 
 The `break` stops as soon as a divisor is found. Once you know a number is not prime,
 there is no point looking for more divisors.
@@ -442,7 +427,7 @@ The faster version, which is the answer to the question in the exercise.
 for divisor in range(2, int(number ** 0.5) + 1):
 ```
 
-Why this works, which is a really lovely argument. If a number has a factor bigger than
+Why this works: if a number has a factor bigger than
 its square root, it must also have one smaller than its square root, because the two
 factors multiply to give the number. So if you have found no factors up to the square
 root, there are none at all.
@@ -465,14 +450,12 @@ print(f"{number}! = {result}")
 The accumulator starts at 1 rather than 0, because it is a multiplication. Starting at 0
 would make everything zero, which is a mistake worth making once.
 
-The guard for 0 is worth thinking about. `range(1, 1)` is empty, so the loop does not
-run and the answer is 1. That happens to be correct, since 0 factorial is defined as 1.
-Ask yourself whether that was on purpose or luck.
+There is no special case for 0. `range(1, 1)` is empty, so the loop does not run and the
+answer is 1. That is correct, since 0 factorial is defined as 1.
 
-For 20, the answer is 2432902008176640000, which is about 2.4 quintillion. Compare with
-`2 ** 100` from unit 01, which is about 1.27 nonillion, so much bigger still. Python
-handles arbitrary precision integers, which most languages do not, and this shows it
-well.
+For 20, the answer is 2432902008176640000, which is about 2.4 followed by 18 zeros.
+`2 ** 100` is about 1.27 followed by 30 zeros, so much bigger still. Python keeps every
+digit of a whole number however big it gets, which is not true of every language.
 
 ### 4.17 Fibonacci
 
@@ -493,8 +476,7 @@ Output starts `1 1 2 3 5 8 13 21 34 55...`
 
 The order matters. If you do `a = b` before computing the next value, you have destroyed
 the old `a` and lost it. So the next value has to be worked out first, before anything
-is overwritten. That is exactly the same reasoning as the swap exercise in unit 01, and
-it is worth noticing the connection.
+is overwritten. This is the same reasoning as the swap exercise in unit 01.
 
 The Python trick version, which is shorter and harder to read.
 
@@ -539,18 +521,16 @@ print(f"Took {steps} steps")
 
 For 6, the sequence is 6, 3, 10, 5, 16, 8, 4, 2, 1, which is 8 steps. Note the printed
 sequence has 9 numbers and 8 arrows between them, so the step count is one less than the
-number of lines printed. That is worth checking, since students often get 9.
+number of lines printed. Check that you did not get 9.
 
-This is the exercise that justifies `while`. You really cannot know in advance how many
-steps it will take, so a `for` loop with a range is not an option. Say that
-out loud. "I cannot count the passes, so I need a `while`" is exactly the reasoning this
+This is the exercise that needs `while`. You cannot know in advance how many steps it
+will take, so a `for` loop with a range is not an option. Say it to yourself. "I cannot count the passes, so I need a `while`" is exactly the reasoning this
 unit is trying to build.
 
 If you want to test the conjecture yourself, you can wrap the whole thing in another
 loop that runs every starting number from 1 to 1000 and checks that each one reaches 1.
 That is a nice nested loop exercise and it runs fast enough.
 
-Worth knowing that the Collatz conjecture is unsolved. No one has proved it always
+The Collatz conjecture is unsolved. No one has proved it always
 reaches 1, and no one has found a number that fails. It is a real open problem in
-mathematics, and it fits in ten lines of beginner code. That is a really motivating
-thing for a new programmer to hear.
+mathematics, and it fits in ten lines of beginner code.

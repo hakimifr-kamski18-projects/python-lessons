@@ -3,7 +3,51 @@ title: Unit 03 exercises
 sidebar:
   label: Exercises
 ---
-Predict before you run. Read your conditions out loud as sentences.
+Predict before you run. Read your conditions to yourself as sentences. Say `==` as "is
+equal to" and `=` as "gets". In an `if`, `elif`, `else` chain only the first matching
+branch (the first condition that is true) runs.
+
+---
+
+## Before you start
+
+Two facts explain the bug in exercise 3.12 and the last question of this page.
+
+First, `or` joins two complete conditions. This does not do what it looks like:
+
+```python
+answer = "no"
+
+if answer == "yes" or "y":
+    print("Continuing")
+```
+
+Python reads it as `(answer == "yes") or ("y")`. The second part, `"y"`, is not a
+question. It is just a value. Any text that is not empty counts as true, and so does any
+number except 0. So `"y"` is always true, and the whole condition is always true. The
+code above prints "Continuing" even though the answer is "no". Try it.
+
+You can see how Python judges a value with `bool()`:
+
+```python
+print(bool("y"))   # True
+print(bool(""))    # False
+print(bool(5))     # True
+print(bool(0))     # False
+```
+
+Second, to ask "is this value one of several choices", use `in` with a list (a group of
+values in square brackets):
+
+```python
+answer = "y"
+
+if answer in ["y", "yes"]:
+    print("You agreed")
+```
+
+This means "is `answer` one of these". It is shorter than writing `answer == "y" or
+answer == "yes"` and it avoids the trap above.
 
 ---
 
@@ -28,7 +72,7 @@ not (5 > 3)
 ### 3.2 Spot the bug
 
 This is meant to check whether someone is old enough to drive, in a country where the
-age is 17. It prints the wrong thing for a 15 year old.
+age is 17. It prints "Can drive" for everyone, even a 15 year old.
 
 ```python
 age = int(input("Age: "))
@@ -37,12 +81,12 @@ if age >= 17 or age < 17:
     print("Can drive")
 ```
 
-Explain in your own words why it is always wrong, and fix it.
+Explain in your own words why it always prints "Can drive", and fix it.
 
 ### 3.3 Spot the second bug
 
-This is meant to say whether a number is between 1 and 10. It says yes for the number
-50.
+This is meant to say whether a number is between 1 and 10. The numbers 1 and 10 are not
+included. It says yes for the number 50.
 
 ```python
 number = int(input("Number: "))
@@ -94,8 +138,10 @@ A cinema charges by age.
 - 18 to 64, 14 dollars
 - 65 and over, 9 dollars
 
-Ask for an age and print the price. Test every boundary, that is 4, 5, 17, 18, 64 and
-65. Boundary testing is a habit worth building now.
+All ages are whole numbers.
+
+Ask for an age and print the price. Test every boundary (a value where the answer changes), that is 4, 5, 17, 18, 64 and
+65. Testing boundaries is a good habit to build now.
 
 ### 3.8 Password check
 
@@ -118,7 +164,8 @@ both. Print "Welcome" if both match, "Wrong password" if only the username match
 Ask for three side lengths. Print whether they can form a triangle. The rule is that the
 sum of any two sides must be greater than the third.
 
-A triangle with sides 3, 4 and 5 works. Sides 1, 2 and 10 do not.
+A triangle with sides 3, 4 and 5 works. Sides 1, 2 and 10 do not, and neither do 1, 2 and
+3 (a flat line is not a triangle).
 
 ### 3.11 BMI category
 
@@ -126,8 +173,8 @@ Ask for a weight in kilograms and a height in metres. Work out the BMI, which is
 divided by the square of the height. Then print the category.
 
 - Under 18.5, underweight
-- 18.5 to 24.9, normal
-- 25 to 29.9, overweight
+- 18.5 up to, but not including, 25, normal
+- 25 up to, but not including, 30, overweight
 - 30 and over, obese
 
 Print the BMI itself to one decimal place as well.
@@ -135,11 +182,11 @@ Print the BMI itself to one decimal place as well.
 ### 3.12 Yes or no, properly
 
 Ask a yes or no question. Accept `y`, `yes`, `Y`, `YES`, ` yes ` and the same for no.
-Anything else, ask them again... actually you cannot loop yet, so instead print "I did
-not understand".
+For anything else, print "I did not understand". You will learn to ask again in unit 04.
 
-This is exercise 2.4 done properly, and it is where the `or` trap from the lesson shows
-up. Use the list form.
+This is exercise 2.4 done properly, and it is where the `or` trap (see "Before you
+start") shows up. Use `if answer in ["y", "yes"]`, which means "is `answer` one of
+these".
 
 ---
 
@@ -147,7 +194,7 @@ up. Use the list form.
 
 ### 3.13 Leap year
 
-Ask for a year and print whether it is a leap year. The rules are.
+Ask for a year and print whether it is a leap year. The rules are:
 
 - Divisible by 4, it is a leap year
 - Unless it is also divisible by 100, then it is not
@@ -156,8 +203,8 @@ Ask for a year and print whether it is a leap year. The rules are.
 So 2024 is, 1900 is not, and 2000 is.
 
 This one is worth doing slowly. Write the rule in English first, in three sentences,
-then translate. Getting it wrong the first time and testing 1900 and 2000 is the actual
-lesson.
+then translate. Getting it wrong the first time and then testing 1900 and 2000 is where you
+really learn.
 
 ### 3.14 Income tax
 
@@ -173,28 +220,28 @@ So an income of 50000 pays 0 on the first 10000, 20 percent of 20000 which is 40
 Test with 5000, 10000, 30000 and 50000 to make sure the boundaries behave.
 
 This is the hardest exercise in the unit. It is not conceptually hard, but there are a
-lot of numbers and it is easy to be off by one. Do the arithmetic on paper first.
+lot of numbers and it is easy to forget the tax from the lower brackets. Do the arithmetic on paper first.
 
 ### 3.15 Rock paper scissors
 
 Ask two players for their choices, player one first then player two. Print who wins, or
 that it is a draw.
 
-The rules are the ones you remember. Rock beats scissors, scissors beats paper, paper
+You know the rules. Rock beats scissors, scissors beats paper, paper
 beats rock.
 
-Then think about this question. How many `if` statements did you need, and could you
-have done it with fewer by writing the conditions differently? There is no single right
-answer, but a version that checks "does player one beat player two" once and handles the
-draw first is much shorter than one that enumerates all nine combinations.
+Then think about this question. How many branches (`if`, `elif` and `else` parts) did
+you need, and could you have used fewer by writing the conditions differently? There is
+no single right answer, but a version that handles the draw first and then checks "does
+player one win" is much shorter than one that lists all nine combinations (3 x 3).
 
 ---
 
-## Before next session
+## Check yourself
 
-Be able to do these without notes.
+Try these without notes.
 
 - Write an `if`, `elif`, `else` chain from a blank file.
-- Say out loud what `=` and `==` each mean.
-- Explain why `if x == 1 or 2` is always true.
+- Say to yourself what `=` and `==` each mean.
+- Explain why `if answer == "yes" or "y"` is always true.
 - Test a range with a chained comparison like `0 <= x <= 10`.

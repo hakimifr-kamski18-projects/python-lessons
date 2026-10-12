@@ -4,7 +4,45 @@ sidebar:
   label: Exercises
 ---
 Trace and predict before running. When something surprises you, print the list after
-every step until you find where your model went wrong.
+every step until you find where your idea of how it works went wrong.
+
+---
+
+## Before you start
+
+Four things that the exercises use.
+
+**Slicing a list.** A slice (a piece cut out) of a list is also a list. The start
+position is included and the end position is not.
+
+```python
+names = ["Ada", "Grace", "Alan", "Edsger"]
+print(names[1:3])   # ['Grace', 'Alan']
+print(names[:])     # a copy of the whole list
+```
+
+**Changing an item by position.** Lists are mutable (can be changed), so you can put a
+new value in a position. A string cannot do this.
+
+```python
+names[0] = "Katherine"
+print(names)        # ['Katherine', 'Grace', 'Alan', 'Edsger']
+```
+
+**Two ways to put a list in reverse order.** `items.reverse()` flips the current order
+and does nothing else, so it does not sort. `items.sort(reverse=True)` sorts the list
+from biggest to smallest. Both change the list itself. `items.pop(0)` removes the item
+at position 0 and gives it back.
+
+**A list inside a list.** The items of a list can be lists. Use two pairs of square
+brackets to reach inside. When you sort a list of lists, Python compares the first items
+first, and looks at the second items only if the first ones are equal.
+
+```python
+pairs = [[95, "Grace"], [88, "Ada"]]
+print(pairs[0])      # [95, 'Grace']
+print(pairs[0][1])   # Grace
+```
 
 ---
 
@@ -50,7 +88,7 @@ b.append(4)
 print(a)
 ```
 
-The three together are the point of this exercise. Say out loud what the difference is.
+The three together are the point of this exercise. Write down the difference in one sentence.
 
 ### 5.3 Spot the bug
 
@@ -61,12 +99,11 @@ names = names.append("Grace")
 print(len(names))
 ```
 
-Two problems. One is the `TypeError` you get immediately. The other is harder to see,
-about the first line. Fix both.
+This program fails with an error. Find out why it fails and fix it.
 
 ### 5.4 Finding the error
 
-Each of these fails. Say which error type it gives and why.
+Each of these fails. Write down which error type it gives and why.
 
 ```python
 names = ["Ada", "Grace"]
@@ -101,7 +138,8 @@ What does this print? Is it sorted? Explain the difference between `reverse()` a
 ### 5.6 Shopping list
 
 Ask the user to enter shopping items one at a time until they type `done`. Then print
-the list, the number of items, and the items in alphabetical order.
+the list, the number of items, and the items in alphabetical order. (`sorted()` puts
+capital letters before small letters, so use small letters only when you test.)
 
 You will need `while True` with `break` from unit 04.
 
@@ -111,8 +149,7 @@ Ask how many students there are, then ask for each student's score. Store them i
 list. Then print the highest, the lowest, and the average.
 
 You may use `max()` and `min()` this time. Then, as a second version, work out the highest
-without using `max()`, with a loop. Both are worth being able to do, and exercise 5.10
-asks for the second one properly.
+without using `max()`, with a loop. Exercise 5.10 asks for the second one properly.
 
 ### 5.8 Remove the duplicates
 
@@ -133,15 +170,15 @@ appending it. The order should be the order of first appearance, so do not just 
 Take a list and produce a reversed copy, without using `reverse()`, `reversed()` or slicing.
 Use a loop that goes backwards through the positions.
 
-Hint, `range()` with a negative step, from unit 04.
+Hint: `range()` with a negative step, from unit 04.
 
 ### 5.10 Biggest, the hard way
 
 Write the biggest-of-a-list logic with a loop, without `max()`. Then answer this question.
-What did you initialise the "biggest so far" variable to, and what happens if the whole
-list is negative?
+If you started the "biggest so far" variable at `0`, what happens when the whole list is
+negative?
 
-Fix it, so that it works for a list of nothing but negative numbers.
+Make your program work for a list of nothing but negative numbers.
 
 ### 5.11 Word lengths
 
@@ -176,13 +213,13 @@ Start with a list of five names. Then, in order.
 - Add a name to the end
 - Add a name at the front
 - Remove a name by value
-- Remove the last name and say which one it was
+- Remove the last name and print which one it was (`pop()` gives it back)
 - Print the final list and its length
 
 ### 5.14 Sort by length
 
-Take a list of words sorted alphabetically and print them sorted by length, shortest
-first. Use `sorted()` with the `key` argument.
+Take a list of words that is already in alphabetical order and print them sorted by
+length, shortest first. Use `sorted()` with the `key` argument.
 
 You have not been taught this, so here is the shape.
 
@@ -202,20 +239,20 @@ Ask for student names and scores, storing the names in one list and the scores i
 another, so that `names[i]` and `scores[i]` belong to the same person. Then print a
 report, one line per student, sorted by score from highest to lowest.
 
-Example.
+Example. The exact spacing does not matter.
 
 ```
-Grace 95
-Ada 88
-Alan 72
+Grace 95.0
+Ada 88.0
+Alan 72.0
 ```
 
 The sorting is the hard part, because sorting one list leaves the other one behind.
-Think about how to keep them together. There is a way with a list of lists, and there is
-a way with just indices and a bit of arithmetic. Either is fine.
+Think about how to keep them together. One way is to build a list of lists, where each
+inner list holds a score and a name.
 
-Notice how awkward this is. That awkwardness is a real problem with parallel lists, and
-unit 07 exists because of it.
+Notice how awkward this is. Two parallel lists (two lists whose positions belong
+together) are hard to keep in step, and unit 07 shows a better way.
 
 ### 5.16 Second biggest
 
@@ -226,7 +263,8 @@ Careful with duplicates. In `[5, 5, 3]` the second largest is `3`, not `5`.
 ### 5.17 Merge two sorted lists
 
 Given two lists that are already sorted, build a single sorted list containing all their
-items, in one pass through each, without using `sort()` or `sorted()`.
+items, going through each list only once (the loop that copies the leftover items at the end is
+allowed), without using `sort()` or `sorted()`.
 
 ```python
 a = [1, 4, 7, 10]
@@ -236,8 +274,8 @@ b = [2, 3, 8, 11]
 The answer is `[1, 2, 3, 4, 7, 8, 10, 11]`.
 
 The idea is to keep an index into each list, compare the two current items, take the
-smaller one, and move that index forward. This really is a real algorithm that real
-software uses, and it is the heart of merge sort.
+smaller one, and move that index forward. This is the merge step of merge sort, one of
+the standard ways to sort.
 
 ### 5.18 Run length encoding
 
@@ -255,11 +293,11 @@ loop and an index, or with `range(0, len(text), 2)` from unit 04.
 
 ---
 
-## Before next session
+## Check yourself
 
-Be able to do these without notes.
+Try to do these without notes.
 
 - Make a list, add to it, remove from it, and get items out by position.
 - Loop over a list and build a new list from it.
-- Say why `b = a` does not copy a list, and how to copy one properly.
+- Explain why `b = a` does not copy a list, and how to copy one properly.
 - Explain why `names = names.append("Ada")` breaks.

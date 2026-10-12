@@ -21,11 +21,11 @@ person = {"name": "Ada", "age": 36, "city": "London"}
 | `person.get("job")` | `None` |
 | `person.get("job", "none")` | `'none'` |
 
-The two `in` lines are the lesson. `"Ada" in person` is `False` because `"Ada"` is a
-value and `in` looks at keys by default. This surprises almost everybody, and the fix is
+Remember these two `in` lines. `"Ada" in person` is `False` because `"Ada"` is a
+value and `in` looks at keys by default. This is easy to get wrong, and the fix is
 `.values()`.
 
-Some students expect `len(person)` to count the values or the characters. It counts
+You might expect `len(person)` to count the values or the characters. It counts
 key-value pairs, so three.
 
 ### 7.2 Predict the output
@@ -101,8 +101,7 @@ second is what you need when you want the name as well, which is most of the tim
 There is a third way, which is `sum(scores.values())`.
 
 The variable name `score` is also misleading in the original, since it actually holds a
-name. Naming things accurately would have made this bug clear much sooner, and that is a
-good lesson in itself.
+name. A more accurate name would have made this bug easier to see.
 
 ### 7.5 Find the bug, part two
 
@@ -116,7 +115,7 @@ It fails with a `TypeError` about an `int` object not supporting item assignment
 The line is a chained assignment, the same kind as `a = b = 0`, which means "give this
 value to both targets". Python assigns to the targets left to right, so `student` gets
 the number 36 first. By the time the second target runs, `student` is no longer a
-dictionary, it is an integer, and `36["age"] =...` makes no sense.
+dictionary, it is an integer, and `36["age"] = 36` makes no sense.
 
 It should be two separate statements (one complete instruction each).
 
@@ -125,9 +124,7 @@ student = {"name": "Ada"}
 student["age"] = 36
 ```
 
-Which is the ordinary way of adding a key, and it is what you should write. The chained
-version was a way of trying to do two unrelated things at once, and there is no reason
-to.
+This is the ordinary way of adding a key. Write two separate statements.
 
 ---
 
@@ -170,16 +167,15 @@ Which is shorter, and it loses the ability to respond differently to a miss. Bot
 fine. Ask yourself which you prefer and why. The version with the `in` check is usually
 better when the two cases need different output.
 
-One more thing worth checking. The user types `ada` lowercase, and the dictionary has
+Here is one more case. The user types `ada` in lowercase, and the dictionary has
 `Ada`. That is a miss. If you want the lookup to be case insensitive, you either
 lowercase the keys when building the dictionary or lowercase both sides when comparing.
-This is worth noticing, since it is the same class of problem as the `strip()` and
-`lower()` issues from unit 02.
+This is the same kind of problem as the `strip()` and `lower()` issues from unit 02.
 
 ### 7.7 Word count
 
 ```python
-sentence = input("Sentence: ").lower().strip()
+sentence = input("Sentence: ").lower()
 words = sentence.split()
 
 counts = {}
@@ -196,19 +192,9 @@ for word, count in counts.items():
 
 For `the cat and the dog`, this prints `the 2`, then the others with 1.
 
-The `.lower()` is essential, since `The` and `the` would otherwise be different keys. The
-`.strip()` handles a trailing space, which would produce an empty string as the last word
-and count it.
-
-Checking for the empty string is worth doing if you left the `.strip()` off.
-
-```python
-for word in words:
-    if word:
-        ...
-```
-
-Since an empty string is falsy, that guard skips it.
+The `.lower()` is essential, since `The` and `the` would otherwise be different keys.
+`.split()` with nothing in the brackets already ignores extra spaces at the start, at the
+end and between words, so you never get an empty word.
 
 If you want the output in a fixed order, `for word in sorted(counts):`.
 
@@ -230,17 +216,17 @@ The index loop is the right tool here, and this is a genuine case of needing the
 position, even though unit 05 said to avoid it. The reason is that you are walking two
 lists at once, so you need a shared index.
 
-There is a neater way, using `zip`, which is a unit 09 thing.
+There is a neater way, using `zip`, which unit 09 covers.
 
 ```python
 result = dict(zip(names, scores))
 ```
 
 The answer to the second part of the exercise. In exercise 5.15 you were keeping two
-parallel lists and then trying to sort one while keeping the other in step. The right
-answer was to build a single dictionary, or a list of dictionaries, so that the name and
-score travel together. Two parallel lists are a design mistake from the start, not a
-problem you fix afterwards. That is exactly why dictionaries exist.
+parallel lists and then trying to sort one while keeping the other in step. You should
+have built a single dictionary, or a list of dictionaries, so that the name and score
+travel together. Two parallel lists are a poor design from the start, and sorting them
+later does not fix that. This is why dictionaries exist.
 
 ### 7.9 Inventory
 
@@ -301,8 +287,9 @@ The `continue` skips spaces. An alternative is to not count them at all.
 if character.isalpha():
 ```
 
-Which would also skip punctuation and digits, and is probably what you want in real
-code. `.isalpha()` is worth knowing alongside `.isdigit()` from unit 04.
+This would also skip punctuation and digits, and is probably what you want in real
+code. `.isalpha()` is `True` if every character is a letter. It is the partner of
+`.isdigit()` from unit 04.
 
 Sorting the keys before printing is what gives the alphabetical order, since
 dictionaries remember insertion order and `hello` would otherwise come out as `h`, `e`,
@@ -334,7 +321,6 @@ if votes:
     for name, count in votes.items():
         if count > top_count:
             top_count = count
-            winner = name
 
     winners = []
     for name, count in votes.items():
@@ -347,18 +333,19 @@ if votes:
         print(f"\nTie between: {', '.join(winners)}")
 ```
 
-The counting uses `.get(name, 0) + 1`, which is the pattern from the lesson.
+The counting uses `.get(name, 0) + 1`, the same counting pattern as in 7.7.
 
 The winner logic finds the top count first, then collects everyone who has that count.
 Doing it in that order is what handles ties correctly. A version that just tracked "the
 biggest so far" and overwrote the winner would silently pick whichever tied candidate
 came last, which is the wrong answer.
 
-This is worth noticing. Being asked to handle ties forces you to write slightly more
-code, and it produces a better answer. Real specifications are full of these little
-details.
+Handling ties needs a little more code, and it gives a better answer. Real programs have
+many small cases like this.
 
-`", ".join(winners)` is the join from unit 02, doing real work.
+`", ".join(winners)` is the join from unit 02, doing real work. Inside the f-string, the
+quotes around `", "` are single quotes (`', '`) because the f-string itself uses double
+quotes. The inner quotes must be a different kind from the outer ones.
 
 ### 7.12 Grade book
 
@@ -397,9 +384,8 @@ If the student is new, you have to create the inner dictionary before you can ad
 anything to it. The next line `grades[student][subject] = score` reaches into the inner
 dictionary by name and adds a key, and it needs the inner dictionary to exist first.
 
-That is exactly the grouping pattern from the lesson, one level deeper. It is worth
-noticing the connection, because "make sure the container exists before adding to
-it" is a shape that keeps coming back.
+This is the same "create the container first" step as in 7.14, one level deeper. The idea
+of making sure the container exists before adding to it comes back often.
 
 The `title()` on the student name and the `lower()` on the subject keep the dictionary keys
 consistent, so `ada` and `Ada` do not become two different students.
@@ -432,9 +418,10 @@ with the first. If the first items are equal, it compares the second, and so on.
 putting the score first means the list is sorted by score. Putting the name first would
 sort alphabetically by name instead.
 
-That "compare the first, then the second to break ties" behaviour is really useful. If
-two students tie on score, they will be ordered alphabetically by name, which is a nice
-accident.
+That "compare the first, then the second to break ties" behaviour is useful. If two
+students tie on score, they are ordered by name. Because of `reverse=True`, the names come
+in reverse alphabetical order, so `[88, "Ada"]` and `[88, "Bob"]` print Bob first. Exercise
+7.15 explains this further.
 
 If you want ascending, drop the `reverse=True`.
 
@@ -489,8 +476,16 @@ for word, count in counts.items():
 pairs.sort(reverse=True)
 
 print(f"Most common: {pairs[0][1]} ({pairs[0][0]} times)")
-print(f"Second: {pairs[1][1]} ({pairs[1][0]} times)")
+if len(pairs) > 1:
+    print(f"Second: {pairs[1][1]} ({pairs[1][0]} times)")
 ```
+
+`word.strip(".,!?;:")` removes any of those characters from both ends of the word, so
+`dog.` becomes `dog`. A word such as `...` becomes an empty string. An empty string is
+falsy (it counts as `False` in an `if`), so `if word:` skips it.
+
+The `if len(pairs) > 1` check is there because a text with only one different word has no
+second most common word, and `pairs[1]` would crash with an `IndexError`.
 
 Answers to the questions.
 
@@ -499,14 +494,14 @@ The second most common is `pairs[1]`, since the list is sorted by count.
 For a tie, the sort compares the second item of each pair, which is the word, and sorts
 them in reverse alphabetical order because of `reverse=True`. So for two words with the
 same count, whichever is later alphabetically comes first. Which one comes first does
-not matter, but it is predictable, and the trick with `reverse=True` on a pair is worth
-noticing. It reverses the tie-breaking order too, which is sometimes not what you want.
+not matter here, but it is predictable. Remember that `reverse=True` on a list of pairs
+reverses the tie-breaking order too, which is sometimes not what you want.
 
 If you want ties broken alphabetically in the normal direction, you need to sort in
-two passes, or use a `key`. Both are beyond this course. Noticing that the problem
-exists is the point.
+two passes, or use a `key`. Both are beyond this course. The point is to know that the
+problem exists.
 
-The `pairs[0][1]` syntax looks ugly. Pulling it into variables first reads better.
+The `pairs[0][1]` syntax is hard to read. Pulling it into variables first reads better.
 
 ```python
 top_count, top_word = pairs[0]
@@ -539,9 +534,9 @@ print(inverted) # {1: 'b'}
 Only one entry survives, because a dictionary cannot have duplicate keys. Setting
 `inverted[1]` twice just overwrites the first one, and the last key processed wins.
 
-This is a real problem with inverting a dictionary, and it shows well that dictionaries
-enforce uniqueness of keys. If you wanted to keep both, the values would have to be
-lists, which is the grouping pattern again.
+This is a real problem with inverting a dictionary, and it shows that dictionaries
+keep every key unique. If you wanted to keep both, the values would have to be lists,
+which needs the same "create the empty list first, then append" step as in 7.14.
 
 ### 7.17 Combined word count
 
@@ -572,14 +567,14 @@ for word in sorted(combined):
         print(word)
 ```
 
-Two things worth checking.
+Two parts of this code need an explanation.
 
-`combined = dict(first)` makes a copy. Without it, `combined = first` would give the
+`combined = dict(first)` makes a copy of the dictionary. Without it, `combined = first` would give the
 same dictionary a second name, and the next loop would modify `first` as well. That is
 the aliasing trap from unit 05, applying to dictionaries in exactly the same way.
 
 The final loop checks membership in both dictionaries. `word in first` works because
-`in` checks keys, which is exactly what is wanted.
+`in` checks keys, which is what you want here.
 
 ### 7.18 Word length histogram
 
@@ -598,21 +593,20 @@ for length in sorted(lengths):
 
 For `the quick brown fox`, the output is `3: **` and `5: **`.
 
-Two nice things here. The keys of the dictionary are integers rather than strings, which
+Two points about this code. The keys of the dictionary are integers rather than strings, which
 dictionaries allow. And `'*' * count` is string repetition from unit 01, doing the
 actual bar chart.
 
 `sorted(lengths)` sorts the integer keys numerically, which is what you want. If the
-keys were strings, they would sort alphabetically, which would put `10` before `2`. That
-is a real gotcha when sorting numbers stored as text, and it is worth remembering if you
-have hit it.
+keys were strings, they would sort alphabetically, which would put `10` before `2`.
+Remember this whenever you sort numbers stored as text.
 
 ### 7.19 Tuples as keys
 
 ```python
 distances = {
     ("London", "Paris"): 344,
-    ("Paris", "Berlin"): 878,
+    ("Berlin", "Paris"): 878,
 }
 
 def distance(city_a, city_b):
@@ -621,23 +615,26 @@ def distance(city_a, city_b):
 
 print(distance("London", "Paris")) # 344
 print(distance("Paris", "London")) # 344
+print(distance("Paris", "Berlin")) # 878
 print(distance("London", "Berlin")) # unknown
 ```
 
-The trick is normalising (putting it in a fixed form so two equal things really are
-equal). Because a lookup has to match the key exactly, and a tuple of `("Paris",
-"London")` is not the same key as `("London", "Paris")`, you have to put the two cities
-into a fixed order before looking up. Sorting them alphabetically does that, so both
-orders produce the same key.
+The trick is normalising (putting data in a fixed form so two equal things really are
+equal). A lookup has to match the key exactly, and `("Paris", "London")` is not the same
+key as `("London", "Paris")`. So you put the two cities into a fixed order before the
+lookup. Sorting them alphabetically does that, so both orders produce the same key. The
+keys you store must be in that same order, which is why the data has `("Berlin", "Paris")`
+and not `("Paris", "Berlin")`.
 
-Note the `sorted([city_a, city_b])` returns a list, and `tuple(...)` converts it back to
-a tuple, because lists cannot be dictionary keys at all. Try it without the
-`tuple` and read the error.
+`sorted([city_a, city_b])` returns a list, and `tuple(...)` converts it back to a tuple,
+because a list cannot be a dictionary key. Try it without the `tuple` and read the
+error. It is a `TypeError` that mentions `unhashable type: 'list'`.
 
-Dictionary keys have to be hashable,
-which means they cannot be changed, so they can be used as a key. Lists can change, so
-they are not allowed as keys. Tuples cannot change, so they are fine.
+A dictionary key must be something that cannot change, because Python files the key away
+by its contents. If the contents changed, Python could not find the key again. Lists can
+change, so they cannot be keys. Tuples cannot change, so they can. (Python calls a value
+that cannot change in this way hashable.)
 
-The concept of normalising data before comparing it, so that two things that should be
-equal actually are, is a really useful idea that goes well beyond this exercise. The
-`strip().lower()` on input from unit 02 is the same idea.
+Normalising data before comparing it, so that two things that should be equal really
+are, is useful far beyond this exercise. The `strip().lower()` on input from unit 02 is
+the same idea.
