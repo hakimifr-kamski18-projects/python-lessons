@@ -71,10 +71,10 @@ print(total)
 ### 6.6 Scope
 
 ```python
-def make_name:
+def make_name():
     name = "Ada"
 
-make_name
+make_name()
 print(name)
 ```
 

@@ -79,10 +79,10 @@ means.
 ### 6.6 Scope
 
 ```python
-def make_name:
+def make_name():
     name = "Ada"
 
-make_name
+make_name()
 print(name)
 ```
 
@@ -91,10 +91,10 @@ function finished. The function's variables do not leak out into the rest of the
 program.
 
 ```python
-def make_name:
+def make_name():
     return "Ada"
 
-name = make_name
+name = make_name()
 print(name)
 ```
 
