@@ -18,7 +18,7 @@ Write down `True` or `False` for each, then check them in the Python console.
 10 > 10
 10 >= 10
 "a" == "A"
-"a"!= "A"
+"a" != "A"
 3 * 2 == 6
 not (5 > 3)
 5 > 3 and 2 > 4

@@ -23,7 +23,7 @@ survive bad input instead of crashing.
 
 **Time.** Two sessions. Either half is a full session on its own.
 
-**Prerequisites.** Unit 07. Dictionaries, `.items`, the counting pattern.
+**Prerequisites.** Unit 07. Dictionaries, `.items()`, the counting pattern.
 
 
 ---

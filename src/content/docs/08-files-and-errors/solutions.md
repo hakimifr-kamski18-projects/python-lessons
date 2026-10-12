@@ -70,10 +70,10 @@ Worth comparing 8.4 and 8.5 side by side. The code after the `try` runs either w
 
 ```python
 with open("sample.txt") as file:
-    text = file.read
+    text = file.read()
 
-lines = text.splitlines
-words = text.split
+lines = text.splitlines()
+words = text.split()
 
 print(f"Lines: {len(lines)}")
 print(f"Words: {len(words)}")
@@ -106,7 +106,7 @@ newline.
 things = []
 
 for i in range(5):
-    things.append(input(f"Favourite thing {i + 1}: ").strip)
+    things.append(input(f"Favourite thing {i + 1}: ").strip())
 
 with open("favourites.txt", "w") as file:
     for thing in things:
@@ -115,7 +115,7 @@ with open("favourites.txt", "w") as file:
 print()
 with open("favourites.txt") as file:
     for i, line in enumerate(file, start=1):
-        print(f"{i}. {line.strip}")
+        print(f"{i}. {line.strip()}")
 ```
 
 For the question about running it twice. With `"w"`, the second run replaces the file,
@@ -133,8 +133,8 @@ variable, and either is fine.
 ```python
 import datetime
 
-now = datetime.datetime.now
-message = input("What happened? ").strip
+now = datetime.datetime.now()
+message = input("What happened? ").strip()
 
 with open("log.txt", "a") as file:
     file.write(f"{now} - {message}\n")
@@ -144,7 +144,7 @@ print("Logged.")
 
 `"a"` is what makes this a log file. Every run adds one line and nothing is lost.
 
-The timestamp uses `datetime.datetime.now`, which gives a full date and time object.
+The timestamp uses `datetime.datetime.now()`, which gives a full date and time object.
 Turning it into a string with an f-string gives something readable like `2026-09-29
 14:32:10.123456`. The microseconds are ugly, and if you want to clean it up there is a
 formatting method for it, which is unit 09 material.
@@ -157,7 +157,7 @@ when it ran, which is a small step toward being a real tool.
 ```python
 def get_number(prompt):
     while True:
-        text = input(prompt).strip
+        text = input(prompt).strip()
         try:
             return int(text)
         except ValueError:
@@ -223,7 +223,7 @@ import json
 scores = {}
 
 for i in range(5):
-    name = input(f"Name {i + 1}: ").strip
+    name = input(f"Name {i + 1}: ").strip()
     score = int(input(f"Score {i + 1}: "))
     scores[name] = score
 
@@ -242,7 +242,7 @@ with open("scores.json") as file:
     scores = json.load(file)
 
 pairs = []
-for name, score in scores.items:
+for name, score in scores.items():
     pairs.append([score, name])
 
 pairs.sort(reverse=True)
@@ -267,7 +267,7 @@ numbers = []
 
 with open("numbers.txt") as file:
     for line in file:
-        line = line.strip
+        line = line.strip()
         if line:
             numbers.append(int(line))
 
@@ -302,13 +302,13 @@ counts = {}
 
 with open("sample.txt") as file:
     for line in file:
-        for word in line.split:
-            word = word.strip(".,!?").lower
+        for word in line.split():
+            word = word.strip(".,!?").lower()
             if word:
                 counts[word] = counts.get(word, 0) + 1
 
 pairs = []
-for word, count in counts.items:
+for word, count in counts.items():
     pairs.append([count, word])
 
 pairs.sort(reverse=True)
@@ -335,7 +335,7 @@ evens = []
 
 with open("numbers.txt") as file:
     for line in file:
-        line = line.strip
+        line = line.strip()
         if line and int(line) % 2 == 0:
             evens.append(line)
 
@@ -367,7 +367,7 @@ one that wipes the file) before running is worth the two seconds.
 ```python
 import json
 
-def load_todos:
+def load_todos():
     try:
         with open("todos.json") as file:
             return json.load(file)
@@ -383,13 +383,13 @@ def save_todos(todos):
 
 def get_number(prompt):
     while True:
-        text = input(prompt).strip
+        text = input(prompt).strip()
         try:
             return int(text)
         except ValueError:
             print("Please enter a number")
 
-todos = load_todos
+todos = load_todos()
 
 while True:
     print()
@@ -400,10 +400,10 @@ while True:
         print("(nothing to do)")
 
     print("\n1. Add 2. Remove 3. Quit")
-    choice = input("Choose: ").strip
+    choice = input("Choose: ").strip()
 
     if choice == "1":
-        todos.append(input("What? ").strip)
+        todos.append(input("What? ").strip())
         save_todos(todos)
     elif choice == "2":
         index = get_number("Which number? ")
@@ -450,7 +450,7 @@ had to change with it. That is a real lesson about how data structures drive pro
 ```python
 import json
 
-def load_grades:
+def load_grades():
     try:
         with open("grades.json") as file:
             return json.load(file)
@@ -461,7 +461,7 @@ def save_grades(grades):
     with open("grades.json", "w") as file:
         json.dump(grades, file, indent=2)
 
-grades = load_grades
+grades = load_grades()
 
 if grades:
     print(f"Loaded {len(grades)} students")
@@ -469,8 +469,8 @@ else:
     print("Starting with an empty grade book")
 
 while True:
-    name = input("Name (or 'done'): ").strip
-    if name.lower == "done":
+    name = input("Name (or 'done'): ").strip()
+    if name.lower() == "done":
         break
 
     score = int(input("Score: "))
@@ -496,11 +496,11 @@ after that continues from where it left off.
 records = []
 
 with open("data.csv") as file:
-    header_line = file.readline.strip
+    header_line = file.readline().strip()
     columns = header_line.split(",")
 
     for line in file:
-        line = line.strip
+        line = line.strip()
         if not line:
             continue
 
@@ -535,9 +535,9 @@ standard library. It is worth knowing that it exists.
 
 ```python
 def calculate(text):
-    parts = text.split
+    parts = text.split()
 
-    if len(parts)!= 3:
+    if len(parts) != 3:
         return "Please write it as: number operator number"
 
     left_text, operator, right_text = parts
@@ -563,13 +563,13 @@ def calculate(text):
         return f"I do not know the operator {operator}"
 
 while True:
-    text = input("Calculate (or 'quit'): ").strip
-    if text.lower == "quit":
+    text = input("Calculate (or 'quit'): ").strip()
+    if text.lower() == "quit":
         break
     print(calculate(text))
 ```
 
-The `len(parts)!= 3` check handles malformed input like `7 *` or just `hello` before
+The `len(parts) != 3` check handles malformed input like `7 *` or just `hello` before
 anything else, which is cleaner than trying to unpack (take apart into separate
 variables) and catching the failure.
 
@@ -595,16 +595,16 @@ success and value.
 ### 8.19 File statistics
 
 ```python
-filename = input("Filename: ").strip
+filename = input("Filename: ").strip()
 
 try:
     with open(filename) as file:
-        text = file.read
+        text = file.read()
 except FileNotFoundError:
     print(f"There is no file called {filename}")
 else:
-    lines = text.splitlines
-    words = text.split
+    lines = text.splitlines()
+    words = text.split()
 
     print(f"Lines: {len(lines)}")
     print(f"Words: {len(words)}")
@@ -621,12 +621,12 @@ else:
 
         counts = {}
         for word in words:
-            word = word.strip(".,!?").lower
+            word = word.strip(".,!?").lower()
             if word:
                 counts[word] = counts.get(word, 0) + 1
 
         top = None
-        for word, count in counts.items:
+        for word, count in counts.items():
             if top is None or count > top[1]:
                 top = [word, count]
 
@@ -649,7 +649,7 @@ There is a much shorter version of the most-common-word logic using the pair sor
 from unit 07.
 
 ```python
-pairs = sorted([[count, word] for word, count in counts.items], reverse=True)
+pairs = sorted([[count, word] for word, count in counts.items()], reverse=True)
 top = pairs[0]
 ```
 

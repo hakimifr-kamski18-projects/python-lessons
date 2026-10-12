@@ -47,12 +47,12 @@ text = " Hello World "
 
 | Expression | Result |
 | --- | --- |
-| `text.strip` | `'Hello World'` |
-| `text.lower` | `' hello world '` |
-| `text.strip.lower` | `'hello world'` |
-| `text.lower.strip` | `'hello world'` |
+| `text.strip()` | `'Hello World'` |
+| `text.lower()` | `' hello world '` |
+| `text.strip().lower()` | `'hello world'` |
+| `text.lower().strip()` | `'hello world'` |
 | `text.replace("World", "there")` | `' Hello there '` |
-| `text.strip.count("l")` | `3` |
+| `text.strip().count("l")` | `3` |
 
 Note that the order in the third and fourth rows does not matter here, because `strip()`
 only touches the ends and `lower()` only changes letters in the middle. It is worth asking
@@ -85,7 +85,7 @@ print(repr(answer)) # 'yes ' <- the space is right there
 The fix.
 
 ```python
-answer = input("Continue? ").strip.lower
+answer = input("Continue? ").strip().lower()
 ```
 
 Then `yes`, `Yes`, `YES`, ` yes ` all work, which is what the user expects.
@@ -101,11 +101,11 @@ work with `print(repr(answer))` and `print(answer == "yes")`.
 ### 2.5 Name badge
 
 ```python
-first = input("First name: ").strip
-last = input("Last name: ").strip
+first = input("First name: ").strip()
+last = input("Last name: ").strip()
 
-full_name = f"{first} {last}".upper
-email = f"{first}.{last}@example.com".lower
+full_name = f"{first} {last}".upper()
+email = f"{first}.{last}@example.com".lower()
 
 print("=" * 28)
 print(f" {full_name}")
@@ -119,7 +119,7 @@ Two useful asides here.
 much nicer than typing twenty eight equals signs. You met this in unit 01 if you did
 the stretch exercises.
 
-The email uses `f"{first}.{last}@example.com"` and then calls `.lower` on the whole
+The email uses `f"{first}.{last}@example.com"` and then calls `.lower()` on the whole
 thing, which is simpler than lowercasing each piece separately. Either way works.
 
 Output for Adamari Lovelace.
@@ -138,14 +138,14 @@ today.
 ### 2.6 Mad libs
 
 ```python
-noun = input("Enter a noun: ").strip
-verb = input("Enter a verb: ").strip
-adjective = input("Enter an adjective: ").strip
+noun = input("Enter a noun: ").strip()
+verb = input("Enter a verb: ").strip()
+adjective = input("Enter an adjective: ").strip()
 
 print(f"The {adjective} {noun} likes to {verb} in the rain.")
 ```
 
-Simple, and the only judgement call is where to `.strip`. Every input gets one.
+Simple, and the only judgement call is where to `.strip()`. Every input gets one.
 
 Worth running it a few times with silly answers. Small programs that are fun to
 run get run more, and running things is how the syntax settles.
@@ -175,13 +175,13 @@ the correct answer is 13.0 and the wrong one is 9.0, so it shows up clearly.
 ### 2.8 Age calculator
 
 ```python
-name = input("Name: ").strip
+name = input("Name: ").strip()
 birth_year = int(input("Birth year: "))
 
 age_2030 = 2030 - birth_year
 age_2020 = 2020 - birth_year
 
-print(f"{name.title}, in 2030 you will be {age_2030}.")
+print(f"{name.title()}, in 2030 you will be {age_2030}.")
 print(f"In 2020 you turned {age_2020}.")
 ```
 
@@ -193,11 +193,11 @@ conversion. If you wrote `int(input(...))` on one line, that is fine now.
 For two names.
 
 ```python
-full_name = input("Full name: ").strip
-parts = full_name.split
+full_name = input("Full name: ").strip()
+parts = full_name.split()
 
-first_initial = parts[0][0].upper
-last_initial = parts[1][0].upper
+first_initial = parts[0][0].upper()
+last_initial = parts[1][0].upper()
 
 print(f"{first_initial}.{last_initial}.")
 ```
@@ -210,8 +210,8 @@ is inside something else, and it comes back constantly later with dictionaries.
 For three names, add a middle line.
 
 ```python
-middle_initial = parts[1][0].upper
-last_initial = parts[2][0].upper
+middle_initial = parts[1][0].upper()
+last_initial = parts[2][0].upper()
 ```
 
 Note that this breaks completely if there is only one name, with an `IndexError`. That
@@ -224,11 +224,11 @@ many names there are. It is worth seeing where this is heading.
 ### 2.10 Word count
 
 ```python
-sentence = input("Enter a sentence: ").strip
+sentence = input("Enter a sentence: ").strip()
 
 print(f"Characters: {len(sentence)}")
-print(f"Words: {len(sentence.split)}")
-print(f"Title case: {sentence.title}")
+print(f"Words: {len(sentence.split())}")
+print(f"Title case: {sentence.title()}")
 ```
 
 For `the quick brown fox jumps over the lazy dog`, the answers are 43 characters and 9
@@ -238,11 +238,11 @@ Check the word count by hand. There is a real lesson here. The character
 count is 43 because it counts the eight spaces as well as the letters. If you guessed
 35, you forgot the spaces.
 
-`len(sentence.split)` is neat but it hides a step. Write it in two lines if
+`len(sentence.split())` is neat but it hides a step. Write it in two lines if
 you find it hard to read.
 
 ```python
-words = sentence.split
+words = sentence.split()
 print(f"Words: {len(words)}")
 ```
 
@@ -251,14 +251,14 @@ That is the better habit at this stage, and the nested version can come later.
 ### 2.11 Username generator
 
 ```python
-full_name = input("Full name: ").strip
-number = input("Favourite number: ").strip
+full_name = input("Full name: ").strip()
+number = input("Favourite number: ").strip()
 
-parts = full_name.split
+parts = full_name.split()
 first_initial = parts[0][0]
 last_name = parts[1]
 
-username = f"{first_initial}{last_name}{number}".lower
+username = f"{first_initial}{last_name}{number}".lower()
 
 print(f"Your username is {username}")
 ```
@@ -282,10 +282,10 @@ it works, then ask yourself which version you prefer and why.
 ### 2.12 Sentence surgery
 
 ```python
-sentence = input("Enter a sentence: ").strip
+sentence = input("Enter a sentence: ").strip()
 
 print(sentence.replace(" ", "_"))
-print(sentence.title)
+print(sentence.title())
 print(f"The letter e appears {sentence.count('e')} times")
 ```
 
@@ -294,18 +294,18 @@ Fox`, and 1.
 
 The interesting bit is `count('e')`. It is case sensitive, so it does not count `E`.
 Try it with a sentence containing a capital and then decide whether to fix it
-with `.lower` first.
+with `.lower()` first.
 
 ### 2.13 Acronym
 
 For a four-word name, without a loop.
 
 ```python
-org = input("Organisation: ").strip
-parts = org.split
+org = input("Organisation: ").strip()
+parts = org.split()
 
 acronym = parts[0][0] + parts[1][0] + parts[2][0] + parts[3][0]
-print(acronym.upper)
+print(acronym.upper())
 ```
 
 For `North Atlantic Treaty Organization` this gives `NATO`.
@@ -319,7 +319,7 @@ There is a neat trick that works for any number of words, using the tools you al
 have.
 
 ```python
-print("".join(part[0] for part in parts).upper)
+print("".join(part[0] for part in parts).upper())
 ```
 
 It uses a generator expression, which is a comprehension, which
@@ -328,7 +328,7 @@ is not in this course on purpose.
 ### 2.14 Palindrome check
 
 ```python
-word = input("Enter a word: ").strip.lower
+word = input("Enter a word: ").strip().lower()
 reversed_word = word[::-1]
 
 print(f"{word} backwards is {reversed_word}")
@@ -357,14 +357,14 @@ This is really a "wow" moment for beginners, and it is worth enjoying it. It
 is also worth knowing that this exact trick appears in every Python codebase in the
 world.
 
-The `.lower` matters, so that `Racecar` also works. Try it without the `.lower` and see.
+The `.lower()` matters, so that `Racecar` also works. Try it without the `.lower()` and see.
 
 ### 2.15 The invisible bug
 
 ```python
 answer = input("Type the word magic: ")
 
-if answer.strip.lower == "magic":
+if answer.strip().lower() == "magic":
     print("Correct!")
 else:
     print("Wrong, try again")

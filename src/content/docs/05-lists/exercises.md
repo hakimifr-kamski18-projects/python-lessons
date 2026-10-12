@@ -87,7 +87,7 @@ print(names.remove("Alan"))
 
 ```python
 numbers = [5, 2, 9, 1, 7]
-numbers.reverse
+numbers.reverse()
 print(numbers)
 ```
 

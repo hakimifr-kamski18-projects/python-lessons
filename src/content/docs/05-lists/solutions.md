@@ -96,7 +96,7 @@ names.append("Grace")
 print(len(names)) # 2
 ```
 
-Make the connection. This is the exact opposite of unit 02, where `name = name.upper`
+Make the connection. This is the exact opposite of unit 02, where `name = name.upper()`
 was the correct thing to write. Both are correct in their own place, and the way to tell
 is to check whether the method gives something back or changes the thing. If you are
 unsure, `print()` the result and see.
@@ -128,7 +128,7 @@ noticing, because `print(names.remove("Alan"))` looks like it should print somet
 
 ```python
 numbers = [5, 2, 9, 1, 7]
-numbers.reverse
+numbers.reverse()
 print(numbers) # [7, 1, 9, 2, 5]
 ```
 
@@ -151,9 +151,9 @@ operations and compare the outputs. On `[5, 2, 9, 1, 7]`, `reverse()` gives `[7,
 shopping = []
 
 while True:
-    item = input("Item (or 'done' to finish): ").strip
+    item = input("Item (or 'done' to finish): ").strip()
 
-    if item.lower == "done":
+    if item.lower() == "done":
         break
 
     if item:
@@ -175,10 +175,10 @@ Two details worth checking.
 The `if item:` guard skips empty input, so pressing Enter by accident does not add a
 blank item. That is the truthiness point from unit 03 in real use.
 
-And `sorted(shopping)` rather than `shopping.sort`, because sorting the original would
+And `sorted(shopping)` rather than `shopping.sort()`, because sorting the original would
 change the order the user entered them in, and the exercise prints both orders. This is
 a good opportunity to ask yourself which one you want and why. If you only needed the sorted
-version, `shopping.sort` would be fine and would save a copy.
+version, `shopping.sort()` would be fine and would save a copy.
 
 ### 5.7 Grades
 
@@ -302,8 +302,8 @@ for that list is the moment the lesson lands.
 ### 5.11 Word lengths
 
 ```python
-sentence = input("Sentence: ").strip
-words = sentence.split
+sentence = input("Sentence: ").strip()
+words = sentence.split()
 
 lengths = []
 for word in words:
@@ -356,7 +356,7 @@ names.append("Donald")
 names.insert(0, "Katherine")
 names.remove("Alan")
 
-last = names.pop
+last = names.pop()
 
 print(f"Removed: {last}")
 print(names)
@@ -403,7 +403,7 @@ scores = []
 
 count = int(input("How many students? "))
 for i in range(count):
-    names.append(input(f"Name {i + 1}: ").strip)
+    names.append(input(f"Name {i + 1}: ").strip())
     scores.append(float(input(f"Score {i + 1}: ")))
 
 pairs = []
@@ -466,7 +466,7 @@ for number in numbers:
     if number not in unique:
         unique.append(number)
 
-unique.sort
+unique.sort()
 print(unique[-2])
 ```
 

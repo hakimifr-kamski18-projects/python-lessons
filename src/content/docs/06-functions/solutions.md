@@ -237,7 +237,7 @@ def count_letters(text, letter):
     return count
 
 def count_vowels(text):
-    text = text.lower
+    text = text.lower()
     total = 0
     for vowel in "aeiou":
         total += count_letters(text, vowel)
@@ -251,7 +251,7 @@ Note that `count_vowels` calls `count_letters` five times rather than looping ov
 characters once. It is less efficient and much easier to read, and that is usually the
 right trade. Worth noticing.
 
-The `.lower` inside `count_vowels` means callers do not have to remember to do it
+The `.lower()` inside `count_vowels` means callers do not have to remember to do it
 themselves. That is a small design decision, and it is the right one. A function should
 handle the awkward details so its callers do not have to.
 
@@ -352,12 +352,12 @@ def biggest(a, b, c):
 
 def count_vowels(text):
     count = 0
-    for character in text.lower:
+    for character in text.lower():
         if character in "aeiou":
             count += 1
     return count
 
-def show_menu:
+def show_menu():
     print()
     print("1. Celsius to Fahrenheit")
     print("2. Biggest of three")
@@ -365,8 +365,8 @@ def show_menu:
     print("4. Quit")
 
 while True:
-    show_menu
-    choice = input("Choose: ").strip
+    show_menu()
+    choice = input("Choose: ").strip()
 
     if choice == "1":
         celsius = float(input("Celsius: "))
@@ -418,7 +418,7 @@ def print_report(name, score):
     grade = letter_grade(score)
     print(f"{name} scored {score}, which is a {grade}")
 
-name = input("Name: ").strip.title
+name = input("Name: ").strip().title()
 score = int(input("Score out of 100: "))
 print_report(name, score)
 ```
@@ -433,11 +433,11 @@ It is "know which one you are doing and why".
 For the shopping list, a reasonable decomposition.
 
 ```python
-def read_items:
+def read_items():
     items = []
     while True:
-        item = input("Item (or 'done' to finish): ").strip
-        if item.lower == "done":
+        item = input("Item (or 'done' to finish): ").strip()
+        if item.lower() == "done":
             break
         if item:
             items.append(item)
@@ -453,7 +453,7 @@ def remove_item(items, item):
         return True
     return False
 
-items = read_items
+items = read_items()
 print(f"{len(items)} items:")
 show_items(items)
 ```
@@ -471,7 +471,7 @@ cleaner but slower and less natural here.
 
 ```python
 def count_long_words(sentence):
-    words = sentence.split
+    words = sentence.split()
     count = 0
     for word in words:
         if len(word) > 3:
@@ -508,7 +508,7 @@ The fix.
 ```python
 def count_long_words(sentence):
     count = 0
-    for word in sentence.split:
+    for word in sentence.split():
         if len(word) > 3:
             count += 1
     return count

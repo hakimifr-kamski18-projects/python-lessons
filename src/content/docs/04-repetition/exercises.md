@@ -181,7 +181,7 @@ thing. If the user enters something that is not a number, ignore it and ask agai
 instead of crashing.
 
 The second part is hard without what comes in unit 08, so here is a hint. You can check
-whether a string is made of digits with `.isdigit`, which gives back `True` or `False`.
+whether a string is made of digits with `.isdigit()`, which gives back `True` or `False`.
 Use that before converting.
 
 ### 4.14 Sum of digits
@@ -237,7 +237,7 @@ took. No one has ever found a starting number that does not eventually reach 1, 
 one has proved that none exists. That is a real open problem in mathematics, which is a
 fun thing to tell a beginner.
 
-Careful, the loop needs `while number!= 1` rather than a `for`, because you do not know
+Careful, the loop needs `while number != 1` rather than a `for`, because you do not know
 in advance how many steps there will be. That is exactly the situation `while` is for.
 
 ---

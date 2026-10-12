@@ -207,7 +207,7 @@ that are longer than three characters.
 
 ```python
 def count_long_words(sentence):
-    words = sentence.split
+    words = sentence.split()
     count = 0
     for word in words:
         if len(word) > 3:

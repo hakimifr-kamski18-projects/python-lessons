@@ -23,7 +23,7 @@ Write down what each gives.
 - `len(person)`
 - `"age" in person`
 - `"Ada" in person`
-- `"Ada" in person.values`
+- `"Ada" in person.values()`
 - `person.get("job")`
 - `person.get("job", "none")`
 
@@ -129,7 +129,7 @@ Then do these things, printing the inventory after each step.
 - Add a new item, `"dates"` with 7
 - Print the total number of items across all the fruit, not the number of kinds
 
-For that last one, you need a loop over `.values` (a value is the thing you get back)
+For that last one, you need a loop over `.values()` (a value is the thing you get back)
 and an accumulator from unit 04.
 
 ### 7.10 Letter frequency
@@ -162,7 +162,7 @@ grades = {
 Let the user add a new subject mark for a student that already exists, and add a whole
 new student. Then print every student and their average across subjects.
 
-The average needs a loop inside a loop, or a loop over `.values`.
+The average needs a loop inside a loop, or a loop over `.values()`.
 
 ### 7.13 Sort by value
 

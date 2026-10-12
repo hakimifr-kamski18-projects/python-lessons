@@ -12,7 +12,7 @@ sidebar:
 10 > 10 # False, strictly greater
 10 >= 10 # True
 "a" == "A" # False, case matters
-"a"!= "A" # True
+"a" != "A" # True
 3 * 2 == 6 # True, the multiplication happens first
 not (5 > 3) # False, not True is False
 5 > 3 and 2 > 4 # False, one side is False
@@ -208,7 +208,7 @@ else:
 Same order-dependent shape as the cinema prices. A 14 character password matches the
 first branch and stops, so it is strong rather than merely acceptable.
 
-The judgement call here is `.strip`. Should it be `input("Password: ").strip`? For a
+The judgement call here is `.strip()`. Should it be `input("Password: ").strip()`? For a
 real password, no, a space is a legitimate character and stripping would change what the
 user typed. For this exercise it does not matter. It is a nice question to ask yourself, because
 it shows that "always strip input" is a habit rather than a law.
@@ -219,12 +219,12 @@ it shows that "always strip input" is a habit rather than a law.
 correct_user = "ada"
 correct_pass = "secret123"
 
-username = input("Username: ").strip.lower
+username = input("Username: ").strip().lower()
 password = input("Password: ")
 
-if username!= correct_user:
+if username != correct_user:
     print("No such user")
-elif password!= correct_pass:
+elif password != correct_pass:
     print("Wrong password")
 else:
     print("Welcome")
@@ -298,7 +298,7 @@ because of the ordering. `bmi < 25` after `bmi < 18.5` failed means the BMI is a
 ### 3.12 Yes or no, properly
 
 ```python
-answer = input("Do you agree? ").strip.lower
+answer = input("Do you agree? ").strip().lower()
 
 if answer in ["y", "yes"]:
     print("You agreed")
@@ -308,7 +308,7 @@ else:
     print("I did not understand")
 ```
 
-`.strip.lower` handles all the case and whitespace variations, and then the list form
+`.strip().lower()` handles all the case and whitespace variations, and then the list form
 handles the two spellings per answer cleanly.
 
 If you wrote `if answer == "y" or answer == "yes"` that is also correct. The list
@@ -353,7 +353,7 @@ The logic, and this is the interesting part. The rules can be written as one com
 condition.
 
 ```python
-if (year % 4 == 0 and year % 100!= 0) or year % 400 == 0:
+if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
 ```
 
 That is correct and it is harder to read than the chain of `elif` above. The `elif`
@@ -410,8 +410,8 @@ Which is more readable and makes the structure clear.
 A compact version that handles the draw first and then checks one direction.
 
 ```python
-p1 = input("Player 1: ").strip.lower
-p2 = input("Player 2: ").strip.lower
+p1 = input("Player 1: ").strip().lower()
+p2 = input("Player 2: ").strip().lower()
 
 if p1 == p2:
     print("Draw")

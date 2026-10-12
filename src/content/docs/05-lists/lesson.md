@@ -425,7 +425,7 @@ Then extend it together.
 
 **The mutability contrast with strings is the core idea.** Everything else is
 vocabulary. Spend the time on `word[0] = "K"` failing and `list[0] = "K"` working, and
-on `names.append` changing the list while `name.upper` does not.
+on `names.append()` changing the list while `name.upper()` does not.
 
 **`names = names.append("Alan")` will happen, and it deserves real time.** It follows
 directly from the correct lesson in unit 02, so it is not carelessness. It is a genuine

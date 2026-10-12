@@ -17,13 +17,13 @@ person = {"name": "Ada", "age": 36, "city": "London"}
 | `len(person)` | `3` |
 | `"age" in person` | `True` |
 | `"Ada" in person` | `False`, it checks keys |
-| `"Ada" in person.values` | `True`, this one checks the values |
+| `"Ada" in person.values()` | `True`, this one checks the values |
 | `person.get("job")` | `None` |
 | `person.get("job", "none")` | `'none'` |
 
 The two `in` lines are the lesson. `"Ada" in person` is `False` because `"Ada"` is a
 value and `in` looks at keys by default. This surprises almost everybody, and the fix is
-`.values`.
+`.values()`.
 
 Some students expect `len(person)` to count the values or the characters. It counts
 key-value pairs, so three.
@@ -84,7 +84,7 @@ the same `TypeError` you met back in unit 01.
 The first fix, ask for the values.
 
 ```python
-for score in scores.values:
+for score in scores.values():
     total += score
 ```
 
@@ -98,7 +98,7 @@ for name in scores:
 Both are correct. The first is shorter and clearer when you want only the values. The
 second is what you need when you want the name as well, which is most of the time.
 
-There is a third way, which is `sum(scores.values)`.
+There is a third way, which is `sum(scores.values())`.
 
 The variable name `score` is also misleading in the original, since it actually holds a
 name. Naming things accurately would have made this bug clear much sooner, and that is a
@@ -143,9 +143,9 @@ phone_book = {
 }
 
 while True:
-    name = input("Name (or 'quit'): ").strip
+    name = input("Name (or 'quit'): ").strip()
 
-    if name.lower == "quit":
+    if name.lower() == "quit":
         break
 
     if name in phone_book:
@@ -179,8 +179,8 @@ This is worth noticing, since it is the same class of problem as the `strip()` a
 ### 7.7 Word count
 
 ```python
-sentence = input("Sentence: ").lower.strip
-words = sentence.split
+sentence = input("Sentence: ").lower().strip()
+words = sentence.split()
 
 counts = {}
 
@@ -190,17 +190,17 @@ for word in words:
     else:
         counts[word] = 1
 
-for word, count in counts.items:
+for word, count in counts.items():
     print(f"{word} {count}")
 ```
 
 For `the cat and the dog`, this prints `the 2`, then the others with 1.
 
-The `.lower` is essential, since `The` and `the` would otherwise be different keys. The
-`.strip` handles a trailing space, which would produce an empty string as the last word
+The `.lower()` is essential, since `The` and `the` would otherwise be different keys. The
+`.strip()` handles a trailing space, which would produce an empty string as the last word
 and count it.
 
-Checking for the empty string is worth doing if you left the `.strip` off.
+Checking for the empty string is worth doing if you left the `.strip()` off.
 
 ```python
 for word in words:
@@ -257,7 +257,7 @@ inventory["dates"] = 7
 print(inventory)
 
 total = 0
-for count in inventory.values:
+for count in inventory.values():
     total += count
 
 print(f"Total items: {total}") # 28
@@ -266,8 +266,8 @@ print(f"Total items: {total}") # 28
 After the changes, the inventory is `{'apples': 9, 'cherries': 12, 'dates': 7}`, which
 adds up to 28.
 
-The `for count in inventory.values` loop is the accumulator pattern from unit 04,
-applied to a dictionary. Note that `sum(inventory.values)` does the same thing in one
+The `for count in inventory.values()` loop is the accumulator pattern from unit 04,
+applied to a dictionary. Note that `sum(inventory.values())` does the same thing in one
 line, and both are worth knowing.
 
 The distinction the exercise is testing. `len(inventory)` is 3, the number of kinds of
@@ -277,7 +277,7 @@ and it is easy to answer the wrong one by accident.
 ### 7.10 Letter frequency
 
 ```python
-text = input("Text: ").lower
+text = input("Text: ").lower()
 
 counts = {}
 
@@ -298,11 +298,11 @@ For `hello`, the output is `e 1`, `h 1`, `l 2`, `o 1`, in alphabetical order.
 The `continue` skips spaces. An alternative is to not count them at all.
 
 ```python
-if character.isalpha:
+if character.isalpha():
 ```
 
 Which would also skip punctuation and digits, and is probably what you want in real
-code. `.isalpha` is worth knowing alongside `.isdigit` from unit 04.
+code. `.isalpha()` is worth knowing alongside `.isdigit()` from unit 04.
 
 Sorting the keys before printing is what gives the alphabetical order, since
 dictionaries remember insertion order and `hello` would otherwise come out as `h`, `e`,
@@ -314,9 +314,9 @@ dictionaries remember insertion order and `hello` would otherwise come out as `h
 votes = {}
 
 while True:
-    name = input("Candidate (or 'done'): ").strip
+    name = input("Candidate (or 'done'): ").strip()
 
-    if name.lower == "done":
+    if name.lower() == "done":
         break
 
     if not name:
@@ -325,19 +325,19 @@ while True:
     votes[name] = votes.get(name, 0) + 1
 
 print()
-for name, count in votes.items:
+for name, count in votes.items():
     print(f"{name}: {count}")
 
 # find the winner
 if votes:
     top_count = 0
-    for name, count in votes.items:
+    for name, count in votes.items():
         if count > top_count:
             top_count = count
             winner = name
 
     winners = []
-    for name, count in votes.items:
+    for name, count in votes.items():
         if count == top_count:
             winners.append(name)
 
@@ -368,8 +368,8 @@ grades = {
     "Grace": {"maths": 95, "english": 92},
 }
 
-student = input("Student: ").strip.title
-subject = input("Subject: ").strip.lower
+student = input("Student: ").strip().title()
+subject = input("Subject: ").strip().lower()
 score = int(input("Score: "))
 
 if student not in grades:
@@ -378,9 +378,9 @@ if student not in grades:
 grades[student][subject] = score
 
 print()
-for name, subjects in grades.items:
+for name, subjects in grades.items():
     total = 0
-    for subject, score in subjects.items:
+    for subject, score in subjects.items():
         total += score
     average = total / len(subjects)
     print(f"{name}: average {average:.1f}")
@@ -410,7 +410,7 @@ consistent, so `ada` and `Ada` do not become two different students.
 scores = {"Grace": 95, "Ada": 88, "Alan": 72}
 
 pairs = []
-for name, score in scores.items:
+for name, score in scores.items():
     pairs.append([score, name])
 
 pairs.sort(reverse=True)
@@ -474,16 +474,16 @@ of the last few units.
 ### 7.15 The most common word
 
 ```python
-text = input("Text: ").lower
+text = input("Text: ").lower()
 counts = {}
 
-for word in text.split:
+for word in text.split():
     word = word.strip(".,!?;:")
     if word:
         counts[word] = counts.get(word, 0) + 1
 
 pairs = []
-for word, count in counts.items:
+for word, count in counts.items():
     pairs.append([count, word])
 
 pairs.sort(reverse=True)
@@ -519,7 +519,7 @@ print(f"Most common: {top_word} ({top_count} times)")
 original = {"a": 1, "b": 2, "c": 3}
 
 inverted = {}
-for key, value in original.items:
+for key, value in original.items():
     inverted[value] = key
 
 print(inverted) # {1: 'a', 2: 'b', 3: 'c'}
@@ -530,7 +530,7 @@ For the question about duplicate values.
 ```python
 original = {"a": 1, "b": 1}
 inverted = {}
-for key, value in original.items:
+for key, value in original.items():
     inverted[value] = key
 
 print(inverted) # {1: 'b'}
@@ -548,7 +548,7 @@ lists, which is the grouping pattern again.
 ```python
 def count_words(text):
     counts = {}
-    for word in text.lower.split:
+    for word in text.lower().split():
         word = word.strip(".,!?;:")
         if word:
             counts[word] = counts.get(word, 0) + 1
@@ -559,7 +559,7 @@ second = count_words(input("Second text: "))
 
 combined = dict(first) # a copy of the first
 
-for word, count in second.items:
+for word, count in second.items():
     combined[word] = combined.get(word, 0) + count
 
 print("\nCombined counts:")
@@ -584,11 +584,11 @@ The final loop checks membership in both dictionaries. `word in first` works bec
 ### 7.18 Word length histogram
 
 ```python
-sentence = input("Sentence: ").strip
+sentence = input("Sentence: ").strip()
 
 lengths = {}
 
-for word in sentence.split:
+for word in sentence.split():
     length = len(word)
     lengths[length] = lengths.get(length, 0) + 1
 
@@ -640,4 +640,4 @@ they are not allowed as keys. Tuples cannot change, so they are fine.
 
 The concept of normalising data before comparing it, so that two things that should be
 equal actually are, is a really useful idea that goes well beyond this exercise. The
-`strip.lower` on input from unit 02 is the same idea.
+`strip().lower()` on input from unit 02 is the same idea.

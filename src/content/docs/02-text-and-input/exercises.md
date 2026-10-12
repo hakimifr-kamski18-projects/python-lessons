@@ -56,12 +56,12 @@ text = " Hello World "
 
 Write down what each of these gives, and note which ones include spaces.
 
-- `text.strip`
-- `text.lower`
-- `text.strip.lower`
-- `text.lower.strip`
+- `text.strip()`
+- `text.lower()`
+- `text.strip().lower()`
+- `text.lower().strip()`
 - `text.replace("World", "there")`
-- `text.strip.count("l")`
+- `text.strip().count("l")`
 
 ### 2.4 Spot the bug
 

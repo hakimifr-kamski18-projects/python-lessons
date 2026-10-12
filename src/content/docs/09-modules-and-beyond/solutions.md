@@ -189,8 +189,8 @@ import random
 names = []
 
 while True:
-    name = input("Name (or 'done'): ").strip
-    if name.lower == "done":
+    name = input("Name (or 'done'): ").strip()
+    if name.lower() == "done":
         break
     if name:
         names.append(name)
@@ -223,9 +223,9 @@ ask for more items than there are. That is a good thing to hit.
 ```python
 import datetime
 
-text = input("Birth date (YYYY-MM-DD): ").strip
+text = input("Birth date (YYYY-MM-DD): ").strip()
 birth = datetime.datetime.strptime(text, "%Y-%m-%d")
-now = datetime.datetime.now
+now = datetime.datetime.now()
 
 difference = now - birth
 
@@ -260,7 +260,7 @@ again until the answer is valid).
 ```python
 def get_number(prompt):
     while True:
-        text = input(prompt).strip
+        text = input(prompt).strip()
         try:
             return int(text)
         except ValueError:
@@ -269,7 +269,7 @@ def get_number(prompt):
 
 def get_text(prompt):
     while True:
-        text = input(prompt).strip
+        text = input(prompt).strip()
         if text:
             return text
         print("You have to type something")
@@ -325,7 +325,7 @@ And the program.
 import shapes
 
 print("1. Rectangle 2. Circle 3. Triangle")
-choice = input("Which shape? ").strip
+choice = input("Which shape? ").strip()
 
 if choice == "1":
     width = float(input("Width: "))
@@ -367,9 +367,9 @@ print("Wait for it...")
 
 time.sleep(random.uniform(1.5, 4.0))
 
-start = time.time
+start = time.time()
 input("NOW! Press Enter!")
-elapsed = time.time - start
+elapsed = time.time() - start
 
 print(f"Your reaction time: {elapsed:.3f} seconds")
 
@@ -395,7 +395,7 @@ because it does not jump around if the system clock changes.
 ```python
 import random
 
-def play:
+def play():
     secret = random.randint(1, 100)
 
     for attempt in range(7):
@@ -412,7 +412,7 @@ def play:
     print(f"Out of guesses. It was {secret}")
     return False
 
-play
+play()
 ```
 
 The `return True` and `return False` let the caller find out what happened without
@@ -425,7 +425,7 @@ guesses is enough because 2 to the power 7 is 128, which is more than 100.
 The computer playing against itself looks like this.
 
 ```python
-def computer_play:
+def computer_play():
     secret = random.randint(1, 100)
     low = 1
     high = 100
@@ -556,7 +556,7 @@ def show_todos(todos):
 
 def get_number(prompt):
     while True:
-        text = input(prompt).strip
+        text = input(prompt).strip()
         try:
             return int(text)
         except ValueError:
@@ -581,10 +581,10 @@ while True:
     todo_lib.show_todos(todos)
 
     print("\n1. Add 2. Remove 3. Quit")
-    choice = input("Choose: ").strip
+    choice = input("Choose: ").strip()
 
     if choice == "1":
-        todos.append(input("What? ").strip)
+        todos.append(input("What? ").strip())
         todo_lib.save_todos(FILENAME, todos)
     elif choice == "2":
         index = todo_lib.get_number("Which number? ")

@@ -31,7 +31,7 @@ often needs revisiting next session.
 
 ## 0. Warm-up
 
-Open [`fstrings.py`](/code/02-text-and-input/fstrings.py) from unit 01, or their own 1.6 solution, and have them narrate
+Open [`fstrings.py`](/code/01-values-and-variables/fstrings.py) from unit 01, or their own 1.6 solution, and have them narrate
 it. Then ask them, without looking, to write a line that prints a variable inside a
 sentence.
 

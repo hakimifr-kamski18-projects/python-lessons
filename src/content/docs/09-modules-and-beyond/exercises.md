@@ -141,10 +141,10 @@ measure how long they take.
 ```python
 import time
 time.sleep(2) # wait 2 seconds
-time.time # the current time as a number of seconds
+time.time() # the current time as a number of seconds
 ```
 
-The difference between two `time.time` calls is the elapsed time. This is the first
+The difference between two `time.time()` calls is the elapsed time. This is the first
 program here that does something you could not easily do by hand.
 
 ### 9.12 Number guessing with a limit

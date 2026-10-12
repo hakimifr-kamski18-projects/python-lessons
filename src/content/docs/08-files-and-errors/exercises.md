@@ -40,7 +40,7 @@ Say which error each of these gives.
 
 ```python
 with open("does_not_exist.txt") as file:
-    print(file.read)
+    print(file.read())
 ```
 
 ```python
@@ -123,7 +123,7 @@ For the time, you will need this.
 
 ```python
 import datetime
-now = datetime.datetime.now
+now = datetime.datetime.now()
 ```
 
 Then `str(now)` gives you a readable timestamp. This is a preview of unit 09.

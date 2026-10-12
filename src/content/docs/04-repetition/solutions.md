@@ -193,7 +193,7 @@ any number, but `None` is unit 08 material. Not needed for this exercise.
 ### 4.9 Count the vowels
 
 ```python
-sentence = input("Sentence: ").strip.lower
+sentence = input("Sentence: ").strip().lower()
 
 count = 0
 for letter in sentence:
@@ -203,10 +203,10 @@ for letter in sentence:
 print(f"There are {count} vowels")
 ```
 
-The `.lower` on the input handles the case problem in one move, which is neater than
+The `.lower()` on the input handles the case problem in one move, which is neater than
 checking both cases in the condition.
 
-If you wrote `if letter in "aeiouAEIOU"` that is also correct and avoids the `.lower`.
+If you wrote `if letter in "aeiouAEIOU"` that is also correct and avoids the `.lower()`.
 Either is fine. What matters is that you thought about the case problem at all.
 
 Note that `letter in "aeiou"` reuses the `in` operator
@@ -328,9 +328,9 @@ secret = random.randint(1, 100)
 attempts = 0
 
 while True:
-    text = input("Guess a number between 1 and 100: ").strip
+    text = input("Guess a number between 1 and 100: ").strip()
 
-    if not text.isdigit:
+    if not text.isdigit():
         print("That is not a number, try again")
         continue
 
@@ -351,9 +351,9 @@ does not count as an attempt and the loop just asks again. That is exactly what
 `continue` is for, and it is a much better use of it than the contrived `if number == 5:
 continue` examples.
 
-`.isdigit` gives back `True` for `"42"` and `False` for `"hello"`, `"-5"` and `"4.5"`.
+`.isdigit()` gives back `True` for `"42"` and `False` for `"hello"`, `"-5"` and `"4.5"`.
 Note the last two. It is stricter than `int` in one direction, since `int("-5")` works
-but `.isdigit` says no, and looser in others. Worth testing both. Handling
+but `.isdigit()` says no, and looser in others. Worth testing both. Handling
 negative numbers properly would need unit 08 material.
 
 ### 4.14 Sum of digits
@@ -361,7 +361,7 @@ negative numbers properly would need unit 08 material.
 The string way, which is easier.
 
 ```python
-text = input("Number: ").strip
+text = input("Number: ").strip()
 
 total = 0
 for digit in text:
@@ -373,7 +373,7 @@ print(total)
 The arithmetic way.
 
 ```python
-number = int(input("Number: ").strip)
+number = int(input("Number: ").strip())
 
 total = 0
 while number > 0:
@@ -525,7 +525,7 @@ number = int(input("Start: "))
 steps = 0
 print(number)
 
-while number!= 1:
+while number != 1:
     if number % 2 == 0:
         number //= 2
     else:
