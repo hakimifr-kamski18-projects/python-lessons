@@ -1,4 +1,4 @@
-# Unit 08 — reading files
+# Unit 09 — reading files
 # Run this with the Run button in your editor.
 #
 # sample.txt sits in this same folder, next to this script. If your editor

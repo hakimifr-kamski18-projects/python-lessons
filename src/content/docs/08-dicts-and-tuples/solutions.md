@@ -1,11 +1,11 @@
 ---
-title: Unit 07 solutions
+title: Unit 08 solutions
 sidebar:
   label: Solutions
 ---
 ## Warm-ups
 
-### 7.1 Predict the output
+### 8.1 Predict the output
 
 ```python
 person = {"name": "Ada", "age": 36, "city": "London"}
@@ -28,7 +28,7 @@ value and `in` looks at keys by default. This is easy to get wrong, and the fix 
 You might expect `len(person)` to count the values or the characters. It counts
 key-value pairs, so three.
 
-### 7.2 Predict the output
+### 8.2 Predict the output
 
 ```python
 counts = {"a": 1, "b": 2}
@@ -48,7 +48,7 @@ creates a new key, since `"c"` was not there.
 The order of the output follows the order the keys were created, since modern Python
 dictionaries remember that. Do not rely on it, but do not be surprised by it.
 
-### 7.3 Unpacking
+### 8.3 Unpacking
 
 It prints.
 
@@ -65,7 +65,7 @@ and score are separated by the comma in the `for` line, matching the comma in th
 
 Try `for item in pairs: print(item)` to see the tuple before unpacking.
 
-### 7.4 Find the bug
+### 8.4 Find the bug
 
 ```python
 scores = {"Ada": 88, "Grace": 95}
@@ -103,7 +103,7 @@ There is a third way, which is `sum(scores.values())`.
 The variable name `score` is also misleading in the original, since it actually holds a
 name. A more accurate name would have made this bug easier to see.
 
-### 7.5 Find the bug, part two
+### 8.5 Find the bug, part two
 
 ```python
 student = {"name": "Ada"}
@@ -130,7 +130,7 @@ This is the ordinary way of adding a key. Write two separate statements.
 
 ## Core
 
-### 7.6 Phone book
+### 8.6 Phone book
 
 ```python
 phone_book = {
@@ -172,7 +172,7 @@ Here is one more case. The user types `ada` in lowercase, and the dictionary has
 lowercase the keys when building the dictionary or lowercase both sides when comparing.
 This is the same kind of problem as the `strip()` and `lower()` issues from unit 02.
 
-### 7.7 Word count
+### 8.7 Word count
 
 ```python
 sentence = input("Sentence: ").lower()
@@ -198,7 +198,7 @@ end and between words, so you never get an empty word.
 
 If you want the output in a fixed order, `for word in sorted(counts):`.
 
-### 7.8 Two lists into a dictionary
+### 8.8 Two lists into a dictionary
 
 ```python
 names = ["Ada", "Grace", "Alan"]
@@ -213,22 +213,22 @@ print(result) # {'Ada': 88, 'Grace': 95, 'Alan': 72}
 ```
 
 The index loop is the right tool here, and this is a genuine case of needing the
-position, even though unit 05 said to avoid it. The reason is that you are walking two
+position, even though unit 06 said to avoid it. The reason is that you are walking two
 lists at once, so you need a shared index.
 
-There is a neater way, using `zip`, which unit 09 covers.
+There is a neater way, using `zip`, which unit 10 covers.
 
 ```python
 result = dict(zip(names, scores))
 ```
 
-The answer to the second part of the exercise. In exercise 5.15 you were keeping two
+The answer to the second part of the exercise. In exercise 6.15 you were keeping two
 parallel lists and then trying to sort one while keeping the other in step. You should
 have built a single dictionary, or a list of dictionaries, so that the name and score
 travel together. Two parallel lists are a poor design from the start, and sorting them
 later does not fix that. This is why dictionaries exist.
 
-### 7.9 Inventory
+### 8.9 Inventory
 
 ```python
 inventory = {"apples": 5, "bananas": 3, "cherries": 12}
@@ -260,7 +260,7 @@ The distinction the exercise is testing. `len(inventory)` is 3, the number of ki
 fruit. The loop gives 28, the number of pieces of fruit. Those are different questions
 and it is easy to answer the wrong one by accident.
 
-### 7.10 Letter frequency
+### 8.10 Letter frequency
 
 ```python
 text = input("Text: ").lower()
@@ -295,7 +295,7 @@ Sorting the keys before printing is what gives the alphabetical order, since
 dictionaries remember insertion order and `hello` would otherwise come out as `h`, `e`,
 `l`, `o`.
 
-### 7.11 Votes
+### 8.11 Votes
 
 ```python
 votes = {}
@@ -333,7 +333,7 @@ if votes:
         print(f"\nTie between: {', '.join(winners)}")
 ```
 
-The counting uses `.get(name, 0) + 1`, the same counting pattern as in 7.7.
+The counting uses `.get(name, 0) + 1`, the same counting pattern as in 8.7.
 
 The winner logic finds the top count first, then collects everyone who has that count.
 Doing it in that order is what handles ties correctly. A version that just tracked "the
@@ -347,7 +347,7 @@ many small cases like this.
 quotes around `", "` are single quotes (`', '`) because the f-string itself uses double
 quotes. The inner quotes must be a different kind from the outer ones.
 
-### 7.12 Grade book
+### 8.12 Grade book
 
 ```python
 grades = {
@@ -384,13 +384,13 @@ If the student is new, you have to create the inner dictionary before you can ad
 anything to it. The next line `grades[student][subject] = score` reaches into the inner
 dictionary by name and adds a key, and it needs the inner dictionary to exist first.
 
-This is the same "create the container first" step as in 7.14, one level deeper. The idea
+This is the same "create the container first" step as in 8.14, one level deeper. The idea
 of making sure the container exists before adding to it comes back often.
 
 The `title()` on the student name and the `lower()` on the subject keep the dictionary keys
 consistent, so `ada` and `Ada` do not become two different students.
 
-### 7.13 Sort by value
+### 8.13 Sort by value
 
 ```python
 scores = {"Grace": 95, "Ada": 88, "Alan": 72}
@@ -421,7 +421,7 @@ sort alphabetically by name instead.
 That "compare the first, then the second to break ties" behaviour is useful. If two
 students tie on score, they are ordered by name. Because of `reverse=True`, the names come
 in reverse alphabetical order, so `[88, "Ada"]` and `[88, "Bob"]` print Bob first. Exercise
-7.15 explains this further.
+8.15 explains this further.
 
 If you want ascending, drop the `reverse=True`.
 
@@ -429,7 +429,7 @@ If you want ascending, drop the `reverse=True`.
 
 ## Stretch
 
-### 7.14 Group by first letter
+### 8.14 Group by first letter
 
 ```python
 words = ["apple", "banana", "avocado", "cherry", "blueberry"]
@@ -458,7 +458,7 @@ The `", ".join(...)` works here because the values are lists of strings. That
 combination of sorting, joining, and looping over a dictionary is a good consolidation
 of the last few units.
 
-### 7.15 The most common word
+### 8.15 The most common word
 
 ```python
 text = input("Text: ").lower()
@@ -508,7 +508,7 @@ top_count, top_word = pairs[0]
 print(f"Most common: {top_word} ({top_count} times)")
 ```
 
-### 7.16 Invert a dictionary
+### 8.16 Invert a dictionary
 
 ```python
 original = {"a": 1, "b": 2, "c": 3}
@@ -536,9 +536,9 @@ Only one entry survives, because a dictionary cannot have duplicate keys. Settin
 
 This is a real problem with inverting a dictionary, and it shows that dictionaries
 keep every key unique. If you wanted to keep both, the values would have to be lists,
-which needs the same "create the empty list first, then append" step as in 7.14.
+which needs the same "create the empty list first, then append" step as in 8.14.
 
-### 7.17 Combined word count
+### 8.17 Combined word count
 
 ```python
 def count_words(text):
@@ -571,12 +571,12 @@ Two parts of this code need an explanation.
 
 `combined = dict(first)` makes a copy of the dictionary. Without it, `combined = first` would give the
 same dictionary a second name, and the next loop would modify `first` as well. That is
-the aliasing trap from unit 05, applying to dictionaries in exactly the same way.
+the aliasing trap from unit 06, applying to dictionaries in exactly the same way.
 
 The final loop checks membership in both dictionaries. `word in first` works because
 `in` checks keys, which is what you want here.
 
-### 7.18 Word length histogram
+### 8.18 Word length histogram
 
 ```python
 sentence = input("Sentence: ").strip()
@@ -601,7 +601,7 @@ actual bar chart.
 keys were strings, they would sort alphabetically, which would put `10` before `2`.
 Remember this whenever you sort numbers stored as text.
 
-### 7.19 Tuples as keys
+### 8.19 Tuples as keys
 
 ```python
 distances = {

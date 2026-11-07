@@ -1,4 +1,4 @@
-# Unit 07 — dictionary patterns
+# Unit 08 — dictionary patterns
 # Run this with the Run button in your editor.
 
 # ---------------------------------------------------------------
@@ -83,7 +83,7 @@ print()
 
 # ---------------------------------------------------------------
 # A DICTIONARY OF DICTIONARIES
-# Same double indexing idea as grid[2][1] from unit 05,
+# Same double indexing idea as grid[2][1] from unit 06,
 # but with names instead of positions.
 
 grades = {

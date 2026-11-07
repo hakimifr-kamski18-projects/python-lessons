@@ -1,11 +1,11 @@
 ---
-title: Unit 08 solutions
+title: Unit 09 solutions
 sidebar:
   label: Solutions
 ---
 ## Warm-ups
 
-### 8.1 Predict the output
+### 9.1 Predict the output
 
 The file contains only `two` and a newline.
 
@@ -16,14 +16,14 @@ The first line is gone.
 This is the behaviour that surprises people, and it is worth running to see rather than
 believing it.
 
-### 8.2 Predict the output
+### 9.2 Predict the output
 
 The file contains `one` and `two`, each on its own line.
 
 `"a"` means append, so it adds to the end without wiping. That is the difference between
-8.1 and 8.2, and it is the whole reason both modes exist.
+9.1 and 9.2, and it is the whole reason both modes exist.
 
-### 8.3 What error?
+### 9.3 What error?
 
 | Code | Error |
 | --- | --- |
@@ -36,22 +36,22 @@ The message for the first one includes the filename, which is why this error is 
 easy to fix once you have read it. Usually the file is simply not where the program is
 looking.
 
-### 8.4 Predict the output
+### 9.4 Predict the output
 
 ```
 B
 C
 ```
 
-`int("hello")` raises (signals that an error has happened) immediately, so `print("A")`
-never runs. The `except` catches it (handles the error so the program does not stop) and
-prints `B`. Then the `try` block is finished, and the program continues with whatever
-comes after, which is `C`.
+This works the same way as in unit 05. `int("hello")` raises (starts an error) a
+`ValueError` immediately, so `print("A")` never runs. The `except` catches it (handles the
+error so the program does not stop) and prints `B`. Then the `try` block is finished, and
+the program continues with whatever comes after, which is `C`.
 
 The `C` printing is the point. `try` and `except` do not stop the program, they handle
 one specific problem and carry on.
 
-### 8.5 Predict the output
+### 9.5 Predict the output
 
 ```
 A
@@ -60,13 +60,13 @@ C
 
 No error, so the `except` block is skipped entirely and `C` still runs.
 
-Worth comparing 8.4 and 8.5 side by side. The code after the `try` runs either way.
+Worth comparing 9.4 and 9.5 side by side. The code after the `try` runs either way.
 
 ---
 
 ## Core
 
-### 8.6 Count things in a file
+### 9.6 Count things in a file
 
 ```python
 with open("sample.txt") as file:
@@ -83,7 +83,7 @@ print(f"Characters: {len(text)}")
 `splitlines()` cuts a text into a list of lines, and `split()` cuts it into a list of
 words.
 
-For [`sample.txt`](/code/08-files-and-errors/sample.txt), the answers are 5 lines, 29 words and 146 characters.
+For [`sample.txt`](/code/09-files-and-errors/sample.txt), the answers are 5 lines, 29 words and 146 characters.
 
 The line count is worth thinking about, because it depends on how you count.
 
@@ -103,7 +103,7 @@ The character count is also worth a look. 146 includes the newlines. Stripping t
 text first gives 145. Both are reasonable, and the difference is exactly the final
 newline.
 
-### 8.7 Write a file
+### 9.7 Write a file
 
 ```python
 things = []
@@ -126,12 +126,12 @@ so it always contains exactly five things. That is probably what you want here, 
 the user is being asked for five things again.
 
 If you wanted to keep everything from every run, you would use `"a"` instead. Then the
-file grows every time, which is the log file behaviour from exercise 8.8.
+file grows every time, which is the log file behaviour from exercise 9.8.
 
 The `enumerate(file, start=1)` is a shortcut for numbering. The long form uses a counter
 variable, and either is fine.
 
-### 8.8 A log file
+### 9.8 A log file
 
 ```python
 import datetime
@@ -150,9 +150,9 @@ print("Logged.")
 The timestamp uses `datetime.datetime.now()`, which gives a full date and time object.
 Turning it into a string with an f-string gives something readable like `2026-09-29
 14:32:10.123456`. The microseconds are ugly, and if you want to clean it up there is a
-formatting method for it, which is unit 09 material.
+formatting method for it, which is unit 10 material.
 
-### 8.9 Safe number input
+### 9.9 Safe number input
 
 ```python
 def get_number(prompt):
@@ -168,7 +168,8 @@ b = get_number("Second number: ")
 print(f"Sum: {a + b}")
 ```
 
-The key detail is that `return` is inside the `try`. If the conversion succeeds the
+This is the validation loop from unit 05, with `return` doing the job of `break`. The
+key detail is that `return` is inside the `try`. If the conversion succeeds the
 function returns, which ends the loop. If it fails, the loop goes round and asks again.
 
 If you put `return number` after the `try` block instead, a bad first input crashes the
@@ -177,7 +178,7 @@ function, because `number` was never set.
 Test cases worth running. `hello` a few times then `5`, and also an empty line, and also
 `5.5` which is a `ValueError` because `int` will not take a decimal.
 
-### 8.10 Safe division
+### 9.10 Safe division
 
 With `try`.
 
@@ -210,7 +211,7 @@ the check is awkward or impossible, like reading a file that may not exist.
 
 Whichever you prefer, make sure you can explain why.
 
-### 8.11 Save and load a dictionary
+### 9.11 Save and load a dictionary
 
 Saving.
 
@@ -248,7 +249,7 @@ for score, name in pairs:
     print(f"{name}: {score}")
 ```
 
-The sort by score uses the pair trick from unit 07. Everything here is material you
+The sort by score uses the pair trick from unit 08. Everything here is material you
 already have, which is the point. This exercise is practice, not new material.
 
 The instruction to run it in a fresh terminal matters. It proves the data is really on
@@ -257,7 +258,7 @@ disk rather than still in memory from the first program.
 If `json.load` fails with a `JSONDecodeError`, the usual cause is an empty file, which
 happens if the writing program was interrupted before it wrote anything.
 
-### 8.12 Biggest number in a file
+### 9.12 Biggest number in a file
 
 ```python
 numbers = []
@@ -285,7 +286,7 @@ is a habit worth having.
 There is a way to avoid storing every number, by keeping only the biggest one so far.
 The list version above is simpler, so it is fine here.
 
-### 8.13 Word count from a file
+### 9.13 Word count from a file
 
 ```python
 counts = {}
@@ -307,7 +308,7 @@ for count, word in pairs[:10]:
     print(f"{word}: {count}")
 ```
 
-For [`sample.txt`](/code/08-files-and-errors/sample.txt), the top two are `the` with 4 and `line` with 4, then `this` and
+For [`sample.txt`](/code/09-files-and-errors/sample.txt), the top two are `the` with 4 and `line` with 4, then `this` and
 `is` with 2 each.
 
 The `.lower()` matters. Without it, `The` and `the` are different words, so `the` would
@@ -321,7 +322,7 @@ From the fifth word on, every count is 1, so those words can come out in any ord
 `pairs[:10]` is a slice, from unit 02, taking the first ten. That is the neat way to do
 "top ten".
 
-### 8.14 Filter a file
+### 9.14 Filter a file
 
 ```python
 evens = []
@@ -355,7 +356,7 @@ one that wipes the file) before running is worth the two seconds.
 
 ## Stretch
 
-### 8.15 To-do list that remembers
+### 9.15 To-do list that remembers
 
 ```python
 import json
@@ -426,7 +427,7 @@ for i, todo in enumerate(todos, start=1):
 ```
 
 The `"x" if todo["done"] else " "` is a conditional expression (a one-line if/else that
-gives back one of two values), which is unit 09 material. The long form works just as
+gives back one of two values), which is unit 10 material. The long form works just as
 well.
 
 ```python
@@ -441,7 +442,7 @@ had to change with it. The shape of your data decides how the rest of the progra
 Delete the old `todos.json` after you change the shape, or loading will fail with a
 `TypeError`, because the old file holds plain strings.
 
-### 8.16 Grade book on disk
+### 9.16 Grade book on disk
 
 ```python
 import json
@@ -482,12 +483,12 @@ for name in sorted(grades):
 Note the `except (FileNotFoundError, ValueError)` form, which catches two types with one
 block. That syntax is worth knowing, since it is common.
 
-Like 8.15, this program loads what was saved earlier. The first run starts fresh, and
+Like 9.15, this program loads what was saved earlier. The first run starts fresh, and
 every run after that continues from where it left off.
 
 `indent=2` in `json.dump` only makes the saved file easy for a person to read.
 
-### 8.17 A small CSV reader
+### 9.17 A small CSV reader
 
 ```python
 records = []
@@ -528,7 +529,7 @@ i < len(values) else ""`, which is a one-line if/else that gives back one of two
 This is the kind of thing that makes real CSV reading awkward, and it is why the `csv`
 module exists in the standard library. It is worth knowing that it exists.
 
-### 8.18 A calculator that does not crash
+### 9.18 A calculator that does not crash
 
 ```python
 def calculate(text):
@@ -584,10 +585,11 @@ a `ValueError`, so only they are inside that `try`. This is an important habit.
 
 One more detail. Returning strings like `"Cannot divide by zero"` from a function that
 otherwise returns numbers is a sign of poor design, since the caller cannot tell what
-it got. A cleaner design would report the problem another way, which you will meet
-later, or return a pair of success and value.
+it got. A cleaner design would `raise ValueError("...")` inside `calculate`, as in unit
+05, and let the loop catch it with `except ValueError as error` and print the message.
+Another option is to return a pair of success and value.
 
-### 8.19 File statistics
+### 9.19 File statistics
 
 ```python
 filename = input("Filename: ").strip()
@@ -644,7 +646,7 @@ every word becomes empty after `strip`, so `counts` stays empty and `top` stays 
 The `if top is None` check stops `top[0]` from crashing.
 
 There is a shorter version of the most-common-word logic using the pair sorting from
-unit 07.
+unit 08.
 
 ```python
 pairs = sorted([[count, word] for word, count in counts.items()], reverse=True)

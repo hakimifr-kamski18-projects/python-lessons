@@ -1,11 +1,11 @@
 ---
-title: Unit 09 solutions
+title: Unit 10 solutions
 sidebar:
   label: Solutions
 ---
 ## Warm-ups
 
-### 9.1 Predict the output
+### 10.1 Predict the output
 
 With `random.seed(1)` in place, both runs give the same answer, which on current Python
 is `18`. Remove the `seed` line and the two runs give different answers.
@@ -24,7 +24,7 @@ test, and expect a specific answer.
 The seed value itself does not matter. It is not a secret and it does not need to be
 random. It just has to be the same every time you want the same sequence.
 
-### 9.2 Import styles
+### 10.2 Import styles
 
 ```python
 # the original
@@ -51,7 +51,7 @@ name comes from is a real part of reading code.
 The nickname form is useful for long module names, and the direct form is fine for one
 or two names that are unambiguous.
 
-### 9.3 The star import
+### 10.3 The star import
 
 `from math import *` pulls every public name out of the module and drops it into your
 file as if you had defined it yourself.
@@ -75,7 +75,7 @@ use them.
 
 ## Core
 
-### 9.4 Dice roller
+### 10.4 Dice roller
 
 ```python
 import random
@@ -118,7 +118,7 @@ than most people expect.
 Note that `random.randint(1, 6)` includes both 1 and 6, unlike `range()`, which stops
 before the end.
 
-### 9.5 Random password generator
+### 10.5 Random password generator
 
 ```python
 import random
@@ -150,7 +150,7 @@ password += secrets.choice(allowed)
 There is a right and a wrong way to generate random numbers, and the wrong way looks
 identical. A program that works and a program that is correct can be different things.
 
-### 9.6 Coin flip statistics
+### 10.6 Coin flip statistics
 
 ```python
 import random
@@ -178,7 +178,7 @@ closer to the true chance), and you can see it happen in your own program.
 If you are interested, you can run the experiment 100 times and plot the spread of
 results, which is a nice thing to do with a list and a loop.
 
-### 9.7 Pick a random name
+### 10.7 Pick a random name
 
 ```python
 import random
@@ -215,7 +215,7 @@ this.
 The `len(names) >= 3` check exists because `random.sample` raises a `ValueError` if you
 ask for more items than there are.
 
-### 9.8 Dates
+### 10.8 Dates
 
 ```python
 import datetime
@@ -248,10 +248,10 @@ it.
 of memorising them.
 
 If the input does not match the format, `strptime` raises a `ValueError`. This is the
-same error handling as unit 08, so a validation loop (a loop that asks again until the
+same error handling as unit 05, so a validation loop (a loop that asks again until the
 answer is valid) works well here.
 
-### 9.9 Your own module
+### 10.9 Your own module
 
 `input_helpers.py`.
 
@@ -295,7 +295,7 @@ even starts.
 
 Now you have seen the problem that the guard fixes.
 
-### 9.10 A geometry helper module
+### 10.10 A geometry helper module
 
 `shapes.py`.
 
@@ -354,7 +354,7 @@ design rule.
 
 ## Stretch
 
-### 9.11 Reaction timer
+### 10.11 Reaction timer
 
 ```python
 import random
@@ -388,7 +388,7 @@ Enter early.
 `time` also has `time.perf_counter`, which is better for measuring short durations
 because it does not jump around if the system clock changes.
 
-### 9.12 Number guessing with a limit
+### 10.12 Number guessing with a limit
 
 ```python
 import random
@@ -414,7 +414,7 @@ play()
 ```
 
 The `return True` and `return False` let the caller find out what happened without
-printing inside the function. This is the unit 06 idea of returning values instead of
+printing inside the function. This is the unit 07 idea of returning values instead of
 printing them.
 
 The strategy is to always guess the middle of the remaining range. With 1 to
@@ -449,7 +449,7 @@ The two variables `low` and `high` track the range that the answer could still b
 and each guess cuts it in half. This is binary search, and it is the same method behind
 searching a sorted list, and behind the "guess the number between 1 and 1000" trick.
 
-### 9.13 Rock paper scissors tournament
+### 10.13 Rock paper scissors tournament
 
 ```python
 import random
@@ -515,7 +515,7 @@ is always-paper, which wins every round). Then note that always-paper loses ever
 to always-scissors. This circle is what makes rock paper scissors interesting. No
 single strategy beats all the others.
 
-### 9.14 Shuffle and sort
+### 10.14 Shuffle and sort
 
 ```python
 import random
@@ -532,13 +532,13 @@ print("Longest first:", sorted(names, key=len, reverse=True))
 
 `random.shuffle` changes the list in place (changed directly, without a copy) and
 returns `None`. `sorted()` returns a new list and leaves the original alone. This is the
-same difference as `sort()` and `sorted()` in unit 05.
+same difference as `sort()` and `sorted()` in unit 06.
 
 `shuffle` is a function from `random`, not a list method. There is no built-in that
 returns a shuffled copy, but `random.sample(names, len(names))` does the same job and
 leaves the original list alone.
 
-### 9.15 Split your to-do list
+### 10.15 Split your to-do list
 
 `todo_lib.py`.
 
@@ -612,7 +612,7 @@ while True:
         break
 ```
 
-This solution splits the basic version of 8.15, where each item is plain text. The
+This solution splits the basic version of 9.15, where each item is plain text. The
 improvement over the single file version is that the filename becomes a parameter rather
 than a fixed string. Now the library can be used for more than one list, and you can
 test it without touching a real file.
@@ -624,4 +624,4 @@ in the library. A program that has grown large should take this shape.
 
 ## The last exercise
 
-There is no solution to 9.16, on purpose. Whatever you wrote is the answer.
+There is no solution to 10.16, on purpose. Whatever you wrote is the answer.

@@ -1,4 +1,4 @@
-# Unit 09 — your own module
+# Unit 10 — your own module
 # This file is a module. It just happens to be one you wrote.
 #
 # Note the print() and the test call at the BOTTOM of this file. They are the

@@ -67,7 +67,7 @@ data = "10,20,30"
 print(data.split(","))
 
 # split() gives back a LIST. The square brackets mean list.
-# Lists are unit 05. For now, just know it is a box of several values.
+# Lists are unit 06. For now, just know it is a box of several values.
 
 print()
 

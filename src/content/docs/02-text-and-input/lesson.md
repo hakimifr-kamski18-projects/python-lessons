@@ -228,7 +228,7 @@ word = "J" + word[1:]
 print(word)          # Jython
 ```
 
-That is enough for now. The deeper consequences come up with lists in unit 05, where
+That is enough for now. The deeper consequences come up with lists in unit 06, where
 they will find that lists can be changed in place and strings cannot.
 
 ## 4. The methods
@@ -395,7 +395,7 @@ find `type(age)` themselves rather than telling them.
 
 **Do not introduce `try` and `except` here.** When `int()` fails on `"hello"`, the
 correct move is to let it crash and read the `ValueError`, and to say "we will learn how
-to handle this gracefully in unit 08". Handling bad input properly is a unit 08 topic
+to handle this gracefully in unit 05". Handling bad input properly is a unit 05 topic
 and doing it now would bury the important `input()` lesson.
 
 **`strip()` pairs with `input()` and saves enormous pain later.** If they learn one
@@ -420,7 +420,7 @@ confusing and rarely needed.
 they need rather than to fix it for them.
 
 **Exercise 2.13, the generator expression.** Do not teach this now. Show it for ten
-seconds as a curiosity if they are curious, then say "this is a unit ten thing, do
+seconds as a curiosity if they are curious, then say "this comes after the course, do
 not use it in exercises".
 
 **Preview of next unit.** They can get information into the program. Next session the

@@ -1,5 +1,5 @@
 ---
-title: Unit 09 — Modules and what comes next
+title: Unit 10 — Modules and what comes next
 sidebar:
   hidden: true
 pagefind: false
@@ -11,20 +11,21 @@ head:
 prev: false
 next: false
 ---
-**Files for this unit.** [`main_guard.py`](/code/09-modules-and-beyond/main_guard.py), [`modules_demo.py`](/code/09-modules-and-beyond/modules_demo.py), [`my_tools.py`](/code/09-modules-and-beyond/my_tools.py), [`use_my_tools.py`](/code/09-modules-and-beyond/use_my_tools.py)
+**Files for this unit.** [`main_guard.py`](/code/10-modules-and-beyond/main_guard.py), [`modules_demo.py`](/code/10-modules-and-beyond/modules_demo.py), [`my_tools.py`](/code/10-modules-and-beyond/my_tools.py), [`use_my_tools.py`](/code/10-modules-and-beyond/use_my_tools.py)
 
-These live in `public/code/09-modules-and-beyond/` in the repository, and the links above
+These live in `public/code/10-modules-and-beyond/` in the repository, and the links above
 open them as plain text. Every snippet the student needs is already inline in the
 exercises, so the files are for the session itself, when you are both at the
 keyboard.
 
-**Goal for the session.** They can find and use code other people wrote, they can split
-their own code across files, and they know what to learn next.
+**Goal for the session.** They can find and use code other people wrote, and they can
+split their own code across files.
 
-**Time.** One to two sessions. This unit is lighter than the last few on purpose, and it
-is partly a wrap-up.
+**Time.** One to two sessions. This unit is lighter than the last few on purpose. It
+pulls units 00 to 09 together before classes arrive in unit 11.
 
-**Prerequisites.** Everything. This is the last unit.
+**Prerequisites.** Units 00 to 09, all of them. Units 11 (classes) and 12 (inheritance)
+come after this one.
 
 
 ---
@@ -32,7 +33,7 @@ is partly a wrap-up.
 ## 0. Warm-up
 
 Have them write a program that saves and loads a dictionary (a collection you look
-things up in by name) with `json`, with no notes. That is the unit 08 retrieval check
+things up in by name) with `json`, with no notes. That is the unit 09 retrieval check
 and it should be quick.
 
 Then ask them the closing question from last session. "What do you do when you need
@@ -41,7 +42,7 @@ something Python does not seem to have?" That is today.
 ## 1. Modules
 
 They have already used `import random` (pull a module in so you can use it) in unit 04
-and `import json` in unit 08. Now they get the full story.
+and `import json` in unit 09. Now they get the full story.
 
 A module (a file of code you can import) is a file full of code that somebody else
 wrote, which you can use.
@@ -106,7 +107,7 @@ either the right name or installing the thing, which is section 4.
 
 ## 2. A tour of the standard library
 
-Open [`modules_demo.py`](/code/09-modules-and-beyond/modules_demo.py). Python ships with a huge library and they only need to know
+Open [`modules_demo.py`](/code/10-modules-and-beyond/modules_demo.py). Python ships with a huge library and they only need to know
 a few parts of it exist.
 
 ### `random`
@@ -121,7 +122,7 @@ random.sample(items, 3)           # three different items
 ```
 
 Note `shuffle` changes the list and returns `None`, exactly like `sort` and `append`
-from unit 05. The command-sounding name rule applies.
+from unit 06. The command-sounding name rule applies.
 
 ### `math`
 
@@ -194,7 +195,7 @@ Tell them the two habits that matter more than any list.
 
 ## 3. Splitting your own code across files
 
-Open [`my_tools.py`](/code/09-modules-and-beyond/my_tools.py) and [`use_my_tools.py`](/code/09-modules-and-beyond/use_my_tools.py).
+Open [`my_tools.py`](/code/10-modules-and-beyond/my_tools.py) and [`use_my_tools.py`](/code/10-modules-and-beyond/use_my_tools.py).
 
 `my_tools.py` is a file with some functions in it. Nothing special.
 
@@ -223,7 +224,7 @@ allowed.
 
 ### The main guard
 
-Open [`main_guard.py`](/code/09-modules-and-beyond/main_guard.py). This is a small piece of boilerplate (fixed code you copy
+Open [`main_guard.py`](/code/10-modules-and-beyond/main_guard.py). This is a small piece of boilerplate (fixed code you copy
 without changing much) that looks mysterious and has a simple explanation.
 
 ```python
@@ -353,7 +354,7 @@ look like a typo, and the two line version is usually clearer.
 
 ### Functions that take functions
 
-They met this in exercise 6.20 and in `sorted(key=len)`. A very brief reminder.
+They met this in exercise 7.20 and in `sorted(key=len)`. A very brief reminder.
 
 ```python
 words = ["banana", "fig", "apple"]
@@ -366,10 +367,9 @@ is all.
 
 ### The things not taught on purpose
 
-Be honest with them about this list, because it is where the course stops.
+Be honest with them about this list. Classes are not on it, because units 11 and 12
+teach them next. Everything below stays outside the course.
 
-- **Classes** (a way to invent your own kind of thing). It is the next big topic and
-  it is much easier once functions are comfortable.
 - **List comprehensions** (a short way of writing a loop that builds a list).
   `[x * 2 for x in numbers]`. Shorter than the loop version and everywhere in real
   code. Twenty minutes to learn once loops are solid.
@@ -379,17 +379,21 @@ Be honest with them about this list, because it is where the course stops.
   once).
 - **Type hints** (optional notes about the types, which other tools can check).
   `def add(a: int, b: int) -> int:`. Very common in modern code.
-- **Writing your own exceptions,** meaning your own kinds of error, and class
-  hierarchies.
+- **Writing your own exceptions,** meaning your own kinds of error. Unit 12 comes
+  close, because an exception type is a class with a parent class, but the course does
+  not show how to make new ones.
 - **Async** (for doing several things at the same time). Only needed for a specific
   kind of program.
 
 The message. Everything left is a smaller step than the ones they have already taken.
-Unit 04, loops, and unit 06, functions, were the hard parts, and both are behind them.
+Unit 04, loops, and unit 07, functions, were the hard parts, and both are behind them.
+Classes in units 11 and 12 build on functions, so they are a step of the same size.
 
 ## 6. Writing a program from nothing
 
-The last thing to do with them, and it is the real ending of the course.
+This is the last thing to do with them in this unit, and it ends the part of the course
+that comes before classes. Units 11 and 12 add a new way to organise code, so this is the
+right moment to see what they can do with the tools they already have.
 
 Ask them to write something from an empty file, with no exercise prompt, no starter
 code, and no list of requirements. Anything they want. Something small.
@@ -415,8 +419,9 @@ running.
 
 ## Teaching notes for this unit
 
-**This unit is a wind-down, and it should feel like one.** The bulk of the learning
-happened in units 03 to 07. Do not introduce pressure here.
+**This unit is a rest between harder units, and it should feel like one.** The bulk of
+the learning happened in units 03 to 09, and units 11 and 12 bring the next big idea. Do
+not introduce pressure here.
 
 **Do not try to cover the whole standard library.** Pick three modules they will
 actually use and let the rest be a list of names. `random` and `datetime` are the two
@@ -429,22 +434,19 @@ tutorial.
 **The main guard is pure boilerplate.** Show it, explain it once, and tell them to copy
 it. Do not let it become a mysterious line that scares them.
 
-**Be honest about what is not taught.** A student who knows that classes exist and are
-learnable is in a very different position from one who thinks they have finished and
-there is nothing left.
+**Be honest about what is not taught.** A student who knows that comprehensions,
+decorators and the rest exist and are learnable is in a very different position from one
+who thinks they have finished and there is nothing left. Classes come next, in units 11
+and 12, so say that too.
 
-**The free project is the assessment, and there is no grade.** If they can write
-something small without help, the course worked. If they freeze on an empty file, that
-is useful information, and the fix is more exercises from units 04 to 07 rather than
-more new material.
+**The free project is the assessment for units 00 to 10, and there is no grade.** If they
+can write something small without help, those units worked. If they freeze on an empty
+file, that is useful information, and the fix is more exercises from units 04 to 08
+rather than more new material.
 
-**Leave them with somewhere to go.** Recommend the official tutorial at
-docs.python.org/3/tutorial, and tell them that the best next step is to write something
-they personally want, badly, and then improve it. That is what everyone does.
-
-**Stay in touch.** If they have enjoyed it, offer to look at whatever they write next,
-or to pair with them on a small project. The course ending well matters more than the
-course covering everything.
+**The course does not end here.** Units 11 and 12 come next. The "where to go next"
+conversation, the official tutorial at docs.python.org/3/tutorial, and the offer to stay
+in touch all belong at the end of unit 12, so save them for then.
 
 **The reaction timer.** Mention `time.perf_counter` once.
 
@@ -457,12 +459,12 @@ code style or the features. They are these.
 - Can they explain what each part does?
 - Do they know what they would add next?
 
-If the answer to all five is yes, the course worked regardless of what the program does.
+If the answer to all five is yes, units 00 to 10 worked regardless of what the program
+does.
 
 And if the program is short and unfinished, that is also a completely normal outcome,
 and a much better one than a large program they cannot explain. Something small that
 they understand and could extend is the right place to stop.
 
-Then tell them what to do next, which is to keep going on the same thing, or start
-something else, and to come back when they get stuck. That offer is the last piece of
-teaching in the course, and it matters more than unit 09 does.
+Then tell them to keep the program. Unit 11 is a good moment to come back to it, since
+some of its data may fit a class better than a dictionary.

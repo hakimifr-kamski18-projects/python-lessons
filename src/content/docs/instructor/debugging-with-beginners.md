@@ -76,7 +76,7 @@ The distinction between `TypeError` and `ValueError` confuses people. Useful fra
 
 ## Print debugging, the honest version
 
-`print()` is the right tool for most of all ten units. Teach it properly rather
+`print()` is the right tool for most of all thirteen units. Teach it properly rather
 than apologetically.
 
 Three patterns to install.
@@ -124,7 +124,7 @@ The method. Copy the broken part into a fresh file. Delete everything unrelated.
 lines one at a time until removing one more would make the problem disappear. What is
 left is the real problem. Then work on that.
 
-Do this once, together, in unit 05 or 06. Students are often reluctant, because it feels
+Do this once, together, in unit 06 or 07. Students are often reluctant, because it feels
 like going backwards. Point out that finding the problem in three lines is faster than
 staring at forty.
 
@@ -188,9 +188,9 @@ Good ones, roughly in order of difficulty.
 
 There is a set of ready-made broken files for exactly this.
 
-- `/code/05-lists/list_traps.py` (in `public/code/05-lists/`), five list mistakes, commented out one section at a
+- `/code/06-lists/list_traps.py` (in `public/code/06-lists/`), five list mistakes, commented out one section at a
   time so the file still runs.
-- `/code/06-functions/broken_functions.py` (in `public/code/06-functions/`), six function mistakes, including the one
+- `/code/07-functions/broken_functions.py` (in `public/code/07-functions/`), six function mistakes, including the one
   that produces no error at all.
 
 Each is written to be worked through rather than read. Have them uncomment one section,

@@ -1,11 +1,11 @@
 ---
-title: Unit 05 solutions
+title: Unit 06 solutions
 sidebar:
   label: Solutions
 ---
 ## Warm-ups
 
-### 5.1 Predict the output
+### 6.1 Predict the output
 
 ```python
 numbers = [10, 20, 30, 40, 50]
@@ -25,7 +25,7 @@ numbers = [10, 20, 30, 40, 50]
 string slicing. If you got `[20, 30, 40]`, remember that the end position is not
 included.
 
-### 5.2 Predict the mutation
+### 6.2 Predict the mutation
 
 ```python
 a = [1, 2, 3]
@@ -68,7 +68,7 @@ print(a) # 5, unchanged
 Lists can be changed in place and numbers cannot. So `b = 6` just gives `b` a new
 value, and `a` stays 5.
 
-### 5.3 Spot the bug
+### 6.3 Spot the bug
 
 ```python
 names = []
@@ -97,7 +97,7 @@ was the correct thing to write. Both are correct in their own place, and the way
 is to check whether the method gives something back or changes the thing. If you are
 unsure, `print()` the result and see.
 
-### 5.4 Finding the error
+### 6.4 Finding the error
 
 ```python
 names[2] # IndexError: list index out of range
@@ -120,7 +120,7 @@ of thing was right and the content was wrong.
 The second and third lines both raise before `print()` gets a chance to run. Notice this,
 because `print(names.remove("Alan"))` looks like it should print something.
 
-### 5.5 Sort or reverse
+### 6.5 Sort or reverse
 
 ```python
 numbers = [5, 2, 9, 1, 7]
@@ -141,7 +141,7 @@ operations and compare the outputs. On `[5, 2, 9, 1, 7]`, `reverse()` gives `[7,
 
 ## Core
 
-### 5.6 Shopping list
+### 6.6 Shopping list
 
 ```python
 shopping = []
@@ -177,7 +177,7 @@ change the order the user entered them in, and the exercise prints both orders. 
 yourself which one you want and why. If you only needed the sorted
 version, `shopping.sort()` would be fine and would save a copy.
 
-### 5.7 Grades
+### 6.7 Grades
 
 ```python
 how_many = int(input("How many students? "))
@@ -202,7 +202,7 @@ The `if scores:` guard is the important part. Without it, a count of 0 gives a
 just like an empty string. Both ways of writing the guard work, and this one is shorter
 than `if len(scores) > 0`.
 
-### 5.8 Remove the duplicates
+### 6.8 Remove the duplicates
 
 ```python
 items = ["apple", "banana", "apple", "cherry", "banana", "apple"]
@@ -219,13 +219,13 @@ print(unique) # ['apple', 'banana', 'cherry']
 The `not in` check against the growing list is the whole technique. Note that this is
 slow for large lists, since every item has to be checked against
 everything already collected. There is a much faster way using a dictionary, which is
-unit 07 material.
+unit 08 material.
 
 The order is preserved because items are processed in order and only the first
 occurrence of each is kept. If you used `sorted()` you would lose the original order,
 which is why the exercise asked not to.
 
-### 5.9 Reverse without reverse
+### 6.9 Reverse without reverse
 
 ```python
 items = ["a", "b", "c", "d", "e"]
@@ -258,7 +258,7 @@ than getting it right the first time.
 Once it works, look at `items[::-1]`. Leaving the start and stop empty and using a step
 of `-1` gives a reversed copy, and this slicing version is what people usually write.
 
-### 5.10 Biggest, the hard way
+### 6.10 Biggest, the hard way
 
 ```python
 numbers = [4, 7, 2, 9, 4]
@@ -296,7 +296,7 @@ else:
 Test with `[-3, -7, -2]` on both versions. Seeing the `0` version print `0`
 for that list shows why the start value matters.
 
-### 5.11 Word lengths
+### 6.11 Word lengths
 
 ```python
 sentence = input("Sentence: ").strip()
@@ -316,13 +316,13 @@ for word in words:
 print(f"Longest word: {longest}")
 ```
 
-This is the same "biggest so far" pattern as 5.10, comparing lengths instead of values.
+This is the same "biggest so far" pattern as 6.10, comparing lengths instead of values.
 It is one pattern, not two.
 
-Note the `words[0]` initialisation for the same reason as 5.10. It makes ties work out
+Note the `words[0]` initialisation for the same reason as 6.10. It makes ties work out
 in favour of whichever tied word comes first, which is fine.
 
-### 5.12 Filter and transform
+### 6.12 Filter and transform
 
 ```python
 numbers = [4, -7, 2, 9, -4, 1, 8, -3]
@@ -343,7 +343,7 @@ If you ever write a negative number directly, use brackets: `(-7) ** 2` is `49`,
 `-7 ** 2` is `-49`, because `**` has higher precedence than the minus sign. Here
 `number ** 2` is safe because `number` is a variable that holds the whole value.
 
-### 5.13 Insert and delete
+### 6.13 Insert and delete
 
 ```python
 names = ["Ada", "Grace", "Alan", "Edsger", "Barbara"]
@@ -366,7 +366,7 @@ Ask yourself what `names.remove("Ada")` does if there are two Adas in
 the list. It removes only the first one. This is a common
 source of bugs, and it is easy to check.
 
-### 5.14 Sort by length
+### 6.14 Sort by length
 
 ```python
 words = ["apple", "banana", "cherry", "fig", "kiwi"]
@@ -391,7 +391,7 @@ the original order of equal items).
 
 ## Stretch
 
-### 5.15 Report card
+### 6.15 Report card
 
 ```python
 names = []
@@ -428,10 +428,10 @@ exercise.
 
 The awkwardness here is the point. Two parallel lists are a poor design,
 and keeping them in step by hand easily goes wrong. It would be easy to append a
-name without appending the matching score, and then the data is wrong. Unit 07 gives a
+name without appending the matching score, and then the data is wrong. Unit 08 gives a
 much better answer.
 
-### 5.16 Second biggest
+### 6.16 Second biggest
 
 ```python
 numbers = [5, 5, 3]
@@ -460,7 +460,7 @@ biggest. The `elif number < biggest` is what excludes duplicates, which is why `
 This never sorts and never uses `max()`, so it follows the rules of the exercise.
 Trace `[5, 5, 3]` by hand and write down `biggest` and `second` after each step.
 
-### 5.17 Merge two sorted lists
+### 6.17 Merge two sorted lists
 
 ```python
 a = [1, 4, 7, 10]
@@ -504,7 +504,7 @@ algorithms. It is also used to sort very large amounts of data.
 Trace it with the small lists by hand, writing out `i` and `j` at each step.
 After four or five steps, the pattern becomes clear.
 
-### 5.18 Run length encoding
+### 6.18 Run length encoding
 
 Encoding.
 

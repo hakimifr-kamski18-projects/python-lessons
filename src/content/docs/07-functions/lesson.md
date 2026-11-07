@@ -1,5 +1,5 @@
 ---
-title: Unit 06 — Functions
+title: Unit 07 — Functions
 sidebar:
   hidden: true
 pagefind: false
@@ -11,9 +11,9 @@ head:
 prev: false
 next: false
 ---
-**Files for this unit.** [`broken_functions.py`](/code/06-functions/broken_functions.py), [`first_function.py`](/code/06-functions/first_function.py), [`return_values.py`](/code/06-functions/return_values.py), [`scope.py`](/code/06-functions/scope.py)
+**Files for this unit.** [`broken_functions.py`](/code/07-functions/broken_functions.py), [`first_function.py`](/code/07-functions/first_function.py), [`return_values.py`](/code/07-functions/return_values.py), [`scope.py`](/code/07-functions/scope.py)
 
-These live in `public/code/06-functions/` in the repository, and the links above
+These live in `public/code/07-functions/` in the repository, and the links above
 open them as plain text. Every snippet the student needs is already inline in the
 exercises, so the files are for the session itself, when you are both at the
 keyboard.
@@ -26,7 +26,7 @@ in the unit.
 **Time.** Two sessions. The `print` versus `return` distinction needs its own attention
 and will come back.
 
-**Prerequisites.** Unit 05. Lists, loops, building results in a loop.
+**Prerequisites.** Unit 06. Lists, loops, building results in a loop.
 
 
 ---
@@ -34,7 +34,7 @@ and will come back.
 ## 0. Warm-up
 
 Have them write code that asks for five numbers and prints the average. Pure retrieval
-from units 04 and 05.
+from units 04 and 06.
 
 Then have them modify it to also print the biggest and the smallest. Then ask them to
 write a second program that does the same thing for ten numbers. The copy and paste is
@@ -42,7 +42,7 @@ the motivation for today, and it is worth making them feel it before you name th
 
 ## 1. Naming a piece of work
 
-Open [`first_function.py`](/code/06-functions/first_function.py).
+Open [`first_function.py`](/code/07-functions/first_function.py).
 
 ```python
 def greet():
@@ -164,7 +164,7 @@ parameters and you only want to set one. Mention it, do not drill it.
 
 ## 3. Returning values
 
-Open [`return_values.py`](/code/06-functions/return_values.py). This is the most important part of the unit.
+Open [`return_values.py`](/code/07-functions/return_values.py). This is the most important part of the unit.
 
 ```python
 def double(number):
@@ -260,12 +260,12 @@ low, high = min_and_max([3, 1, 4, 1, 5])
 print(low, high)     # 1 5
 ```
 
-The comma makes a tuple (like a list that cannot be changed), which is unit 07. For now,
+The comma makes a tuple (like a list that cannot be changed), which is unit 08. For now,
 just note that you can do it.
 
 ## 4. Scope (which parts can see a variable)
 
-Open [`scope.py`](/code/06-functions/scope.py).
+Open [`scope.py`](/code/07-functions/scope.py).
 
 ```python
 def double(number):
@@ -416,4 +416,4 @@ beginners respond well to being told the usual way.
 
 **Preview of next unit.** They can name pieces of work. Next session they meet
 dictionaries, which are the thing that makes data meaningful rather than just ordered,
-and which finally make the report card exercise from unit 05 pleasant.
+and which finally make the report card exercise from unit 06 pleasant.

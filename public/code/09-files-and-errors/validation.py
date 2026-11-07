@@ -1,8 +1,11 @@
-# Unit 08 — the validation loop
+# Unit 09 — the validation loop
 # Run this with the Run button in your editor.
 #
 # This is THE pattern for getting a usable value out of a user,
 # and you will use it constantly from now on.
+#
+# It is the validation loop from unit 05, wrapped in a function.
+# The break has gone, because return does its job.
 
 def get_number(prompt):
     while True:

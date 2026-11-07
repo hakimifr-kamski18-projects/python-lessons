@@ -1,5 +1,5 @@
 ---
-title: Unit 05 — Lists
+title: Unit 06 — Lists
 sidebar:
   hidden: true
 pagefind: false
@@ -11,9 +11,9 @@ head:
 prev: false
 next: false
 ---
-**Files for this unit.** [`list_basics.py`](/code/05-lists/list_basics.py), [`list_loops.py`](/code/05-lists/list_loops.py), [`list_methods.py`](/code/05-lists/list_methods.py), [`list_traps.py`](/code/05-lists/list_traps.py)
+**Files for this unit.** [`list_basics.py`](/code/06-lists/list_basics.py), [`list_loops.py`](/code/06-lists/list_loops.py), [`list_methods.py`](/code/06-lists/list_methods.py), [`list_traps.py`](/code/06-lists/list_traps.py)
 
-These live in `public/code/05-lists/` in the repository, and the links above
+These live in `public/code/06-lists/` in the repository, and the links above
 open them as plain text. Every snippet the student needs is already inline in the
 exercises, so the files are for the session itself, when you are both at the
 keyboard.
@@ -24,7 +24,8 @@ through it, add to it, and pull values out of it.
 **Time.** Two sessions. Lists are where loops stop being an exercise and start being
 useful, so the material is dense and the exercises matter more than the explanations.
 
-**Prerequisites.** Unit 04. Loops, accumulators, `range`.
+**Prerequisites.** Unit 05, which follows on from unit 04. Loops, accumulators and
+`range` from unit 04, and `try` and `except` from unit 05.
 
 
 ---
@@ -40,7 +41,7 @@ them up." Twenty variables is clearly absurd, and that is the point.
 
 ## 1. What a list is
 
-Open [`list_basics.py`](/code/05-lists/list_basics.py).
+Open [`list_basics.py`](/code/06-lists/list_basics.py).
 
 A list is several values in one variable, in order.
 
@@ -102,7 +103,7 @@ immutable, once, and then use the words so they stick.
 
 ## 2. List methods
 
-Open [`list_methods.py`](/code/05-lists/list_methods.py). This is a big block, so introduce the methods in groups and
+Open [`list_methods.py`](/code/06-lists/list_methods.py). This is a big block, so introduce the methods in groups and
 let them try each one rather than reading a wall of code.
 
 ### Adding things
@@ -228,7 +229,7 @@ the names are confusingly similar.
 
 ## 3. Loops and lists together
 
-Open [`list_loops.py`](/code/05-lists/list_loops.py). This is where the unit pays off.
+Open [`list_loops.py`](/code/06-lists/list_loops.py). This is where the unit pays off.
 
 A loop over a list, without `range` and without indices (positions, starting at 0).
 
@@ -308,18 +309,18 @@ loud = [name.upper() for name in names]
 That is a list comprehension (a short way of writing a loop that builds a list). It is
 short and it is everywhere in real Python code, and it is not taught on purpose in this
 course. Tell them it exists, tell them they will see it, tell them to write the loop
-version for now, and that the comprehension is a unit ten topic once loops feel easy.
+version for now, and that the comprehension is something to learn after this course, once loops feel easy.
 Students who have the loop version solid pick up comprehensions in twenty minutes later.
 Students who learn comprehensions first often cannot write the loop.
 
 ### Looping with the index when you need it
 
-Not for now. If they ask, say there is a tool called `enumerate` and it is a unit 09
+Not for now. If they ask, say there is a tool called `enumerate` and it is a unit 10
 thing.
 
 ## 4. The traps
 
-Open [`list_traps.py`](/code/05-lists/list_traps.py). This file is broken on purpose, and it contains a set of
+Open [`list_traps.py`](/code/06-lists/list_traps.py). This file is broken on purpose, and it contains a set of
 mistakes to work through together. Read the error, predict the fix, then compare.
 
 The three traps it covers.
@@ -415,7 +416,7 @@ Then extend it together.
 - Print the items in alphabetical order with `sorted()`.
 - Ask for a price for each item and store the prices in a second list, then print
   the total. Two parallel lists is a slightly awkward design, and it is worth
-  letting them feel that, because unit 07 offers a better answer.
+  letting them feel that, because unit 08 offers a better answer.
 - Allow removing an item with a `remove` command.
 - Print how many items there are before and after removing one.
 
@@ -449,17 +450,17 @@ Have them run each broken section, read the error out loud, and predict the fix 
 making it.
 
 **If they are flying, the pair of parallel lists is a good stretch,** and it sets up
-unit 07 nicely. If they are struggling, skip the list-of-lists section entirely and
+unit 08 nicely. If they are struggling, skip the list-of-lists section entirely and
 spend the time on building lists in loops.
 
-**On why numbers and lists differ, in 5.2.** Do not go deeper than that.
+**On why numbers and lists differ, in 6.2.** Do not go deeper than that.
 
-**On the `**` binding detail in 5.12.** Not worth raising unless they ask.
+**On the `**` binding detail in 6.12.** Not worth raising unless they ask.
 
-**On `key=len` in 5.14.** Do not go into how `key` works as a function argument, since
+**On `key=len` in 6.14.** Do not go into how `key` works as a function argument, since
 `len()` being passed around as a value is a really advanced idea and it can wait.
 
-**On the `second is None` alternatives in 5.16.** Do not insist on any particular
+**On the `second is None` alternatives in 6.16.** Do not insist on any particular
 version here.
 
 **Preview of next unit.** They can hold many values. Next session they learn to name a

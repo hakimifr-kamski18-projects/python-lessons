@@ -1,5 +1,5 @@
 ---
-title: Unit 07 — Dictionaries and tuples
+title: Unit 08 — Dictionaries and tuples
 sidebar:
   hidden: true
 pagefind: false
@@ -11,9 +11,9 @@ head:
 prev: false
 next: false
 ---
-**Files for this unit.** [`dict_basics.py`](/code/07-dicts-and-tuples/dict_basics.py), [`dict_methods.py`](/code/07-dicts-and-tuples/dict_methods.py), [`dict_patterns.py`](/code/07-dicts-and-tuples/dict_patterns.py), [`tuples.py`](/code/07-dicts-and-tuples/tuples.py)
+**Files for this unit.** [`dict_basics.py`](/code/08-dicts-and-tuples/dict_basics.py), [`dict_methods.py`](/code/08-dicts-and-tuples/dict_methods.py), [`dict_patterns.py`](/code/08-dicts-and-tuples/dict_patterns.py), [`tuples.py`](/code/08-dicts-and-tuples/tuples.py)
 
-These live in `public/code/07-dicts-and-tuples/` in the repository, and the links above
+These live in `public/code/08-dicts-and-tuples/` in the repository, and the links above
 open them as plain text. Every snippet the student needs is already inline in the
 exercises, so the files are for the session itself, when you are both at the
 keyboard.
@@ -23,7 +23,7 @@ the thing that makes programs deal with real information rather than lists of nu
 
 **Time.** Two sessions.
 
-**Prerequisites.** Unit 06. Functions, returning values.
+**Prerequisites.** Unit 07. Functions, returning values.
 
 
 ---
@@ -31,11 +31,11 @@ the thing that makes programs deal with real information rather than lists of nu
 ## 0. Warm-up
 
 Have them write a function `is_even(n)` that returns a boolean (a value that is True or
-False), and use it in a loop to print the even numbers from 1 to 20. That is the unit 06
+False), and use it in a loop to print the even numbers from 1 to 20. That is the unit 07
 retrieval check, and the return-not-print habit is the thing to confirm.
 
 Then ask them this. "Store the marks for five subjects. Each subject has a name and a
-score." They will reach for two parallel lists, because that is what unit 05 taught. Let
+score." They will reach for two parallel lists, because that is what unit 06 taught. Let
 them feel how awkward it is. That is today's motivation.
 
 ## 1. What a dictionary is
@@ -57,11 +57,11 @@ name you look things up by) are usually strings. The values can be anything.
 The comparison worth spelling out, using the parallel lists.
 
 ```python
-# unit 05 way
+# unit 06 way
 names = ["Ada", "Grace"]
 scores = [88, 95]
 
-# unit 07 way
+# unit 08 way
 scores = {"Ada": 88, "Grace": 95}
 ```
 
@@ -74,7 +74,7 @@ value is what you get back.
 
 ## 2. Getting things out
 
-Open [`dict_basics.py`](/code/07-dicts-and-tuples/dict_basics.py).
+Open [`dict_basics.py`](/code/08-dicts-and-tuples/dict_basics.py).
 
 ```python
 student = {"name": "Ada", "age": 36, "subject": "maths"}
@@ -139,7 +139,7 @@ print("Ada" in student.values())    # True
 
 ## 3. Changing a dictionary
 
-Open [`dict_methods.py`](/code/07-dicts-and-tuples/dict_methods.py).
+Open [`dict_methods.py`](/code/08-dicts-and-tuples/dict_methods.py).
 
 ```python
 student = {"name": "Ada"}
@@ -154,7 +154,7 @@ replaced. If it is not, it is created.
 
 Have them add a key, change it, delete it, and print the dictionary after each step so
 they can see it changing. That is the same "print the list after every step" habit from
-unit 05 and it works just as well here.
+unit 06 and it works just as well here.
 
 Other useful methods.
 
@@ -236,7 +236,7 @@ for name in sorted(scores):
 
 ## 5. The counting pattern
 
-Open [`dict_patterns.py`](/code/07-dicts-and-tuples/dict_patterns.py). This is the single most useful dictionary technique, and
+Open [`dict_patterns.py`](/code/08-dicts-and-tuples/dict_patterns.py). This is the single most useful dictionary technique, and
 it is worth the whole session on its own.
 
 Counting how many times each thing appears in a list.
@@ -302,7 +302,7 @@ then add to it" appears constantly.
 
 ## 6. Tuples
 
-Open [`tuples.py`](/code/07-dicts-and-tuples/tuples.py).
+Open [`tuples.py`](/code/08-dicts-and-tuples/tuples.py).
 
 A tuple is like a list that cannot be changed.
 
@@ -427,7 +427,7 @@ grades = {
 print(grades["Ada"]["maths"])     # 90
 ```
 
-Same double indexing idea as `grid[2][1]` from unit 05, but with names instead of
+Same double indexing idea as `grid[2][1]` from unit 06, but with names instead of
 positions. That is a good moment to note that the shape of the code is the same, and
 only the thing in the brackets has changed.
 
@@ -466,7 +466,7 @@ for count, word in pairs:
     print(f"{word:15} {count}")
 ```
 
-Which uses only things they already know, and is a nice callback to exercise 5.15. That
+Which uses only things they already know, and is a nice callback to exercise 6.15. That
 is the version to teach.
 
 Then extend it together.
@@ -496,11 +496,11 @@ scratch, trace it on paper, and then use it in three different exercises. It com
 everywhere.
 
 **Tuple unpacking is mostly free.** They have been using it since unit 01 with `a, b =
-b, a` and since unit 06 with multiple returns. The formal name and the comparison to
+b, a` and since unit 07 with multiple returns. The formal name and the comparison to
 lists is all that is new.
 
 **Do not teach `defaultdict` or `Counter`.** They are the standard library answers to
-the counting pattern, and they are really better, and they belong in unit 09 or later
+the counting pattern, and they are really better, and they belong in unit 10 or later
 once the manual version is solid.
 
 **Do not teach `lambda`.** The sorting-by-value exercise has a version using only known
@@ -511,14 +511,14 @@ are curious, and say it is a later thing.
 showing even if there is no time for exercises with it. Almost everything they will ever
 load from a file or an API looks like that.
 
-**Exercise 7.4, the `sum()` third way.** Mention it once they have the loop working.
+**Exercise 8.4, the `sum()` third way.** Mention it once they have the loop working.
 
-**Exercise 7.8, the `zip` shortcut.** Do not teach it here, but it is worth knowing that the ugly version is not the only option.
+**Exercise 8.8, the `zip` shortcut.** Do not teach it here, but it is worth knowing that the ugly version is not the only option.
 
-**Exercise 7.17, the `dict(first)` copy.** Worth re-testing their understanding here.
+**Exercise 8.17, the `dict(first)` copy.** Worth re-testing their understanding here.
 
-**Exercise 7.19, the unhashable list error.** That error is worth explaining if it comes up.
+**Exercise 8.19, the unhashable list error.** That error is worth explaining if it comes up.
 
 **Preview of next unit.** They can represent data properly. Next session they read it
-from files and write it back, and they learn to handle the input being wrong without the
-program falling over.
+from files and write it back, and they handle the errors that files bring, using the
+`try` and `except` they already know from unit 05.

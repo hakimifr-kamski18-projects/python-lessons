@@ -207,7 +207,7 @@ for word in sentence.split():
 ```
 
 Note to them that `split()` gives back several values in one box, and a `for` loop walks
-through the box one at a time. That is a preview of unit 05, and it is safe to use now.
+through the box one at a time. That is a preview of unit 06, and it is safe to use now.
 
 ## 3. The accumulator pattern
 
@@ -420,7 +420,7 @@ while True:
 
 Explain what `import` does (it pulls a module in) and `random.randint` briefly. It gives
 a random whole number between the two values, both included. The full story of modules
-(a file of code you can import) is unit 09, and for now "import gives you extra tools
+(a file of code you can import) is unit 10, and for now "import gives you extra tools
 someone else wrote" is enough.
 
 Then have them extend it. Some ideas.
@@ -474,5 +474,6 @@ confusion and worth recognising instantly.
 slow version, confirm it works, then ask "How much of that work was wasted?" and let
 them think.
 
-**Preview of next unit.** They can repeat. Next session they meet lists, which are the
-thing most programs are actually made of, and loops get much more useful immediately.
+**Preview of next unit.** They can repeat. Next session they meet exceptions, and learn
+to handle bad input with `try` and `except` instead of letting the program crash. The
+`.isdigit()` check from exercise 4.13 is the starting point.

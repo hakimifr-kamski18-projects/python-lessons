@@ -49,9 +49,11 @@ syntax. Examples of adequate motivation.
 
 - Variables, "so you can use a value later without retyping it".
 - Loops, "so you do not have to write the same line twenty times".
+- Exceptions, "so a wrong answer from the user does not crash the program".
 - Functions, "so you can name a piece of work and stop thinking about how it
   works inside".
 - Dictionaries, "so you can look something up by name instead of by position".
+- Classes, "so the data and the actions on it live together in one place".
 
 Then stop talking and let them type the syntax. A five minute lecture on why functions
 are good is five minutes they could have spent getting a `TypeError` from forgetting to
@@ -211,7 +213,9 @@ Less common, but it happens.
 
 If you see this, skip the remaining warm-ups, hand over the stretch exercises, and move on to
 the next unit sooner. Keep the order of the units, though. Each unit needs the one
-before it, and unit 07 needs the functions from unit 06.
+before it. Unit 06 onwards assumes `try` and `except` from unit 05, unit 08 needs the
+functions from unit 07, and units 11 and 12 need functions and dictionaries to make
+sense.
 
 ## A word on not teaching things
 
@@ -223,8 +227,8 @@ Common examples, and the short version to give.
 
 - "Why not use `is` for comparing numbers?" — "Use `==`. `is` asks a different and
   weirder question. I will show you later."
-- "What is a class?" — "A way to invent your own kind of thing, like a string but
-  custom. It comes after this course, and it will make much more sense once functions feel
+- "What is a class?" — "A way to make your own type of value, like a string but
+  custom. It comes in unit 11, and it will make much more sense once functions feel
   easy."
 - "Can I do this in one line?" — "Probably. Shorter code is not automatically
   better. Write it clearly first, always."

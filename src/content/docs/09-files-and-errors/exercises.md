@@ -1,5 +1,5 @@
 ---
-title: Unit 08 exercises
+title: Unit 09 exercises
 sidebar:
   label: Exercises
 ---
@@ -36,26 +36,29 @@ for number, item in enumerate(["tea", "milk"], start=1):
     print(f"{number}. {item}")
 ```
 
-`try` and `except` handle an error. You can add `else`, which runs only when nothing went
-wrong in the `try` block.
+You learned `try` and `except` in unit 05, and this unit uses them with files. Opening a
+file that is not there gives a `FileNotFoundError`, which you can catch like any other
+type.
 
 ```python
 try:
-    number = int(text)
-except ValueError:
-    print("not a number")
+    with open("sample.txt") as file:
+        text = file.read()
+except FileNotFoundError:
+    print("There is no sample.txt next to this program")
 else:
-    print("that worked")
+    print(text)
 ```
 
-To catch two kinds of error with one `except`, put them in brackets:
+The code that uses the file goes in `else`, so it only runs when the file opened. To
+catch two types with one `except`, use a tuple, as in unit 05. For example,
 `except (FileNotFoundError, ValueError):`.
 
 ---
 
 ## Warm-ups
 
-### 8.1 Predict the output
+### 9.1 Predict the output
 
 ```python
 with open("test.txt", "w") as file:
@@ -67,7 +70,7 @@ with open("test.txt", "w") as file:
 
 What is in the file at the end?
 
-### 8.2 Predict the output
+### 9.2 Predict the output
 
 ```python
 with open("test.txt", "w") as file:
@@ -77,9 +80,9 @@ with open("test.txt", "a") as file:
     file.write("two\n")
 ```
 
-What is in the file now, and how is this different from 8.1?
+What is in the file now, and how is this different from 9.1?
 
-### 8.3 What error?
+### 9.3 What error?
 
 Say which error each of these gives.
 
@@ -103,7 +106,7 @@ number = int("0")
 print(100 / number)
 ```
 
-### 8.4 Predict the output
+### 9.4 Predict the output
 
 ```python
 try:
@@ -114,7 +117,7 @@ except ValueError:
 print("C")
 ```
 
-### 8.5 Predict the output
+### 9.5 Predict the output
 
 ```python
 try:
@@ -129,10 +132,10 @@ print("C")
 
 ## Core
 
-### 8.6 Count things in a file
+### 9.6 Count things in a file
 
 Write a program that reports how many lines, how many words, and how many characters
-[`sample.txt`](/code/08-files-and-errors/sample.txt) has. Check the answers by hand.
+[`sample.txt`](/code/09-files-and-errors/sample.txt) has. Check the answers by hand.
 
 Save `sample.txt` in the same folder as your script, so your program can find it. If you
 get a `FileNotFoundError`, the file is in a different folder than your script. Move it.
@@ -140,7 +143,7 @@ get a `FileNotFoundError`, the file is in a different folder than your script. M
 Be careful with the line count. Different ways of reading a file can give different
 line counts. Write a comment in your code saying which way you counted lines and why.
 
-### 8.7 Write a file
+### 9.7 Write a file
 
 Ask the user for five favourite things. Write them to a file, one per line. Then read
 the file back and print it numbered.
@@ -154,7 +157,7 @@ the file back and print it numbered.
 If you run it twice, what happens? Decide what you think should happen, then make it do
 that.
 
-### 8.8 A log file
+### 9.8 A log file
 
 Write a program that appends a line to `log.txt` every time it runs, with the current
 time and something the user typed.
@@ -166,29 +169,32 @@ import datetime
 now = datetime.datetime.now()
 ```
 
-Then `str(now)` gives you a readable date and time. This is a preview of unit 09.
+Then `str(now)` gives you a readable date and time. This is a preview of unit 10.
 
 Run it a few times and then open the file and look at what accumulated.
 
-### 8.9 Safe number input
+### 9.9 Safe number input
 
-Write a function `get_number(prompt)` that keeps asking until the user gives a whole
-number. This is a validation loop (a loop that asks again until the answer is valid).
-Loop forever, try `int(text)` and `return` it, and when you get a `ValueError`, print a
-message and go round again.
+In unit 05 you wrote a validation loop (a loop that asks again until the answer is
+valid) with `while True`, `try` and `break`. Now wrap it in a function. Write
+`get_number(prompt)`, which keeps asking until the user gives a whole number. Loop
+forever, try `int(text)` and `return` it, and when you get a `ValueError`, print a
+message and go round again. Inside a function, `return` does the job that `break` did,
+because it ends the function, and that ends the loop too.
 
 Then use it to ask for two numbers and print their sum.
 
-### 8.10 Safe division
+### 9.10 Safe division
 
-Ask for two numbers and print the first divided by the second. If the second is zero,
-print a message instead of crashing. Use `try` and `except`.
+This exercise practises the choice from unit 05 between checking first and trying. Ask
+for two numbers and print the first divided by the second. If the second is zero, print a
+message instead of crashing. Use `try` and `except`.
 
 Then do the same thing without `try`, by checking the value first.
 
 Then answer this. Which version do you prefer, and why?
 
-### 8.11 Save and load a dictionary
+### 9.11 Save and load a dictionary
 
 Ask the user for five names and scores, store them in a dictionary (a collection you
 look things up in by name), and save it with `json.dump`. If the user types the same
@@ -201,25 +207,25 @@ by score, highest first.
 Run the second program in a fresh terminal to prove it does not depend on the first one
 still running.
 
-### 8.12 Biggest number in a file
+### 9.12 Biggest number in a file
 
 Write a file with several numbers in it, one per line. Write a program that reads the
 file and prints the biggest and smallest.
 
 Remember that everything from a file is text, so you need `int`.
 
-### 8.13 Word count from a file
+### 9.13 Word count from a file
 
 Read a file and count how many times each word appears, using the dictionary counting
-pattern from unit 07. Print the ten most common words.
+pattern from unit 08. Print the ten most common words.
 
 Ignore capital letters, so `The` and `the` count as the same word, and remove `.,!?`
 from both ends of each word (`word.strip(".,!?")` does this). Words with the same count
 can come out in any order.
 
-Test it on [`sample.txt`](/code/08-files-and-errors/sample.txt).
+Test it on [`sample.txt`](/code/09-files-and-errors/sample.txt).
 
-### 8.14 Filter a file
+### 9.14 Filter a file
 
 Read a file of numbers, one per line, and write a new file containing only the even
 ones.
@@ -232,7 +238,7 @@ run it.
 
 ## Stretch
 
-### 8.15 To-do list that remembers
+### 9.15 To-do list that remembers
 
 Write a to-do list program that remembers its items between runs.
 
@@ -252,7 +258,7 @@ rather than a string.
 When you change the shape of the data like this, delete your old `todos.json` first.
 The old file holds plain strings, and the new code cannot read them.
 
-### 8.16 Grade book on disk
+### 9.16 Grade book on disk
 
 Ask for student names and scores, store them in a dictionary, and save to JSON.
 
@@ -260,10 +266,10 @@ Then add a second run mode. If the file already exists when the program starts, 
 and let the user add more students rather than starting empty. A name typed twice
 replaces the earlier score.
 
-Like 8.15, this program loads what was saved earlier, which is what makes it feel like
+Like 9.15, this program loads what was saved earlier, which is what makes it feel like
 real software.
 
-### 8.17 A small CSV reader
+### 9.17 A small CSV reader
 
 A CSV file is comma separated values, one record per line.
 
@@ -287,7 +293,7 @@ names for every line after it. `file.readline()` reads just one line, and a loop
 Then think about this. Should `score` be converted to a number? What happens if one row
 has a missing column?
 
-### 8.18 A calculator that does not crash
+### 9.18 A calculator that does not crash
 
 Ask for an expression in the form `number operator number`, like `7 * 3`. Support `+`,
 `-`, `*` and `/`.
@@ -299,11 +305,11 @@ Handle all of these without crashing.
 - Division by zero
 - Badly written input like `7 *` or just `hello`
 
-Use `try` and `except` around the part that can fail, and catch (handle an error so the
-program does not stop) the specific errors you expect. Then answer this. What is the
-danger of wrapping too much in one `try`?
+This builds on everything from unit 05. Use `try` and `except` around the part that can
+fail, and catch (handle an error so the program does not stop) the specific errors you
+expect. Then answer this. What is the danger of wrapping too much in one `try`?
 
-### 8.19 File statistics
+### 9.19 File statistics
 
 Write a program that asks the user for a filename and reports the number of lines, words,
 characters, the longest word, and the most common word.
@@ -321,5 +327,5 @@ Try to do these without notes.
 - Open and read a file, line by line, with `with`.
 - Write to a file, and explain the difference between `"w"` and `"a"`.
 - Explain why reading a line gives you an extra newline.
-- Write a `try` and `except` that handles a bad number.
+- Write a `try` and `except` that handles a missing file.
 - Save a dictionary with `json` and load it back.

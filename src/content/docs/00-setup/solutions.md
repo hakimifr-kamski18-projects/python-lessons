@@ -15,7 +15,7 @@ you run it.
 
 If Run did nothing, or you could not find it, that is an editor problem rather than a
 Python one. Fix it before you go on, by reading the help pages of your editor or asking
-whoever set it up for you. Everything in the next nine units depends on this one button.
+whoever set it up for you. Everything in the next twelve units depends on this one button.
 
 ## 2. Python console arithmetic
 

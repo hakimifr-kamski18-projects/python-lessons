@@ -1,5 +1,5 @@
 ---
-title: Unit 08 — Files and errors
+title: Unit 09 — Files and errors
 sidebar:
   hidden: true
 pagefind: false
@@ -11,19 +11,20 @@ head:
 prev: false
 next: false
 ---
-**Files for this unit.** [`errors.py`](/code/08-files-and-errors/errors.py), [`file_read.py`](/code/08-files-and-errors/file_read.py), [`file_write.py`](/code/08-files-and-errors/file_write.py), [`save_data.py`](/code/08-files-and-errors/save_data.py), [`validation.py`](/code/08-files-and-errors/validation.py)
+**Files for this unit.** [`errors.py`](/code/09-files-and-errors/errors.py), [`file_read.py`](/code/09-files-and-errors/file_read.py), [`file_write.py`](/code/09-files-and-errors/file_write.py), [`save_data.py`](/code/09-files-and-errors/save_data.py), [`validation.py`](/code/09-files-and-errors/validation.py)
 
-These live in `public/code/08-files-and-errors/` in the repository, and the links above
+These live in `public/code/09-files-and-errors/` in the repository, and the links above
 open them as plain text. Every snippet the student needs is already inline in the
 exercises, so the files are for the session itself, when you are both at the
 keyboard.
 
 **Goal for the session.** Their programs can save data between runs, and they can
-survive bad input instead of crashing.
+handle the errors that come with files, such as a missing file or a bad line in it.
 
 **Time.** Two sessions. Either half is a full session on its own.
 
-**Prerequisites.** Unit 07. Dictionaries, `.items()`, the counting pattern.
+**Prerequisites.** Unit 08. Dictionaries, `.items()`, the counting pattern. Also
+`try` and `except` from unit 05, which this unit builds on.
 
 
 ---
@@ -31,7 +32,7 @@ survive bad input instead of crashing.
 ## 0. Warm-up
 
 Have them write a word counting program from scratch, using the dictionary counting
-pattern. That is the unit 07 retrieval check and it needs to be solid, because it comes
+pattern. That is the unit 08 retrieval check and it needs to be solid, because it comes
 back today with a file as the input instead of a typed sentence.
 
 Then run it and have them enter some text. Now ask the question. "Run it again and type
@@ -40,7 +41,7 @@ is gone. That is today's motivation.
 
 ## 1. Reading a file
 
-Before opening anything, look at [`sample.txt`](/code/08-files-and-errors/sample.txt) so they know what is in it.
+Before opening anything, look at [`sample.txt`](/code/09-files-and-errors/sample.txt) so they know what is in it.
 
 ### The `with` form, which is the one to use
 
@@ -147,7 +148,7 @@ worth a mention.
 
 ### Reading into a dictionary
 
-The shape that connects to unit 07. A file of `name,score` lines.
+The shape that connects to unit 08. A file of `name,score` lines.
 
 ```python
 scores = {}
@@ -172,7 +173,7 @@ Everything is a string. The `int()` conversions are not optional.
 
 ## 2. Writing files
 
-Open [`file_write.py`](/code/08-files-and-errors/file_write.py).
+Open [`file_write.py`](/code/09-files-and-errors/file_write.py).
 
 ```python
 with open("output.txt", "w") as file:
@@ -245,70 +246,86 @@ There are others, and these three are all they need.
 
 ## 3. Errors, and handling them
 
-Open [`errors.py`](/code/08-files-and-errors/errors.py).
+Open [`errors.py`](/code/09-files-and-errors/errors.py).
 
-They have been reading errors for eight units. Now they learn to handle them.
-
-The shape.
-
-```python
-try:
-    number = int(input("Number: "))
-    print(f"Double: {number * 2}")
-except ValueError:
-    print("That was not a number")
-```
-
-Read it out loud. "Try to do this. If this particular kind of error happens, do this
-instead."
-
-Two things to be clear about.
-
-**Specific error types.** `except ValueError` catches (handles an error so the program
-does not stop) only `ValueError`. A `ZeroDivisionError` in the same block still crashes.
-That is good, because it means the except only hides the errors you planned for.
-
-**Bare `except:` is a bad habit.** Show them that `except:` with nothing catches
-everything, including typos in their own code and things they never intended to handle.
-It makes bugs invisible. Name the error type instead.
-
-**Do not use try/except as a substitute for thinking.** If you can check something
-before doing it, checking is usually clearer.
-
-```python
-# checking first
-if text.isdigit():
-    number = int(text)
-
-# asking for forgiveness
-try:
-    number = int(text)
-except ValueError:
-    ...
-```
-
-Both are legitimate. The first is clearer when the check is simple. The second is
-necessary when there is no simple check, like reading a file that may not exist.
-
-### Catching several types
+This section is a recap. In unit 05 they learned `try` and `except`, how to catch one
+specific type or several types in a tuple, `as error`, `else` and `finally`, `raise`, and
+the validation loop. Do not teach any of that again. Ask them to
+write the basic shape from memory, with no notes, and fix only what they get wrong.
 
 ```python
 try:
     number = int(input("Number: "))
-    result = 100 / number
-    print(result)
 except ValueError:
     print("That was not a number")
-except ZeroDivisionError:
-    print("Cannot divide by zero")
 ```
 
-Have them run it with `hello` and then with `0`, and see the two different messages.
+What is new today is the errors that come with files, and the validation loop wrapped in
+a function now that they have functions from unit 07.
 
-### The validation loop
+### `FileNotFoundError`
 
-Open [`validation.py`](/code/08-files-and-errors/validation.py). This is the pattern they will use constantly, and it combines
-a loop from unit 04 with `try` from today.
+```python
+try:
+    with open("missing.txt") as file:
+        contents = file.read()
+except FileNotFoundError:
+    print("There is no file called missing.txt")
+```
+
+This is the error they will meet most often with files. Have them run the `open` line
+without the `try` first and read the message. It names the file exactly, which is what
+makes it easy to fix.
+
+### Checking first, or trying, with files
+
+In unit 05 they compared checking first with `isdigit()` against trying with `int()`.
+Both were fine for a simple check, and `try` was the usual Python way. With files, `try`
+is the only sensible choice, because nothing they know can look at a file name and say
+whether the file is there. So trying to open it and catching `FileNotFoundError` is the
+normal shape. The same goes for
+what is inside the file. A line that should hold a number has to be converted inside a
+`try`, because the file may have been edited by hand.
+
+### Catching several types when reading data
+
+Open [`scores.txt`](/code/09-files-and-errors/scores.txt) first, so they can see the
+`name,score` lines.
+
+```python
+total = 0
+try:
+    with open("scores.txt") as file:
+        for line in file:
+            name, score = line.strip().split(",")
+            total += int(score)
+except FileNotFoundError:
+    print("There is no scores.txt next to this program")
+except ValueError:
+    print("A line in scores.txt is not in the form name,score")
+else:
+    print(f"Total: {total}")
+```
+
+Reading data can fail in two separate ways, so there are two `except` blocks with two
+different messages. The file can be missing, or a line can be wrong. Both a line with no
+comma and a score that is not a number give a `ValueError`. Have them break the file on
+purpose, once by renaming it and once by adding a line like `Ada,lots`, and see which
+message appears. If one message is enough, the tuple form from unit 05 works too,
+`except (FileNotFoundError, ValueError):`.
+
+The `else` block is the useful part with files. The code that uses the data goes there,
+so it only runs when the reading worked, and a mistake in it is not hidden by the
+`except` blocks above.
+
+`finally` is mostly used for cleanup, and the `with` statement (one complete instruction)
+already closes the file, so with files they will rarely need it. Mention it, do not
+drill it.
+
+### The validation loop, in a function
+
+Open [`validation.py`](/code/09-files-and-errors/validation.py). This is the unit 05
+validation loop, wrapped in a function from unit 07.
 
 ```python
 def get_number(prompt):
@@ -323,36 +340,17 @@ age = get_number("Your age: ")
 print(f"Next year you will be {age + 1}")
 ```
 
-Trace the two cases. Valid input returns immediately, which ends the function and so
+Ask them to compare it with their unit 05 version. The `break` has gone, because the
+`return` does its job. Valid input returns immediately, which ends the function and so
 ends the loop. Invalid input prints a message and the loop goes round again.
 
-The clever part is that the `return` is inside the `try`. If the conversion works, the
-function is done. This is the first place where a `return` inside a loop inside a `try`
-all work together, and it is worth tracing carefully.
-
-Have them write this function and then reuse it for several different questions.
-
-### `else` and `finally`
-
-Mention them, do not drill them.
-
-```python
-try:
-    number = int(text)
-except ValueError:
-    print("not a number")
-else:
-    print("that worked")      # runs only if no error
-finally:
-    print("this always runs")
-```
-
-`finally` is mostly used for cleanup, and the `with` statement (one complete
-instruction) already handles the file case. Skip in practice.
+The `return` inside a loop inside a `try` is worth tracing carefully once. Then have them
+reuse the function for several different questions, which is the payoff of having it as
+a function.
 
 ## 4. Saving structured data
 
-Open [`save_data.py`](/code/08-files-and-errors/save_data.py). This is the section that makes files actually useful.
+Open [`save_data.py`](/code/09-files-and-errors/save_data.py). This is the section that makes files actually useful.
 
 Saving a dictionary to a file by hand is fiddly, because everything has to be text and
 you have to read it back. Python has a format for this.
@@ -385,7 +383,7 @@ The round trip is worth showing clearly. Write a dictionary, read it back, and p
 both. The fact that the types survive, that numbers come back as numbers and not
 strings, is a really nice thing that the manual version does not give you.
 
-And with a list of dictionaries, which is the shape from unit 07.
+And with a list of dictionaries, which is the shape from unit 08.
 
 ```python
 students = [
@@ -466,7 +464,7 @@ while True:
 
 Note the `enumerate(todos, start=1)`, which is a shortcut for keeping a count while
 looping. It is the answer to "how do I print numbered items" and it is worth introducing
-here even though it is technically unit 09 material. If you would rather not, use a
+here even though it is technically unit 10 material. If you would rather not, use a
 counter.
 
 ```python
@@ -510,13 +508,15 @@ does.
 **The `"w"` inside a loop is the classic bug of this unit.** Have them write it, look at
 the file, and find the fix themselves.
 
-**`try` and `except` should not be taught as a way to make errors go away.** If a
-student starts wrapping everything in `try`, that is a warning sign. The good use is the
-validation loop (a loop that asks again until the answer is valid), where a bad value is
-an expected part of the interaction. The bad use is hiding bugs. Say so.
+**`try` and `except` are a recap here, not new material.** They learned them in unit
+05. If the recap shows they have forgotten the shape, spend five minutes on unit 05's
+exercises rather than reteaching it from scratch. Keep the new time for the file
+errors.
 
-**Never use a bare `except:`.** Show them once how it swallows a typo in their own code,
-and explain that catching everything is usually a mistake.
+**Watch for the giant `try` again.** Files make it tempting to wrap the whole program in
+one `try`. If a student does that, remind them of the unit 05 rule. Put as little as
+possible inside the `try`, and catch only the types you expect. A bare `except:` around
+file code hides typos just as well as it did in unit 05.
 
 **`json` is the payoff for the whole unit.** Saving a dictionary across runs is the
 thing that makes a program feel real, and it is also the thing that means they no longer
@@ -526,12 +526,14 @@ every exercise from now on, which is exactly right.
 **The to-do list is the best exercise in the course so far.** It uses every single unit,
 it persists, and it is a program they might really use. Give it the time it needs.
 
-**Exercise 8.9, the `return` inside `try`.** Trace it carefully with them if that
-happens.
+**Exercise 9.9, the `return` inside `try`.** This is their unit 05 validation loop
+turned into a function. Trace it carefully with them, and point out that `return`
+replaces `break`.
 
-**Exercise 8.10, the two versions.** Do not push either way.
+**Exercise 9.10, the two versions.** This is the unit 05 checking-first-or-trying
+comparison again. Do not push either way.
 
-**Exercise 8.18, returning strings from the calculator.** Do not push this, but if a
+**Exercise 9.18, returning strings from the calculator.** Do not push this, but if a
 student spots it, that is a very good sign.
 
 **Preview of next unit.** They have everything they need to write a real program. Next

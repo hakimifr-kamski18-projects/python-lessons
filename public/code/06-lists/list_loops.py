@@ -1,4 +1,4 @@
-# Unit 05 — loops and lists together
+# Unit 06 — loops and lists together
 # Run this with the Run button in your editor.
 
 names = ["Ada", "Grace", "Alan"]
@@ -65,7 +65,7 @@ print()
 # loud = [name.upper() for name in names]
 #
 # It is everywhere in real Python code. Do NOT use it yet.
-# Write the loop version. The comprehension is a unit ten thing, and it is
+# Write the loop version. The comprehension comes after this course, and it is
 # much easier to learn once loops are automatic.
 
 print()

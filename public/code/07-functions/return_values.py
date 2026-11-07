@@ -1,4 +1,4 @@
-# Unit 06 — returning values
+# Unit 07 — returning values
 # Run this with the Run button in your editor.
 #
 # THIS IS THE MOST IMPORTANT FILE IN THE UNIT.
@@ -71,7 +71,7 @@ print(check_two(-5), check_two(0), check_two(5))
 print()
 
 # ---------------------------------------------------------------
-# You can return more than one value. The comma makes a tuple, which is unit 07, so just note the shape for now.
+# You can return more than one value. The comma makes a tuple, which is unit 08, so just note the shape for now.
 
 def min_and_max(numbers):
     return min(numbers), max(numbers)

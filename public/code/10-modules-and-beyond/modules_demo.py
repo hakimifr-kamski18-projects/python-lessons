@@ -1,4 +1,4 @@
-# Unit 09 — a tour of the standard library
+# Unit 10 — a tour of the standard library
 # Run this with the Run button in your editor.
 
 # ---------------------------------------------------------------
@@ -15,7 +15,7 @@ random.shuffle(items)
 print(items)                                # shuffled in place
 
 # shuffle() changes the list and gives back None, exactly like sort()
-# and append() from unit 05. The command-sounding name rule again.
+# and append() from unit 06. The command-sounding name rule again.
 
 print()
 

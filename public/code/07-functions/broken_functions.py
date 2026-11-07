@@ -1,4 +1,4 @@
-# Unit 06 — functions broken on purpose
+# Unit 07 — functions broken on purpose
 # Run this with the Run button in your editor.
 #
 # Each function below has a problem. Work through them one at a time.

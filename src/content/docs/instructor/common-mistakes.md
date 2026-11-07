@@ -52,6 +52,9 @@ makes them harder and more interesting.
 | `ZeroDivisionError` | Dividing by something that turned out to be zero | "Print the divisor right before the division." |
 | `AttributeError: 'str' object has no attribute 'append'` | Calling a list method on a string, or a typo in a method name | "What type is that thing, and does that type have that method?" |
 | `TypeError: 'int' object is not iterable` | Forgetting `range()` in a `for` loop, writing `for i in 5` | "What do you want to loop over? `5` is one number, not a sequence." |
+| `TypeError: Dog.bark() takes 0 positional arguments but 1 was given` | Forgetting `self` in a method's `def` line | "What does Python pass in when you write `rex.bark()`?" |
+| `TypeError: Dog.__init__() missing 1 required positional argument: 'name'` | Creating an object without the values `__init__` asks for | "Read the `def __init__` line. What does it need after `self`?" |
+| `AttributeError: 'Dog' object has no attribute 'name'` | A typo, or `name = name` in `__init__` without `self.` | "Where in `__init__` does the object get that attribute?" |
 
 ## Conceptual level
 
@@ -123,7 +126,7 @@ index positions on their fingers once. It sticks better than a rule.
 
 ### `print` versus `return`
 
-The classic. Teaching `print` in unit 01 and `return` in unit 06 means this will appear,
+The classic. Teaching `print` in unit 01 and `return` in unit 07 means this will appear,
 and it is worth a whole ten minutes.
 
 ```python
@@ -244,6 +247,87 @@ Or the cleaner Python way, once they know about lists.
 if answer in ["yes", "y"]:
 ```
 
+### A bare `except:`
+
+```python
+try:
+    number = int(input("Number: "))
+    print(numbr * 2)
+except:
+    print("That was not a number")
+```
+
+The typo `numbr` is a `NameError`, but the bare `except:` catches it and prints "That was
+not a number" even when the input was fine. Ask "what does the program say when you type
+`5`, and is that true?" Then have them write `except ValueError:` and run it again, so the
+real error shows up.
+
+### A giant `try` block
+
+A student who has just learned `try` wraps the whole program in one. Every error then
+lands in the same `except` with the same message, and a bug in their own code looks like
+bad input. Ask "which line in here can actually raise a `ValueError`?" and have them
+shrink the `try` to that line.
+
+### Forgetting `break` in the validation loop
+
+```python
+while True:
+    try:
+        age = int(input("Age: "))
+    except ValueError:
+        print("Not a whole number, try again")
+```
+
+Bad input gets the message, which is right, but good input does not end the loop either,
+because nothing ever leaves it. It keeps asking forever. Ask "which line is supposed to
+end the loop?" If they put the `break` after the whole `try` block, it runs after the bad
+input too, so ask them to trace it with `hello`.
+
+### Forgetting `self` in a method
+
+```python
+class Dog:
+    def bark():
+        print("Woof")
+
+Dog().bark()   # TypeError: Dog.bark() takes 0 positional arguments but 1 was given
+```
+
+The message says one argument was given, and they can see an empty pair of brackets, so
+it looks like Python is lying. Ask "what is in front of the dot, and where does it go?"
+The object is passed in as the first argument, and `self` is the name that receives it.
+
+### Forgetting `self.` inside the class
+
+```python
+class Dog:
+    def __init__(self, name):
+        name = name
+```
+
+This runs with no error. The error comes later, as `AttributeError: 'Dog' object has no
+attribute 'name'` in some other method, or as a `NameError` when a method writes `name`
+instead of `self.name`. Ask "after `__init__` finishes, where is the name kept?" A plain
+`name` is a local variable, and it is gone when the method ends.
+
+### Calling the class without brackets
+
+```python
+rex = Dog
+```
+
+This does not make a dog. It makes `rex` a second name for the class itself, and the
+next method call fails with `missing 1 required positional argument: 'self'`. Ask "what
+do you write to call a function?" and then "is `Dog` being called here?"
+
+### Confusing the class and the object
+
+Students say "the class" for both, and then write `Dog.name` or expect a change to one
+object to change all of them. Ask them to say which one they mean every time. The class
+is the plan, written once with `class`. Each object is one thing made from the plan, with
+its own attributes. Making two objects and changing one of them shows it quickly.
+
 ## How to use this file
 
 Do not pre-emptively teach this list. It is a lookup table for you, so that when a
@@ -256,4 +340,5 @@ into them repeatedly wastes time.
 - `=` versus `==`, before unit 03.
 - `input()` gives a string, inside unit 02.
 - Off by one in `range()`, inside unit 04.
-- `print` versus `return`, inside unit 06.
+- `print` versus `return`, inside unit 07.
+- Forgetting `self`, inside unit 11.

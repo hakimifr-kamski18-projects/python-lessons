@@ -48,7 +48,7 @@ else:
 
 print()
 
-# A cleaner fix, using in. A list is unit 05, but this one pattern is
+# A cleaner fix, using in. A list is unit 06, but this one pattern is
 # so handy that it is worth knowing now.
 # Read it as "is the answer one of these things".
 

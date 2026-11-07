@@ -1,9 +1,8 @@
-# Unit 08 — handling errors
+# Unit 09 — errors that come with files
 # Run this with the Run button in your editor.
 
 # ---------------------------------------------------------------
-# You have been READING errors for eight units.
-# Now you learn to HANDLE them.
+# A recap first. You learned try and except in unit 05.
 
 text = input("Number (try typing hello): ")
 
@@ -13,80 +12,48 @@ try:
 except ValueError:
     print("That was not a number")
 
-# Read it out loud:
-#   "try to do this. If this particular kind of error happens,
-#    do this instead."
-
-# ---------------------------------------------------------------
-# The except is SPECIFIC. It catches ValueError and nothing else.
-# Uncomment this and enter 0. You will still get a ZeroDivisionError,
-# because try/except does not hide errors you did not ask it to catch.
-
-# text = input("Number (try typing 0): ")
-# try:
-#     number = int(text)
-#     print(100 / number)
-# except ValueError:
-#     print("That was not a number")
-
 print()
 
 # ---------------------------------------------------------------
-# Catching more than one thing
-
-text = input("Number (try 0, then try hello): ")
+# FileNotFoundError, the error you will meet most with files.
+# The message names the file exactly.
 
 try:
-    number = int(text)
-    result = 100 / number
-    print(f"100 divided by {number} is {result}")
-except ValueError:
-    print("That was not a number")
-except ZeroDivisionError:
-    print("Cannot divide by zero")
+    with open("missing.txt") as file:
+        contents = file.read()
+except FileNotFoundError:
+    print("There is no file called missing.txt")
 
 print()
 
 # ---------------------------------------------------------------
-# BARE except IS A BAD HABIT.
-#
-#     except:
-#
-# with nothing after it catches EVERYTHING, including typos in your own
-# code and errors you never intended to handle. It makes bugs invisible.
-# Always name the error type.
+# Checking first, or trying?
+# In unit 05, checking first with isdigit() and trying with int()
+# were both fine. With files, trying is the only sensible way.
+# Nothing you know can look at a file name and say whether the file
+# is there, so you try to open it and catch FileNotFoundError.
 
 # ---------------------------------------------------------------
-# Checking first, versus asking for forgiveness.
-# Both are legitimate. The first is clearer when the check is simple.
+# Reading data can fail in two separate ways, so there are two
+# except blocks. The file can be missing, or a line can be wrong.
+# Try renaming scores.txt, or adding a line like  Ada,lots
 
-text = "42"
-
-if text.isdigit():              # check first
-    number = int(text)
-    print(f"checked: {number}")
-
-try:                            # or just try it
-    number = int(text)
-    print(f"tried:   {number}")
-except ValueError:
-    print("not a number")
-
-# Use try/except when there is no simple check. Reading a file that
-# may not exist, for example.
-
-print()
-
-# ---------------------------------------------------------------
-# else and finally. Mentioned here so you recognise them.
-
-text = "42"
-
+total = 0
 try:
-    number = int(text)
+    with open("scores.txt") as file:
+        for line in file:
+            name, score = line.strip().split(",")
+            total += int(score)
+except FileNotFoundError:
+    print("There is no scores.txt next to this program")
 except ValueError:
-    print("not a number")
+    print("A line in scores.txt is not in the form name,score")
 else:
-    print("that worked")        # runs only if there was no error
-finally:
-    print("this always runs")
+    print(f"Total: {total}")    # runs only if the reading worked
+
+# One message for both? Use a tuple, as in unit 05:
+#     except (FileNotFoundError, ValueError):
+
+# ---------------------------------------------------------------
+# finally is mostly for cleanup. The with statement already closes
+# the file, so with files you will rarely need it.

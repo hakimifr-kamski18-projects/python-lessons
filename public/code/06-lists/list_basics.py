@@ -1,4 +1,4 @@
-# Unit 05 — list basics
+# Unit 06 — list basics
 # Run this with the Run button in your editor.
 # Predict each line before running it.
 

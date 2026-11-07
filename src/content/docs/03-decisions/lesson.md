@@ -268,7 +268,7 @@ Which is repetitive, and there is a better way that uses `in`.
 if answer in ["yes", "y"]:
 ```
 
-That is a list, which is unit 05, but this one use is so handy that it is worth
+That is a list, which is unit 06, but this one use is so handy that it is worth
 introducing early as a fixed pattern. "Is the answer one of these things."
 
 ### Chained comparisons
@@ -435,7 +435,7 @@ the section, at least mention `if name:` so the common way of writing it does no
 mysterious when they meet it in someone else's code.
 
 **Do not teach the conditional expression yet.** `x if cond else y` on one line is a
-real feature and it is really confusing to beginners. Unit 09 at the earliest.
+real feature and it is really confusing to beginners. Unit 10 at the earliest.
 
 **Exercise 3.15, the arithmetic version.** Do not teach this. The list and `.index`
 are later material. If a student discovers

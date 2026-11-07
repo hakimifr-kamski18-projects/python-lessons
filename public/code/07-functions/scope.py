@@ -1,4 +1,4 @@
-# Unit 06 — scope
+# Unit 07 — scope
 # Run this with the Run button in your editor.
 
 def double(number):

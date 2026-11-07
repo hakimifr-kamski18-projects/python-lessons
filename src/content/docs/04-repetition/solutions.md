@@ -340,7 +340,8 @@ does not count as an attempt and the loop just asks again. That is exactly what
 `.isdigit()` gives back `True` for `"42"` and `False` for `"hello"`, `"-5"` and `"4.5"`.
 Note the last two. `int("-5")` works but `int("4.5")` does not, so `.isdigit()` and `int`
 are not the same test. This program rejects negative numbers, because `.isdigit()` says
-no to `"-5"`. Handling negative numbers properly would need unit 08 material.
+no to `"-5"`. Unit 05 shows how to handle negative numbers properly, with `try` and
+`except` around `int()`.
 
 ### 4.14 Sum of digits
 

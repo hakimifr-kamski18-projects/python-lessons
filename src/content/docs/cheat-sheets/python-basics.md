@@ -232,6 +232,74 @@ That is normal. It only means you stopped it.
 
 ---
 
+## Exceptions
+
+An exception is an error that happens while the program is running. You can handle it
+with `try` and `except`, so the program does not stop.
+
+```python
+try:
+    number = int(input("Number? "))
+except ValueError:                    # only this type is caught
+    print("That was not a number")
+```
+
+Catch the specific type you expect, and keep the `try` block small. Never use a bare
+`except:`, because it also hides typos in your own code.
+
+You can also catch several types at once, give the error a name with `as`, and add
+`else` and `finally`.
+
+```python
+try:
+    result = 100 / int(input("Number? "))
+except (ValueError, ZeroDivisionError) as error:   # a tuple of types
+    print(f"That did not work: {error}")           # error holds Python's message
+else:
+    print(result)             # runs only if nothing went wrong
+finally:
+    print("Done")             # runs every time
+```
+
+You can start an error yourself with `raise`.
+
+```python
+age = int(input("Age? "))
+if age < 0:
+    raise ValueError("age cannot be negative")
+```
+
+This is the validation loop (a loop that asks again until the answer is valid). The
+`break` only runs when `int()` worked.
+
+```python
+while True:
+    try:
+        age = int(input("Age? "))
+        break
+    except ValueError:
+        print("Not a whole number, try again")
+
+print(f"Next year you will be {age + 1}")
+```
+
+Checking first also works for simple cases. `text.isdigit()` is `True` for `"42"`, but
+it is `False` for `"-5"`, so `try` is the safer test for a whole number.
+
+Inside a function, `return` does the job of `break`.
+
+```python
+def get_number(prompt):
+    while True:
+        text = input(prompt).strip()
+        try:
+            return int(text)
+        except ValueError:
+            print("Not a number, try again")
+```
+
+---
+
 ## Lists
 
 ```python
@@ -408,42 +476,6 @@ Everything from a file is text, just like `input()`. Convert it yourself.
 
 ---
 
-## Handling errors
-
-```python
-try:
-    number = int(input("Number? "))
-except ValueError:
-    print("That was not a number")
-else:
-    print("Got it")           # runs only if nothing went wrong
-finally:
-    print("Done")             # runs every time
-```
-
-Catch specific error types. Never use a bare `except:`.
-
-You can start an error yourself with `raise`.
-
-```python
-if age < 0:
-    raise ValueError("age cannot be negative")
-```
-
-The validation loop, for getting a usable value out of a user.
-
-```python
-def get_number(prompt):
-    while True:
-        text = input(prompt).strip()
-        try:
-            return int(text)
-        except ValueError:
-            print("Not a number, try again")
-```
-
----
-
 ## Modules
 
 ```python
@@ -490,6 +522,94 @@ if __name__ == "__main__":
 
 ---
 
+## Classes
+
+A class is your own type of value. An object is one value made from it.
+
+```python
+class BankAccount:
+    def __init__(self, owner, balance=0):   # runs when you create an object
+        self.owner = owner                   # an attribute
+        self.balance = balance
+
+    def deposit(self, amount):               # a method
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("not enough money")
+        self.balance -= amount
+
+    def __str__(self):                       # the text print() shows
+        return f"{self.owner} has {self.balance}"
+
+account = BankAccount("Ada")     # creates an object, with brackets
+account.deposit(50)
+print(account.balance)           # 50
+print(account)                   # Ada has 50
+```
+
+Every method has `self` as its first parameter. `self` is the object the method was
+called on. Inside the class, an attribute is always `self.something`. Without `self.`,
+the value goes into a local variable and is lost.
+
+Call a method with brackets, `account.deposit(50)`. Without them, nothing runs.
+
+A list of objects works like any other list.
+
+```python
+accounts = [BankAccount("Ada", 20), BankAccount("Grace", 75)]
+for item in accounts:
+    print(item)
+```
+
+Use a dictionary for simple data that you look up by key. Use a class when the data
+comes with actions (methods) that belong to it, like `deposit` and `withdraw`.
+
+---
+
+## Inheritance
+
+A child class is made from a parent class. It gets every method of the parent, and it
+can add new ones or override (replace) them.
+
+```python
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return "..."
+
+    def __str__(self):
+        return f"{self.name} says {self.speak()}"
+
+class Dog(Animal):                    # Dog is a child class of Animal
+    def speak(self):                  # overrides Animal's speak
+        return "Woof"
+
+class Cat(Animal):
+    def __init__(self, name, indoor):
+        super().__init__(name)        # runs Animal's __init__ first
+        self.indoor = indoor
+
+    def speak(self):
+        return "Meow"
+
+pets = [Dog("Rex"), Cat("Tom", True)]
+for pet in pets:
+    print(pet)                        # Rex says Woof, then Tom says Meow
+
+print(isinstance(pets[0], Dog))       # True
+print(isinstance(pets[0], Animal))    # True, a Dog is an Animal
+print(isinstance(pets[0], Cat))       # False
+```
+
+Inherit only when "a Dog is an Animal" is a true sentence. If the sentence is "a car
+has an engine", give the car an attribute instead.
+
+---
+
 ## The errors you will actually meet
 
 ```
@@ -500,7 +620,7 @@ TypeError          wrong kind of value, like "5" + 5
 ValueError         right kind, bad content, like int("hello")
 KeyError           a dictionary key that is not there
 IndexError         a position the list does not have
-AttributeError     asking a value to do something it cannot
+AttributeError     asking a value for a method or attribute it does not have
 FileNotFoundError  the file is not where the program is looking
 ZeroDivisionError  divided by zero
 ```

@@ -1,4 +1,4 @@
-# Unit 06 — the first function
+# Unit 07 — the first function
 # Run this with the Run button in your editor.
 
 def greet():

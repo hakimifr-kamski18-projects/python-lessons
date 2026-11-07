@@ -72,7 +72,7 @@ print()
 
 biggest = 0
 
-# The square brackets here are a LIST, which is unit 05. You met one
+# The square brackets here are a LIST, which is unit 06. You met one
 # already in unit 03 with "answer in [\"yes\", \"y\"]". For now, just
 # read it as "these four numbers".
 for number in [3, 7, 2, 9, 4]:

@@ -1,4 +1,4 @@
-# Unit 08 — saving structured data with json
+# Unit 09 — saving structured data with json
 # Run this with the Run button in your editor.
 #
 # Then open scores.json, which appears in this same folder, and look at it.
@@ -29,7 +29,7 @@ print(type(loaded))
 print()
 
 # ---------------------------------------------------------------
-# A list of dictionaries, which is the shape from unit 07.
+# A list of dictionaries, which is the shape from unit 08.
 # indent=2 makes the file readable instead of one long line.
 
 students = [

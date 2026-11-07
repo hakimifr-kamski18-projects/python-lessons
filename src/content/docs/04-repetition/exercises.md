@@ -242,9 +242,9 @@ come up.
 When that works, add one thing. If the user enters something that is not a number,
 ignore it and ask again instead of crashing. A wrong entry should not count as a guess.
 
-The second part is hard without what comes in unit 08, so here is a hint. You can check
-whether a string is made of digits with `.isdigit()`, which gives back `True` or `False`.
-Use that before converting.
+The next unit, unit 05, shows the proper way to do the second part, with `try` and
+`except`. For now, here is a hint. You can check whether a string is made of digits with
+`.isdigit()`, which gives back `True` or `False`. Use that before converting.
 
 ### 4.14 Sum of digits
 

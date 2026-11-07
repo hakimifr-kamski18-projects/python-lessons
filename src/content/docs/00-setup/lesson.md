@@ -38,12 +38,12 @@ Check three things before you begin, and fix them quietly rather than making a l
 of them.
 
 1. **The Run button works.** Open any `.py` file and click it. If nothing happens, or the
-   button is not there, stop and fix that first. Everything in the next nine units
+   button is not there, stop and fix that first. Everything in the next twelve units
    depends on this one button, and a student who cannot run their own code has no course.
 2. **The console is somewhere they can find it.** You will point at it once in section 4.
    In VS Code it is the command palette, "Python: Start REPL", or Shift and Enter on a
    selected line. Show them where it is, do not describe it.
-3. **Run uses the file's own folder.** Unit 08 reads data files that sit next to the
+3. **Run uses the file's own folder.** Unit 09 reads data files that sit next to the
    scripts, and it is the one unit where a wrong working directory gives a
    `FileNotFoundError`. In VS Code, `python.terminal.executeInFileDir` is the setting.
 
@@ -73,7 +73,7 @@ The reason that matters today is this. When code goes wrong, the computer did wh
 was told. The job is not to convince it, or to try again, or to apologise. The job is to
 find which instruction says something other than what you meant.
 
-That single framing will carry them through every error in the next nine units.
+That single framing will carry them through every error in the next twelve units.
 
 ## 2. The first program
 

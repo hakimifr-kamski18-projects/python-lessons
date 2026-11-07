@@ -177,7 +177,8 @@ printing or changing a list.
 **function** — a named block of code you can run whenever you like. Made with `def`.
 
 **method** — a function that belongs to a value, written after a dot. In
-`name.upper()`, `upper` is a method of the string `name`.
+`name.upper()`, `upper` is a method of the string `name`. The methods you write
+yourself go inside a class, and their first parameter is `self`.
 
 **call** — run a function. `greet()` calls `greet`.
 
@@ -216,9 +217,15 @@ as a string, not a comment.
 **bug** — a mistake in a program. Everyone makes them, every day.
 
 **exception** — Python's word for an error that happens while the program is
-running.
+running. Unit 05 is about them.
+
+**try / except** — `try` runs code that might fail, and `except` says what to do if one
+named type of error happens. `except ValueError:` handles only a `ValueError`.
 
 **catch** — handle an error with `except`, so the program does not stop.
+
+**bare except** — an `except:` with no type after it. It catches every error, including
+typos in your own code, so do not use it.
 
 **raise** — start an error. Python raises an error when something goes wrong, so "it
 raises a `ValueError`" means that error happened. You can also do it yourself with
@@ -257,9 +264,6 @@ prompt is `Name? `.
 **console** — the window or panel where a program shows its output and where you can
 type. Also called the terminal or the shell.
 
-**class** — a way to bundle data and functions into your own kind of value. Not taught
-in this course.
-
 **type hint** — a note in the code about which type a value should have, like
 `def f(n: int)`. Python does not enforce it. Not taught in this course.
 
@@ -269,7 +273,8 @@ code clearer.
 **boilerplate** — fixed code you copy and paste every time without changing much.
 The `if __name__ == "__main__":` block is boilerplate.
 
-**validation loop** — a loop that keeps asking until it gets a usable answer.
+**validation loop** — a loop that asks again until the answer is valid. Usually
+`while True` with `try`, `int(input())` and `break`, from unit 05.
 
 **guard** — a check at the top of a block that stops something bad happening. The
 `if not items:` check before a loop is a guard.
@@ -289,6 +294,55 @@ library is the one that comes with Python.
 
 ---
 
+## The ones about classes
+
+**class** — a way to make your own type of value, with its own data and its own
+methods. Made with `class`, like `class BankAccount:`. Unit 11 is about them.
+
+**object** — one value made from a class. `account = BankAccount("Ada")` makes an
+object. Every value in Python is an object, which is why errors say `'str' object`.
+
+**instance** — another word for object. An object made from `BankAccount` is an
+instance of `BankAccount`. This course mostly says object.
+
+**attribute** — a variable that belongs to an object, written after a dot.
+`account.balance` is an attribute.
+
+**self** — the name a method uses for the object it was called on. It is always the
+first parameter of a method, and attributes inside the class are written
+`self.balance`.
+
+**`__init__`** — the method that sets up a new object. Python runs it by itself when you
+create the object, so it is where the attributes get their first values. Two
+underscores on each side. People say it as "dunder init".
+
+**`__str__`** — the method that gives the text `print()` shows for an object.
+
+**inheritance** — making a new class from one that already exists, so the new class
+gets all of its methods. Unit 12 is about it.
+
+**parent class** — the class that another class is made from. In `class Dog(Animal):`,
+`Animal` is the parent class. Other tutorials say base class or superclass.
+
+**child class** — a class made from a parent class. In `class Dog(Animal):`, `Dog` is
+the child class. It gets everything the parent has, and can add or change things.
+Other tutorials say subclass.
+
+**override** — replace a method from the parent class, by writing a method with the same
+name in the child class. The child's version is the one that runs.
+
+**super()** — gives you the parent class from inside a child class.
+`super().__init__(name)` runs the parent's `__init__`.
+
+**isinstance** — a function that checks the type of an object. `isinstance(rex, Dog)`
+is `True` if `rex` is a `Dog`, or an object of a child class of `Dog`.
+
+**polymorphism** — many types of object answering the same method call, each in its own
+way. A list of shapes where every shape has its own `area()` is an example. This course
+does not use the word, but other tutorials do.
+
+---
+
 ## Words this course does not use, on purpose
 
 These are common in tutorials and in real code, and this course replaces them with
@@ -303,7 +357,8 @@ messages use "concatenate", so you will see it in a `TypeError`.
 **parse** — This course says "read" or "work out". It means taking text apart and
 understanding its structure.
 
-**instantiate** — creating an object from a class. Not needed in this course.
+**instantiate** — creating an object from a class. This course says "create an
+object" instead.
 
 **deprecated** — old and no longer recommended. You will see it in documentation.
 

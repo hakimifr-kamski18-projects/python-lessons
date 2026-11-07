@@ -157,8 +157,8 @@ Common causes.
 - `items.remove(x)` or `items.index(x)` where `x` is not in the list. (Plain `x in items`
   does not fail. It just gives `False`)
 
-This is the one to handle with `try` and `except`, because bad input from a user is
-expected rather than a bug.
+This is the one to handle with `try` and `except`, which unit 05 teaches, because bad
+input from a user is expected rather than a bug.
 
 ---
 
@@ -209,7 +209,77 @@ You asked a value to do something it cannot do.
 The first example means you called a list method on a string. The second usually
 means a variable is `None`, often because a function forgot to return something.
 
-Print the value and its type, and check the method name is spelt right.
+Print the value and its type, and check the method name is spelt right. For an object
+of your own class, see the next section.
+
+---
+
+## Errors with classes
+
+These come up from unit 11 onwards. Almost all of them are a missing `self`, a missing
+`self.`, or missing brackets.
+
+```
+TypeError: Dog.bark() takes 0 positional arguments but 1 was given
+```
+
+You forgot `self` in the `def` line of a method. A call like `rex.bark()` passes the
+object in as the first argument by itself, so every method needs `self` as its first
+parameter, even when it uses nothing else. Write `def bark(self):`.
+
+```
+TypeError: Dog.__init__() missing 1 required positional argument: 'name'
+```
+
+You created an object without the values its `__init__` asks for. If the class has
+`def __init__(self, name):`, then `Dog()` is missing the name. Count the parameters after
+`self`, and pass that many, like `Dog("Rex")`.
+
+```
+TypeError: Dog() takes no arguments
+```
+
+Python cannot find an `__init__` in the class, usually because the name is misspelt.
+Check for two underscores on each side, and for `__int__` instead of `__init__`.
+
+```
+AttributeError: 'Dog' object has no attribute 'nmae'
+AttributeError: 'Dog' object has no attribute 'name'
+```
+
+The object has no attribute with that name. If it is a typo, like `nmae`, compare it with
+the `self.name = ...` line in `__init__`. If the spelling is right, check that
+`__init__` really says `self.name = name` and not just `name = name`. Without `self.`,
+the value goes into a local variable that is gone when `__init__` ends. The object never
+gets the attribute, and the error only shows up later, in the method that tries to use
+it.
+
+```
+NameError: name 'name' is not defined. Did you mean: 'self.name'?
+```
+
+Inside a method you wrote `name` where you meant the attribute `self.name`. Inside the
+class, attributes are always reached through `self.`. Python often guesses this one for
+you, so read the end of the message.
+
+```
+TypeError: Dog.bark() missing 1 required positional argument: 'self'
+```
+
+You used the class where you meant an object, usually because of missing brackets in
+`rex = Dog`. That makes `rex` another name for the class itself, not a new object. Write
+`rex = Dog("Rex")`.
+
+Here is one more, which is not an error at all.
+
+```
+<bound method Dog.bark of <__main__.Dog object at 0xe33d5ee08d70>>
+```
+
+You printed a method without calling it, as in `print(rex.bark)`. Without `()` the method
+does not run, and you see the method itself instead of its result. Write
+`print(rex.bark())`. If you see only `<__main__.Dog object at 0x...>`, you printed an
+object whose class has no `__str__` method. The number at the end changes on every run.
 
 ---
 
@@ -296,7 +366,7 @@ RecursionError: maximum recursion depth exceeded
 ```
 
 A function called itself too many times, usually because there is no case that stops
-it. You will only meet this if you try the optional exercise 6.19. Check that the
+it. You will only meet this if you try the optional exercise 7.19. Check that the
 stopping condition can be reached.
 
 ---

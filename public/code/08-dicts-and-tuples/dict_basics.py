@@ -1,4 +1,4 @@
-# Unit 07 — dictionary basics
+# Unit 08 — dictionary basics
 # Run this with the Run button in your editor.
 
 student = {
@@ -9,7 +9,7 @@ student = {
 
 print(student)
 
-# Compare with the unit 05 way of storing the same thing:
+# Compare with the unit 06 way of storing the same thing:
 
 names = ["Ada", "Grace"]
 scores = [88, 95]

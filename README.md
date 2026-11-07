@@ -72,7 +72,7 @@ python-course/
       exercises.md                    for the student
       solutions.md                    for the student
     ...
-    09-modules-and-beyond/
+    12-inheritance/                   the last unit
     cheat-sheets/                     printable references, for the student
     instructor/                       how to teach this, for you (hidden URLs)
   public/code/00-setup/*.py           the runnable example files, one folder per unit
@@ -95,11 +95,14 @@ heading, so the markdown itself should not start with a `#` heading.
 | 02 | Text and input | Asking the user something and using the answer | 01 |
 | 03 | Decisions | Code that chooses between paths | 02 |
 | 04 | Repetition | Loops, the accumulator pattern, break and continue | 03 |
-| 05 | Lists | Holding many values, iterating, sorting | 04 |
-| 06 | Functions | Naming a block of work and reusing it | 05 |
-| 07 | Dicts and tuples | Grouping related data, counting things | 06 |
-| 08 | Files and errors | Saving to disk, surviving bad input | 07 |
-| 09 | Modules and beyond | Using the standard library, where to go next | 08 |
+| 05 | Exceptions | Reading an exception, try/except, the validation loop, raise | 04 |
+| 06 | Lists | Holding many values, iterating, sorting | 05 |
+| 07 | Functions | Naming a block of work and reusing it | 06 |
+| 08 | Dicts and tuples | Grouping related data, counting things | 07 |
+| 09 | Files and errors | Saving to disk, the errors that come with files | 08 |
+| 10 | Modules and beyond | Using the standard library and their own modules | 09 |
+| 11 | Classes | Their own types, with attributes and methods | 10 |
+| 12 | Inheritance | Child classes, overriding, super(), where to go next | 11 |
 
 Each unit is roughly one to two sessions of 60 to 90 minutes. Do not treat the unit
 boundaries as day boundaries. A unit is done when they can do the core exercises without
@@ -146,10 +149,12 @@ lot of anxiety.
 do not, walk through it at the start of the next session anyway. An unexplained hard
 problem teaches them that some code is magic.
 
-**Do not chase completeness.** This curriculum deliberately leaves out classes,
-comprehensions, decorators, generators, async and everything else that makes Python feel
-intimidating. A student who is comfortable with functions, lists and dictionaries can
-learn the rest on their own, and will, if the first ten units did not scare them off.
+**Do not chase completeness.** Classes are taught in units 11 and 12, because they are
+the next thing a student meets in other people's code. This curriculum still deliberately
+leaves out comprehensions, decorators, generators, async and everything else that makes
+Python feel intimidating. A student who is comfortable with functions, lists,
+dictionaries and simple classes can learn the rest on their own, and will, if the
+thirteen units did not scare them off.
 
 ## What to read before your first session
 

@@ -1,4 +1,4 @@
-# Unit 05 — code broken on purpose
+# Unit 06 — code broken on purpose
 # Run this with the Run button in your editor.
 #
 # Each section below is broken ON PURPOSE. Uncomment one section at a time,

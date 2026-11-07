@@ -1,5 +1,5 @@
 ---
-title: Unit 07 exercises
+title: Unit 08 exercises
 sidebar:
   label: Exercises
 ---
@@ -58,7 +58,7 @@ group that belongs together, such as `(3, 4)` or a name with a score.
 
 ## Warm-ups
 
-### 7.1 Predict the output
+### 8.1 Predict the output
 
 ```python
 person = {"name": "Ada", "age": 36, "city": "London"}
@@ -74,7 +74,7 @@ Write down what each gives.
 - `person.get("job")`
 - `person.get("job", "none")`
 
-### 7.2 Predict the output
+### 8.2 Predict the output
 
 ```python
 counts = {"a": 1, "b": 2}
@@ -83,7 +83,7 @@ counts["c"] = 3
 print(counts)
 ```
 
-### 7.3 Unpacking
+### 8.3 Unpacking
 
 ```python
 pairs = [("Ada", 88), ("Grace", 95)]
@@ -93,7 +93,7 @@ for name, score in pairs:
 
 What does this print, and what does `pairs[0]` look like on its own?
 
-### 7.4 Find the bug
+### 8.4 Find the bug
 
 This is meant to add up all the scores in a dictionary. It crashes.
 
@@ -109,7 +109,7 @@ print(total)
 
 Explain what went wrong, then fix it two different ways.
 
-### 7.5 Find the bug, part two
+### 8.5 Find the bug, part two
 
 ```python
 student = {"name": "Ada"}
@@ -121,7 +121,7 @@ print(student)
 
 ## Core
 
-### 7.6 Phone book
+### 8.6 Phone book
 
 Store a few names and phone numbers in a dictionary. Ask the user for a name and print
 the number, or a message saying it is not there.
@@ -129,7 +129,7 @@ the number, or a message saying it is not there.
 Then wrap the lookup in a `while True` loop so they can look up several numbers until
 they type `quit`.
 
-### 7.7 Word count
+### 8.7 Word count
 
 Ask for a sentence. Count how many times each word appears. Print the results one per
 line.
@@ -145,7 +145,7 @@ dog 1
 
 Lowercase the input first so that `The` and `the` count as the same word.
 
-### 7.8 Two lists into a dictionary
+### 8.8 Two lists into a dictionary
 
 Given these two lists, build a dictionary that pairs them up.
 
@@ -156,12 +156,12 @@ scores = [88, 95, 72]
 
 The answer should be `{"Ada": 88, "Grace": 95, "Alan": 72}`.
 
-You will need the loop with an index from unit 05, `for i in range(len(names))`.
+You will need the loop with an index from unit 06, `for i in range(len(names))`.
 
-Then look back at exercise 5.15, where you kept two parallel lists in step. What should
+Then look back at exercise 6.15, where you kept two parallel lists in step. What should
 you have used instead?
 
-### 7.9 Inventory
+### 8.9 Inventory
 
 Start with this dictionary.
 
@@ -179,7 +179,7 @@ Then do these things, printing the inventory after each step.
 For that last one, you need a loop over `.values()` (in a dictionary, the value is what
 you get back when you look up a key) and an accumulator from unit 04.
 
-### 7.10 Letter frequency
+### 8.10 Letter frequency
 
 Ask for some text. Count how many times each letter appears, ignoring uppercase and
 ignoring spaces.
@@ -188,14 +188,14 @@ So `hello` gives `h 1, e 1, l 2, o 1`.
 
 Then print the letters in alphabetical order.
 
-### 7.11 Votes
+### 8.11 Votes
 
 You are counting votes in an election. Ask for names one at a time until the user types
 `done`. Print how many votes each candidate got, and who won.
 
 Ties are possible, so decide what happens then and make it do that.
 
-### 7.12 Grade book
+### 8.12 Grade book
 
 Store student marks for several subjects, in this shape.
 
@@ -211,12 +211,12 @@ new student. Then print every student and their average across subjects.
 
 The average needs a loop inside a loop, or a loop over `.values()`.
 
-### 7.13 Sort by value
+### 8.13 Sort by value
 
 Take a dictionary of names and scores and print it sorted by score, highest first.
 
 Build a list of `[score, name]` pairs, call `.sort(reverse=True)` on it, then print each
-pair. `reverse=True` is covered in unit 05.
+pair. `reverse=True` is covered in unit 06.
 
 Then answer this. Why does putting the score first make the sort work?
 
@@ -224,7 +224,7 @@ Then answer this. Why does putting the score first make the sort work?
 
 ## Stretch
 
-### 7.14 Group by first letter
+### 8.14 Group by first letter
 
 Given a list of words, build a dictionary that groups them by their first letter. When
 a letter is not a key yet, start it with an empty list `[]`, then use `.append()`.
@@ -241,7 +241,7 @@ Result.
 
 Then print each group on its own line, sorted alphabetically.
 
-### 7.15 The most common word
+### 8.15 The most common word
 
 Take a long piece of text. Find the word that appears most often. Ignore uppercase, and
 ignore punctuation such as `. , ! ?` at the ends of words. Hint: `word.strip(".,!?;:")`
@@ -250,7 +250,7 @@ that.
 
 Then answer these. What is the second most common? What happens if two words tie?
 
-### 7.16 Invert a dictionary
+### 8.16 Invert a dictionary
 
 Given a dictionary, produce a new one where the keys and values are swapped.
 
@@ -263,15 +263,15 @@ Should give `{1: "a", 2: "b", 3: "c"}`.
 Then think about this. What happens if two keys have the same value? Try it and explain
 the result.
 
-### 7.17 Combined word count
+### 8.17 Combined word count
 
 Ask for two pieces of text. Count the words in both, combined into a single dictionary.
 So a word that appears 3 times in the first and 2 times in the second should show 5.
-Ignore uppercase, and ignore punctuation at the ends of words, as in 7.15.
+Ignore uppercase, and ignore punctuation at the ends of words, as in 8.15.
 
 Then print only the words that appear in both texts.
 
-### 7.18 Word length histogram
+### 8.18 Word length histogram
 
 Ask for a sentence. Build a dictionary where the keys are word lengths and the values
 are how many words have that length.
@@ -285,7 +285,7 @@ Then print it as a simple bar chart, one `*` per word.
 5: **
 ```
 
-### 7.19 Tuples as keys
+### 8.19 Tuples as keys
 
 A dictionary key does not have to be a string. It can be a tuple.
 

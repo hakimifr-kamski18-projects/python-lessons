@@ -1,24 +1,24 @@
 ---
-title: Unit 06 solutions
+title: Unit 07 solutions
 sidebar:
   label: Solutions
 ---
 ## Warm-ups
 
-### 6.1 and 6.2
+### 7.1 and 7.2
 
-6.1 prints `5` and then `None`.
+7.1 prints `5` and then `None`.
 
 The function prints `5` when it is called. Then `result` holds `None`, because there is
 no `return`, so the second print gives `None`.
 
-6.2 prints `5` once. Nothing is printed inside the function, because there is no `print()`
+7.2 prints `5` once. Nothing is printed inside the function, because there is no `print()`
 in it, and `result` holds the number 5.
 
 Here is the answer to the comparison in one sentence. Printing shows a value to a
 human, and returning hands a value to the code that called the function.
 
-### 6.3 Predict the output
+### 7.3 Predict the output
 
 ```
 big
@@ -33,7 +33,7 @@ is the case to look at again.
 This is also a good example of the early return pattern. The first `return` handles one
 case and stops the function, so the second line is what happens for everything else.
 
-### 6.4 Find the bug
+### 7.4 Find the bug
 
 ```python
 def area(width, height):
@@ -52,7 +52,7 @@ The variable `result` is not needed, because `return width * height` does the sa
 in one line. A `return` can give back an expression directly, so a variable that is used
 only once is often not needed.
 
-### 6.5 Find the bug, part two
+### 7.5 Find the bug, part two
 
 ```python
 def with_tax(price):
@@ -76,7 +76,7 @@ The error message will mention `NoneType`. Read that as "a function
 earlier in the program did not return anything", because that is almost always what it
 means.
 
-### 6.6 Scope
+### 7.6 Scope
 
 ```python
 def make_name():
@@ -105,7 +105,7 @@ function, return it.
 
 ## Core
 
-### 6.7 Celsius to Fahrenheit
+### 7.7 Celsius to Fahrenheit
 
 ```python
 def to_fahrenheit(celsius):
@@ -124,7 +124,7 @@ Check that 0 gives 32 and 100 gives 212. If the formula is written with the
 brackets in the wrong place, those two will not come out right, and it is much easier to
 spot with known values.
 
-### 6.8 Even or odd, as a function
+### 7.8 Even or odd, as a function
 
 ```python
 def is_even(number):
@@ -159,7 +159,7 @@ def is_even(number):
 Compare it with the one line version and see which you prefer. The idea here is that an
 `if` whose branches just return `True` and `False` is usually unnecessary.
 
-### 6.9 Biggest of three, as a function
+### 7.9 Biggest of three, as a function
 
 ```python
 def biggest(a, b, c):
@@ -180,7 +180,7 @@ Same logic as exercise 3.6, in a function. Note the last line of the function ha
 `elif` guard, because if neither of the first two matched, `c` must be the answer. That
 is a small but real piece of reasoning worth noticing.
 
-### 6.10 Greeting with a default
+### 7.10 Greeting with a default
 
 ```python
 def greet(name, greeting="Hello"):
@@ -196,7 +196,7 @@ The last two lines are the point of keyword arguments (passing a value by naming
 parameter). When you spell out the parameter names, the order stops mattering. That is useful when a function has
 several optional parameters.
 
-### 6.11 BMI
+### 7.11 BMI
 
 ```python
 def bmi(weight, height):
@@ -225,7 +225,7 @@ Note how `bmi_category` uses the early return pattern rather than `elif` chains.
 work. The early return version has one less level of nesting, and some people find it
 easier to read.
 
-### 6.12 Count vowels, as a function
+### 7.12 Count vowels, as a function
 
 ```python
 def count_letters(text, letter):
@@ -254,7 +254,7 @@ The `.lower()` inside `count_vowels` means callers do not have to remember to do
 themselves. That is a small design decision, and it is the right one. A function should
 handle the awkward details so its callers do not have to.
 
-### 6.13 Statistics
+### 7.13 Statistics
 
 ```python
 def statistics(numbers):
@@ -292,7 +292,7 @@ Think about which you chose and why. The point is that you made the decision on 
 rather than having it happen by accident. The line `if not numbers:` means "if the list
 is empty".
 
-### 6.14 Squares list
+### 7.14 Squares list
 
 ```python
 def squares_up_to(n):
@@ -306,13 +306,13 @@ print(squares_up_to(4)) # [1, 4, 9, 16]
 
 The key point is that `result` has to be returned. Without the `return`, the list is
 built and then destroyed when the function ends, and the caller gets `None`. That is the
-same point as 6.4, in a different form.
+same point as 7.4, in a different form.
 
 `range(1, n + 1)` gives 1 up to and including n, because `range` stops before the end
 value. If you wrote
 `range(1, n)` the answer is short by one, and the test with 4 catches it.
 
-### 6.15 Is it a prime, as a function
+### 7.15 Is it a prime, as a function
 
 ```python
 def is_prime(number):
@@ -333,13 +333,13 @@ divisor is found, return `False` and stop. If the loop finishes without finding 
 must be prime.
 
 That "return early when you know, and let the end of the function handle the other case"
-shape is the same one as 6.9 and it is worth noticing.
+shape is the same one as 7.9 and it is worth noticing.
 
 Note that the caller does not know or care that there is a loop inside. It just asks a
 question and gets an answer. The loop is now an internal detail, which is exactly what a
 function is for.
 
-### 6.16 Menu
+### 7.16 Menu
 
 ```python
 def to_fahrenheit(celsius):
@@ -402,7 +402,7 @@ line programs look like. It is worth having written one.
 
 ## Stretch
 
-### 6.17 Refactor a grade calculator
+### 7.17 Refactor a grade calculator
 
 ```python
 def letter_grade(score):
@@ -470,7 +470,7 @@ good rule of thumb in this unit is that functions take values in and return valu
 It is a real judgement call. An alternative is to have it return a new list, which is
 cleaner but less natural here.
 
-### 6.18 Debugging by cutting down
+### 7.18 Debugging by cutting down
 
 ```python
 def count_long_words(sentence):
@@ -517,7 +517,7 @@ def count_long_words(sentence):
     return count
 ```
 
-### 6.19 Recursion
+### 7.19 Recursion
 
 ```python
 def countdown(n):
@@ -559,7 +559,7 @@ Both are correct. The loop is easier to follow here. Recursion becomes really us
 tree-shaped problems, which are a long way off. The point of this is so that
 recursion is not frightening when you meet it later.
 
-### 6.20 Functions that take functions
+### 7.20 Functions that take functions
 
 `apply_twice(double, 5)` does this.
 
@@ -583,7 +583,7 @@ def add_one(n):
 print(apply_twice(add_one, 5)) # 7, because 5 -> 6 -> 7
 ```
 
-The connection to exercise 5.14 is the real point. `sorted(words, key=len)` passes the
+The connection to exercise 6.14 is the real point. `sorted(words, key=len)` passes the
 function `len` as a value, in exactly the same way. That is why `key` works without
 brackets. You are handing the function itself, not the result of calling it, and
 `sorted()` decides when to call it.

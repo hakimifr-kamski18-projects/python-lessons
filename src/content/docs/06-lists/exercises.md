@@ -1,5 +1,5 @@
 ---
-title: Unit 05 exercises
+title: Unit 06 exercises
 sidebar:
   label: Exercises
 ---
@@ -48,7 +48,7 @@ print(pairs[0][1])   # Grace
 
 ## Warm-ups
 
-### 5.1 Predict the output
+### 6.1 Predict the output
 
 ```python
 numbers = [10, 20, 30, 40, 50]
@@ -64,7 +64,7 @@ Write down what each gives.
 - `20 in numbers`
 - `sum(numbers)`
 
-### 5.2 Predict the mutation
+### 6.2 Predict the mutation
 
 Predict what each of these prints, then check.
 
@@ -90,7 +90,7 @@ print(a)
 
 The three together are the point of this exercise. Write down the difference in one sentence.
 
-### 5.3 Spot the bug
+### 6.3 Spot the bug
 
 ```python
 names = []
@@ -101,7 +101,7 @@ print(len(names))
 
 This program fails with an error. Find out why it fails and fix it.
 
-### 5.4 Finding the error
+### 6.4 Finding the error
 
 Each of these fails. Write down which error type it gives and why.
 
@@ -120,7 +120,7 @@ names = ["Ada", "Grace"]
 print(names.remove("Alan"))
 ```
 
-### 5.5 Sort or reverse
+### 6.5 Sort or reverse
 
 ```python
 numbers = [5, 2, 9, 1, 7]
@@ -135,7 +135,7 @@ What does this print? Is it sorted? Explain the difference between `reverse()` a
 
 ## Core
 
-### 5.6 Shopping list
+### 6.6 Shopping list
 
 Ask the user to enter shopping items one at a time until they type `done`. Then print
 the list, the number of items, and the items in alphabetical order. (`sorted()` puts
@@ -143,15 +143,15 @@ capital letters before small letters, so use small letters only when you test.)
 
 You will need `while True` with `break` from unit 04.
 
-### 5.7 Grades
+### 6.7 Grades
 
 Ask how many students there are, then ask for each student's score. Store them in a
 list. Then print the highest, the lowest, and the average.
 
 You may use `max()` and `min()` this time. Then, as a second version, work out the highest
-without using `max()`, with a loop. Exercise 5.10 asks for the second one properly.
+without using `max()`, with a loop. Exercise 6.10 asks for the second one properly.
 
-### 5.8 Remove the duplicates
+### 6.8 Remove the duplicates
 
 Given a list with repeated items, build a new list containing each item only once.
 
@@ -165,14 +165,14 @@ Do it with a loop. For each item, check whether it is already in your new list b
 appending it. The order should be the order of first appearance, so do not just use
 `sorted()`.
 
-### 5.9 Reverse without reverse
+### 6.9 Reverse without reverse
 
 Take a list and produce a reversed copy, without using `reverse()`, `reversed()` or slicing.
 Use a loop that goes backwards through the positions.
 
 Hint: `range()` with a negative step, from unit 04.
 
-### 5.10 Biggest, the hard way
+### 6.10 Biggest, the hard way
 
 Write the biggest-of-a-list logic with a loop, without `max()`. Then answer this question.
 If you started the "biggest so far" variable at `0`, what happens when the whole list is
@@ -180,7 +180,7 @@ negative?
 
 Make your program work for a list of nothing but negative numbers.
 
-### 5.11 Word lengths
+### 6.11 Word lengths
 
 Ask for a sentence. Build a list of the lengths of each word, then print the sentence,
 the list of lengths, and the longest word.
@@ -194,7 +194,7 @@ Longest word: quick
 
 If there is a tie, printing either of the tied words is fine.
 
-### 5.12 Filter and transform
+### 6.12 Filter and transform
 
 Start with this list.
 
@@ -206,7 +206,7 @@ Build a new list containing the squares of only the negative numbers.
 
 The answer should be `[49, 16, 9]`.
 
-### 5.13 Insert and delete
+### 6.13 Insert and delete
 
 Start with a list of five names. Then, in order.
 
@@ -216,7 +216,7 @@ Start with a list of five names. Then, in order.
 - Remove the last name and print which one it was (`pop()` gives it back)
 - Print the final list and its length
 
-### 5.14 Sort by length
+### 6.14 Sort by length
 
 Take a list of words that is already in alphabetical order and print them sorted by
 length, shortest first. Use `sorted()` with the `key` argument.
@@ -233,7 +233,7 @@ Work out what that does from the result, then explain it in your own words.
 
 ## Stretch
 
-### 5.15 Report card
+### 6.15 Report card
 
 Ask for student names and scores, storing the names in one list and the scores in
 another, so that `names[i]` and `scores[i]` belong to the same person. Then print a
@@ -252,15 +252,15 @@ Think about how to keep them together. One way is to build a list of lists, wher
 inner list holds a score and a name.
 
 Notice how awkward this is. Two parallel lists (two lists whose positions belong
-together) are hard to keep in step, and unit 07 shows a better way.
+together) are hard to keep in step, and unit 08 shows a better way.
 
-### 5.16 Second biggest
+### 6.16 Second biggest
 
 Find the second largest value in a list, without sorting it and without `max()`.
 
 Careful with duplicates. In `[5, 5, 3]` the second largest is `3`, not `5`.
 
-### 5.17 Merge two sorted lists
+### 6.17 Merge two sorted lists
 
 Given two lists that are already sorted, build a single sorted list containing all their
 items, going through each list only once (the loop that copies the leftover items at the end is
@@ -277,7 +277,7 @@ The idea is to keep an index into each list, compare the two current items, take
 smaller one, and move that index forward. This is the merge step of merge sort, one of
 the standard ways to sort.
 
-### 5.18 Run length encoding
+### 6.18 Run length encoding
 
 Given a string, compress it by replacing runs of the same character with the character
 and a count.

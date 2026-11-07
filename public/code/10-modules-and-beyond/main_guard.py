@@ -1,4 +1,4 @@
-# Unit 09 — the main guard
+# Unit 10 — the main guard
 # Run this with the Run button in your editor.
 # Then import it from another file, or from the console:
 # >>> import main_guard

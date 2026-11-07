@@ -24,11 +24,14 @@ const SHORT_NAMES = {
   '02-text-and-input': 'Text and input',
   '03-decisions': 'Making decisions',
   '04-repetition': 'Repetition',
-  '05-lists': 'Lists',
-  '06-functions': 'Functions',
-  '07-dicts-and-tuples': 'Dictionaries',
-  '08-files-and-errors': 'Files and errors',
-  '09-modules-and-beyond': 'Modules',
+  '05-exceptions': 'Exceptions',
+  '06-lists': 'Lists',
+  '07-functions': 'Functions',
+  '08-dicts-and-tuples': 'Dictionaries',
+  '09-files-and-errors': 'Files and errors',
+  '10-modules-and-beyond': 'Modules',
+  '11-classes': 'Classes',
+  '12-inheritance': 'Inheritance',
 };
 
 function unitName(dir) {

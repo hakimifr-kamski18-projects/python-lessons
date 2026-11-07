@@ -453,7 +453,7 @@ leaving everything else to the `else`. This pattern, "test the specific cases an
 rest fall through", is worth remembering because you will see it often.
 
 This last version is optional and you can skip it. It uses a list and `.index()`, which
-you will meet in unit 05, and it also handles a move that is not rock, paper or scissors.
+you will meet in unit 06, and it also handles a move that is not rock, paper or scissors.
 Some people find this arithmetic idea on their own.
 
 ```python

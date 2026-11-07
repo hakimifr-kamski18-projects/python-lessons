@@ -1,4 +1,4 @@
-# Unit 07 — changing a dictionary
+# Unit 08 — changing a dictionary
 # Run this with the Run button in your editor.
 # Print the dictionary after each step so you can watch it change.
 
